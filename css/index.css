@@ -1,0 +1,78 @@
+html,body{
+    
+
+    width:100vw;
+    height:100vh;
+    background:radial-gradient(ellipse,#ffffff,#ffffff,#72e7b2,#a9ecce,#ffffff) !important;
+
+}
+.barra_nav{
+
+    background:#41a97a !important;
+    color:white;
+    border-style:inset;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    height:6vh;
+}
+
+#cruzverde{
+    width: 2vw;
+    height: 2vw;
+    align-self: center;
+    margin-left:1vw;
+}
+
+.titul{
+    padding-left: 1vw;
+    color: white;
+    font-size:2em;
+    font-family: 'Arial';
+    height:3vh;
+}
+
+.inicio_ses{
+
+    position:relative;
+    display:inline-block;
+    margin-left:30%;
+    margin-right:30%;
+
+}
+
+.div_interno{
+
+    position:absolute;
+    top:60%;
+    left:8%;
+    align-items:center;
+}
+
+#mensaje_sel_usuario{
+
+    font-size:2em;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style:italic;
+    
+}
+
+#select_usuarios{
+
+    margin-left:35%;
+    margin-right:35%;
+    font-size:1.2em;
+}
+
+#btnEntrar{
+
+   margin-left:39%;
+   margin-right:39%; 
+    margin-top:1vh;
+    width:5vw;
+    border-radius:6px;
+    border-style:ridge;
+    border-color:lightgreen;
+    background:linear-gradient(135deg,#0b7474,#00aa77,#135447);
+    color:white;
+}
