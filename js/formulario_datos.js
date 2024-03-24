@@ -1,7 +1,10 @@
 
 var indice = sessionStorage.getItem("indi");
+var nomusuario_barra_nav;
+
 window.onload = function () {
 
+  nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
   console.log(indice);
   ejecutarCRUD("leer", null,parseInt(indice), null);
@@ -43,6 +46,7 @@ function ejecutarCRUD(operac, dato,indice, callback) {
         solicitudLectura.onsuccess = function (event) {
           console.log("Dato recuperado correctamente: ", event.target.result);
           if (callback) callback(event.target.result);
+          nomusuario_barra_nav.innerHTML = event.target.result.Nombre + " " + event.target.result.Apellidos;
         };
         solicitudLectura.onerror = function (event) {
           console.error("Error al recuperar el dato: " + event.target.errorCode);

@@ -5,6 +5,44 @@ var formulario_nuevo_usuario;
 var btnEntrar;
 var solicitud;
 
+function crearDB(){
+
+
+  var solicitud = indexedDB.open("Seguimiento_Salud_Web", 1);
+
+  solicitud.onupgradeneeded = function (event) {
+    var db = event.target.result;
+    var objectStore = db.createObjectStore("Usuarios", { autoIncrement: true });
+    objectStore.createIndex("Nombre", "Nombre", { unique: false });
+    objectStore.createIndex("Apellidos", "Apellidos", { unique: false });
+  };
+
+
+}
+
+
+function DBExiste(nombre) {
+
+  var solicitud = window.indexedDB.open(nombre);
+
+  let existe;
+
+
+  solicitud.onsuccess = function (event) {
+
+    existe = true;
+  }
+
+  solicitud.onerror = function (event) {
+
+    existe = false;
+
+  }
+  console.log(existe);
+
+  return existe;
+
+}
 
 window.onload = () => {
 
@@ -15,7 +53,7 @@ window.onload = () => {
   itApellidos = document.getElementById('itApellidos');
   btnEntrar = document.getElementById('btnEntrar');
 
-  cargarDatosDB();
+
 
   if (selector_usuario.options.length === 1) {
 
@@ -23,16 +61,20 @@ window.onload = () => {
 
   }
 
+  crearDB();
+
+  cargarDatosDB();
+
   btnEntrar.addEventListener("click", () => {
 
     if (selector_usuario.value === "Crear Nuevo") {
 
       ejecutarCRUD("crear", { Nombre: itNombre.value, Apellidos: itApellidos.value });
 
-    }else{
+    } else {
 
       let indi = selector_usuario.value.split('.')[0];
-      navegarConDatos("formulario_datos.html",indi);
+      navegarConDatos("formulario_datos.html", indi);
 
     }
 
@@ -40,7 +82,6 @@ window.onload = () => {
 
   });
 
-  //manejarDB("LeerTodosLosRegistros");
 
   selector_usuario.addEventListener("change", () => {
     if (selector_usuario.value === "Crear Nuevo") {
@@ -59,11 +100,11 @@ window.onload = () => {
 }
 
 
-function navegarConDatos(url,dato){
+function navegarConDatos(url, dato) {
 
-  sessionStorage.setItem("indi",dato);
+  sessionStorage.setItem("indi", dato);
 
-  window.location.href=url;
+  window.location.href = url;
 
 }
 
@@ -85,9 +126,9 @@ function mostrarFormularioNuevoUsuario(opc) {
 
 }
 
-function agregarOpcionesListaDesplegable(indi,opc) {
+function agregarOpcionesListaDesplegable(indi, opc) {
 
-  
+
   var opcion = document.createElement("option");
   opcion.value = indi + ".- " + opc.Nombre + " " + opc.Apellidos;
   opcion.text = indi + ".- " + opc.Nombre + " " + opc.Apellidos;
@@ -95,10 +136,12 @@ function agregarOpcionesListaDesplegable(indi,opc) {
 
 }
 
+
+
 function cargarDatosDB() {
 
-  let solicitud = indexedDB.open("Seguimiento_Salud_Web", 1);
-  
+  var solicitud = indexedDB.open("Seguimiento_Salud_Web", 1);
+
   solicitud.onsuccess = (event) => {
 
     var db = event.target.result;
@@ -116,7 +159,7 @@ function cargarDatosDB() {
       if (cursor) {
 
         var usuario = cursor.value;
-        agregarOpcionesListaDesplegable(cursor.primaryKey,usuario);
+        agregarOpcionesListaDesplegable(cursor.primaryKey, usuario);
         cursor.continue();
 
 
@@ -129,7 +172,7 @@ function cargarDatosDB() {
 
   }
 
-  solicitud.onerror = (event)=>{
+  solicitud.onerror = (event) => {
 
     alert("No fue posible cargar la lista de usuarios: " + event.errorCode);
 
@@ -217,85 +260,5 @@ function ejecutarCRUD(operac, dato, callback) {
   };
 
   location.reload();
-}
-
-/*
-
-function agregarUsuario(nombre, apellidos) {
-
-    solicitud = indexedDB.open("Seguimiento_Salud_Web", 1);
-
-    solicitud.onupgradeneeded = (event) => {
-
-        var db = event.target.result;
-
-        var objectStore = db.createObjectStore("Usuarios", { autoIncrement: true });
-
-        objectStore.createIndex("Nombre", "Nombre", { unique: false });
-        objectStore.createIndex("Apellidos", "Apellidos", { unique: false });
-
-    }
-
-    solicitud.onsuccess = (event) => {
-
-        var db = event.target.result;
-
-        console.log("Base de datos abierta correctamente.");
-
-        var transaccion = db.transaction(["Usuarios"], "readwrite");
-
-        var objectStore = transaccion.objectStore("Usuarios");
-
-        var datosUsuario = { Nombre: nombre, Apellidos: apellidos };
-
-
-        objectStore.add(datosUsuario);
-
-
-        console.log("Usuario añadido correctamente.");
-        alert(`Usuario ${nombre} ${apellidos} añadido correctamente.`);
-
-        // Cerrar la transaccion al finalizar
-        transaccion.oncomplete = function () {
-            console.log("Transacción Completa.");
-        };
-
-    }
-
-
 
 }
-
-/*
-
-
-function manejarDB(operac) {
-
-
-    solicitud.onerror = function (event) {
-        console.error("Error en la base de datos: " + event.target.errorCode);
-    };
-
-    // Cerrar la transaccion al finalizar
-    transaccion.oncomplete = function () {
-        console.log("Transacción Completa.");
-    };
-    solicitud.onsuccess = (event) => {
-
-
-        if (operac === "LeerTodosLosRegistros") {
-
-
-        } else if (operac === "CrearNuevoUsuario") {
-
-
-
-        }
-
-
-
-    }
-
-
-}
-*/

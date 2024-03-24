@@ -1,0 +1,54 @@
+html,body{
+    
+
+    width:100vw;
+    height:100vh;
+    background:radial-gradient(ellipse,#ffffff,#ffffff,#72e7b2,#a9ecce,#ffffff) !important;
+
+}
+.barra_nav{
+
+    background:#41a97a !important;
+    color:white;
+    border-style:inset;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    height:6vh;
+}
+
+#cruzverde{
+    width: 2vw;
+    height: 2vw;
+    align-self: center;
+    margin-left:1vw;
+}
+
+.titul{
+    padding-left: 1vw;
+    color: white;
+    font-size:2em;
+    font-family: 'Arial';
+    height:3vh;
+}
+
+.inicio_ses{
+
+    position:relative;
+    display:inline-block;
+    margin-left:30%;
+    margin-right:30%;
+
+}
+
+#nomusuario_barra_nav{
+
+    padding-left: 1vw;
+    padding-top:0.3vw;
+    color: white;
+    font-size:1.5em;
+    font-family: 'Arial';
+    height:3vh;
+
+
+}
