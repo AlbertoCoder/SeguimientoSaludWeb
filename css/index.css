@@ -45,8 +45,13 @@ html,body{
 
     position:absolute;
     top:60%;
-    left:8%;
+    left:4vw;
     align-items:center;
+}
+
+#div_interno_nuevo_usuario{
+
+    margin-left:0vw;
 }
 
 #mensaje_sel_usuario{
@@ -59,20 +64,42 @@ html,body{
 
 #select_usuarios{
 
-    margin-left:35%;
-    margin-right:35%;
+    margin-left:8vw;
+    margin-right:8vw;
     font-size:1.2em;
+    width:12vw;
 }
 
 #btnEntrar{
 
-   margin-left:39%;
-   margin-right:39%; 
-    margin-top:1vh;
-    width:5vw;
+   margin-left:8vw;
+   margin-right:8vw; 
+    width:12vw;
+    height:2vw;
     border-radius:6px;
     border-style:ridge;
     border-color:lightgreen;
     background:linear-gradient(135deg,#0b7474,#00aa77,#135447);
     color:white;
+}
+
+#lblNombre,#lblApellidos{
+
+    margin-top:1vh;
+    font-size:2vh;
+    margin-right:0.5vw;
+}
+
+#itNombre{
+
+    width:7vw;
+    margin-right:0.5vw; 
+
+
+}
+
+#itApellidos{
+
+    width:9vw;
+
 }
