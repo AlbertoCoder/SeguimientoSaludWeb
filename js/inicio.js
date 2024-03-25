@@ -12,6 +12,7 @@ function crearDB(){
 
   solicitud.onupgradeneeded = function (event) {
     var db = event.target.result;
+    console.log(event.target.result);
     var objectStore = db.createObjectStore("Usuarios", { autoIncrement: true });
     objectStore.createIndex("Nombre", "Nombre", { unique: false });
     objectStore.createIndex("Apellidos", "Apellidos", { unique: false });
