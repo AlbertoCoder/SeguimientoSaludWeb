@@ -1,3 +1,4 @@
+//API de IndexedDB en https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
 
 var selector_usuario;
 var itNombre, itApellidos;
@@ -5,45 +6,134 @@ var formulario_nuevo_usuario;
 var btnEntrar;
 var solicitud;
 
-function crearDB(){
+function crearDB(nmbBD) {
+
+  //Análisis del código: "indexedDB" es un objeto "IDBFactory"
+  //que la interfaz "Window" de la API de JavaScript tiene
+  //declarado como propiedad/atributo. El método open(nombre_de_la_bd,version)
+  //inmediatamente devuelve un objeto que implementa la interfaz "IDBOpenDBRequest" al mismo tiempo
+  //que ejecuta la operación de abrir la base de datos de forma asíncrona.
+  //El mencionado objeto "IDBOpenDBRequest" es almacenado en la variable "solicitud".
+  //Si la operación es exitosa, automáticamente se lanza un evento "success" del objeto
+  //que implementa la interfaz "IDBOpenDBRequest" el cual tiene un atributo "result" 
+  //que se iniciará automáticamente también con el valor "IDBDatabase". 
+  //Es decir, el atributo "result" contendrá el objeto base de datos.
+  const solicitud = window.indexedDB.open(nmbBD, 1);
+
+  //El evento "onupgradeneeded" se lanza cuando hay un intento de abrir una base de datos con un
+  //número de versión superior al de la versión actual.
+  //El parámetro "event" de la función con la que se inicia el evento "onupgradeneeded" del objeto
+  //"solicitud" (que implementa la interfaz IDBOpenDBRequest).
+  solicitud.addEventListener("upgradeneeded",(event)=> {
+
+    //El objeto "event" (que implementa la interfaz "IDBVersionChangeEvent") pasado por 
+    //parámetro a la retrollamada tiene propiedades como "target", "type" y otras.
+    //La propiedad "target" hace referencia al objeto "solicitud" que implementa la interfaz 
+    //"IDBOpenDBRequest", es decir, el objeto desde el cual se lanza el evento "upgradeneeded".    
+    var db = event.target.result; //Se inicia la variable "db" con el objeto "result" (implementa "IDBDatabase").
+
+    //Información en consola:
+    console.log("Objeto: " + event.target.result);
+    console.log("Nombre de la base de datos: " + event.target.result.name);
+    console.log("Versión: " + event.target.result.version);
+    
+    //El método "createObjectStore" del objeto "db" crea y devuelve un nuevo objeto que implementa
+    //la interfaz "IDBObjectStore" (es decir, una tabla de base de datos).
+    //El primer parámetro corresponde al nombre del "objectStore" (dicho de otro modo, el nombre de la tabla)
+    //y el segundo parámetro corresponde a una matriz de opciones, entre las cuales caben destacar
+    //el "keyPath" (la ruta que hace referencia al nombre del campo clave) y "autoIncrement", un valor
+    //booleano que, de ser establecido en verdadero, indicará que la tabla tiene un generador de clave
+    //autoincremental. 
+    var objectStoreUsuarios = db.createObjectStore("Usuarios", { autoIncrement: true });
+
+    //El método "createIndex" del objeto "objectStoreUsuarios" (que implementa la interfaz "IDBObjectStore")
+    //crea y devuelve un nuevo objeto que implementa la interfaz "IDBIndex".
+    //Los parámetros corresponden al nombre del índice "por_nombre", al campo "Nombre" y las opciones
+    //"unique:false" (no es un campo con valor único). 
+    objectStoreUsuarios.createIndex("por_nombre", "Nombre", { unique: false });
+    objectStoreUsuarios.createIndex("por_apellidos", "Apellidos", { unique: false });
+    
+    
+    var objectStoreMediciones = db.createObjectStore("Mediciones", { autoIncrement: true });
+    objectStoreMediciones.createIndex("por_id", "ID", { unique: true });
+    objectStoreMediciones.createIndex("por_nombre", "Nombre", { unique: false });
+    objectStoreMediciones.createIndex("por_apellidos", "Apellidos", { unique: false });
+    objectStoreMediciones.createIndex("por_fecha", "Fecha", { unique: false });
+    objectStoreMediciones.createIndex("por_glucosa", "Glucosa", { unique: false });
+    objectStoreMediciones.createIndex("por_peso", "Peso", { unique: false });
+    objectStoreMediciones.createIndex("por_o2", "O2", { unique: false });
+    objectStoreMediciones.createIndex("por_sist", "Sist", { unique: false });
+    objectStoreMediciones.createIndex("por_diast", "Diast", { unique: false });
+    objectStoreMediciones.createIndex("por_ppm", "PPM", { unique: false });
+    objectStoreMediciones.createIndex("por_pasos", "Pasos", { unique: false });
+    objectStoreMediciones.createIndex("por_kms", "Kms", { unique: false });
+    objectStoreMediciones.createIndex("por_cals", "Cals", { unique: false });
+
+  });
+
+}
 
 
-  var solicitud = indexedDB.open("Seguimiento_Salud_Web", 1);
+function insertarRegistro(nmbBD,nmbObjSt,datos_registro){
 
-  solicitud.onupgradeneeded = function (event) {
+  var solicitudApertura = indexedDB.open(nmbBD, 1);
+
+
+  solicitudApertura.addEventListener("success",(event)=>{
+
     var db = event.target.result;
-    console.log(event.target.result);
-    var objectStore = db.createObjectStore("Usuarios", { autoIncrement: true });
-    objectStore.createIndex("Nombre", "Nombre", { unique: false });
-    objectStore.createIndex("Apellidos", "Apellidos", { unique: false });
-  };
+    var transac = db.transaction([nmbObjSt],"readwrite");
+    var objSt = transac.objectStore(nmbObjSt);
+
+
+    var solicitudInsertarRegistro = objSt.add(datos_registro);
+
+    solicitudInsertarRegistro.addEventListener("success",(event)=>{
+
+      console.log("Dato agregado: " + event.target.result);      
+
+      alert(`REGISTRO: ${datos_registro.Nombre} ${datos_registro.Apellidos} insertado correctamente.`);
+
+    });
+
+    solicitudInsertarRegistro.addEventListener("error",(event)=>{
+
+      console.error("Error al insertar el registro: " + event.target.errorCode);
+
+    });
+    
+    transac.addEventListener("complete",()=>{
+
+      console.log("Transacción completa.");
+
+
+    });
+
+    transac.addEventListener("error",(event)=>{
+
+      console.error("Error en la transacción: " + event.target.errorCode);      
+
+    })
+
+
+  });
+
+  solicitudApertura.addEventListener("error",(event)=>{
+
+    console.error("Error al abrir la base de datos: " + event.target.errorCode);
+
+  });
+  
+   location.reload(); 
+}
+
+
+function borrarRegistro(){
+
 
 
 }
 
-
-function DBExiste(nombre) {
-
-  var solicitud = window.indexedDB.open(nombre);
-
-  let existe;
-
-
-  solicitud.onsuccess = function (event) {
-
-    existe = true;
-  }
-
-  solicitud.onerror = function (event) {
-
-    existe = false;
-
-  }
-  console.log(existe);
-
-  return existe;
-
-}
 
 window.onload = () => {
 
@@ -62,15 +152,14 @@ window.onload = () => {
 
   }
 
-  crearDB();
-
-  cargarDatosDB();
+  crearDB("Seguimiento_Salud_Web");
+  cargarDatosDB("Seguimiento_Salud_Web", "Usuarios");
 
   btnEntrar.addEventListener("click", () => {
 
     if (selector_usuario.value === "Crear Nuevo") {
 
-      ejecutarCRUD("crear", { Nombre: itNombre.value, Apellidos: itApellidos.value });
+      insertarRegistro("Seguimiento_Salud_Web","Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value });
 
     } else {
 
@@ -103,7 +192,7 @@ window.onload = () => {
 
 function navegarConDatos(url, dato) {
 
-  sessionStorage.setItem("indi", dato);
+  sessionStorage.setItem("id_usuario", selector_usuario.value);
 
   window.location.href = url;
 
@@ -139,17 +228,17 @@ function agregarOpcionesListaDesplegable(indi, opc) {
 
 
 
-function cargarDatosDB() {
+function cargarDatosDB(nmbBD, nmbObjSt) {
 
-  var solicitud = indexedDB.open("Seguimiento_Salud_Web", 1);
+  var solicitud = indexedDB.open(nmbBD, 1);
 
   solicitud.onsuccess = (event) => {
 
     var db = event.target.result;
 
-    var transaccion = db.transaction(["Usuarios"], "readonly");
+    var transaccion = db.transaction(nmbObjSt, "readonly");
 
-    var objectStore = transaccion.objectStore("Usuarios");
+    var objectStore = transaccion.objectStore(nmbObjSt);
 
     var cursorRequest = objectStore.openCursor();
 
@@ -182,22 +271,19 @@ function cargarDatosDB() {
 
 }
 
-function ejecutarCRUD(operac, dato, callback) {
 
-  var solicitud = indexedDB.open("Seguimiento_Salud_Web", 1);
+
+/*
+
+
+function ejecutarCRUD(nmbObjStore,operac, dato, callback) {
+
 
   solicitud.onupgradeneeded = function (event) {
-    var db = event.target.result;
-    var objectStore = db.createObjectStore("Usuarios", { autoIncrement: true });
-    objectStore.createIndex("Nombre", "Nombre", { unique: false });
-    objectStore.createIndex("Apellidos", "Apellidos", { unique: false });
-  };
-
-  solicitud.onsuccess = function (event) {
 
     var db = event.target.result;
-    var transaction = db.transaction(["Usuarios"], "readwrite");
-    var objectStore = transaction.objectStore("Usuarios");
+    var transaction = db.transaction([nmbObjStore], "readwrite");
+    var objectStore = transaction.objectStore(nmbObjStore);
 
     switch (operac) {
       case "crear":
@@ -262,4 +348,7 @@ function ejecutarCRUD(operac, dato, callback) {
 
   location.reload();
 
+
 }
+
+*/

@@ -10,7 +10,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel='stylesheet' type='text/css' media='screen' href='/css/formulario_datos.css'>
-    <script src='js/formulario_datos.js'></script>
+    <script src='js/formulario_datos.js' type="module"></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
         
         <div>
 
-            <h4 id="nomusuario_barra_nav">Seguimiento Básico De Salud</h4>
+            <h4 id="nomusuario_barra_nav"></h4>
 
         </div>
 
@@ -48,19 +48,19 @@
 
             <table>
 
-                <tr><td style="width:100%">Fecha</td><td><input type="date" class="texto_centrado"></input></td></tr>
-                <tr><td>Peso</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Glucosa</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Oxígeno</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Sístole</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Diástole</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Pulsaciones</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Pasos</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Kilómetros</td><td><input type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Calorías</td><td><input type="number" class="texto_centrado"></input></td></tr>
+                <tr><td style="width:100%">Fecha</td><td><input id="it_fecha" type="date" class="texto_centrado"></input></td></tr>
+                <tr><td>Peso</td><td><input id="it_peso" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Glucosa</td><td><input id="it_glucosa" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Oxígeno</td><td><input id="it_o2" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Sístole</td><td><input id="it_sist" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Diástole</td><td><input id="it_diast" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Pulsaciones</td><td><input id="it_ppm" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Pasos</td><td><input id="it_pasos" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Kilómetros</td><td><input id="it_kms" type="number" class="texto_centrado"></input></td></tr>
+                <tr><td>Calorías</td><td><input id="it_cals" type="number" class="texto_centrado"></input></td></tr>
                 
             </table>
-
+            <button type="button" id="btnInsertarRegistro">Insertar Registro</button>
         </form>
     </div>
 </body>
