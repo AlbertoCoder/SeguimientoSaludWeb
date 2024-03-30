@@ -1,11 +1,11 @@
 export var matriz_resultado = [];
 
-export function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
+export async function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
 
   var solicitudApertura = indexedDB.open(nmbBD, 1);
 
 
-  solicitudApertura.addEventListener("success", (event) => {
+  await solicitudApertura.addEventListener("success", (event) => {
 
     var db = event.target.result;
     var transac = db.transaction([nmbObjSt], "readwrite");
