@@ -1,36 +1,36 @@
 export var matriz_resultado = [];
 
-export async function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
+export function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
 
   var solicitudApertura = indexedDB.open(nmbBD, 1);
 
 
-  await solicitudApertura.addEventListener("success", (event) => {
+  solicitudApertura.addEventListener("success", async(event) => {
 
-    var db = event.target.result;
+    var db = await event.target.result;
     var transac = db.transaction([nmbObjSt], "readwrite");
     var objSt = transac.objectStore(nmbObjSt);
 
 
     var solicitudInsertarRegistro = objSt.add(datos_registro);
 
-    solicitudInsertarRegistro.addEventListener("success", (event) => {
+  solicitudInsertarRegistro.addEventListener("success", async(event) => {
 
-      console.log("Dato agregado: " + event.target.result);
+      await console.log("Dato agregado: " + event.target.result);
 
       alert(`REGISTRO: ${datos_registro.Nombre} ${datos_registro.Apellidos} insertado correctamente.`);
 
     });
 
-    solicitudInsertarRegistro.addEventListener("error", (event) => {
+  solicitudInsertarRegistro.addEventListener("error", (event) => {
 
       console.error("Error al insertar el registro: " + event.target.errorCode);
 
     });
 
-    transac.addEventListener("complete", () => {
+    transac.addEventListener("complete", async() => {
 
-      console.log("Transacción completa.");
+      await console.log("Transacción completa.");
 
 
     });

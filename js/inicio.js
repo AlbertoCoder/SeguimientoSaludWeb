@@ -155,11 +155,11 @@ window.onload = () => {
   crearDB("Seguimiento_Salud_Web");
   cargarDatosDB("Seguimiento_Salud_Web", "Usuarios");
 
-  btnEntrar.addEventListener("click", () => {
+  btnEntrar.addEventListener("click", async() => {
 
     if (selector_usuario.value === "Crear Nuevo") {
 
-      insertarRegistro("Seguimiento_Salud_Web","Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value });
+      await insertarRegistro("Seguimiento_Salud_Web","Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value });
 
     } else {
 
