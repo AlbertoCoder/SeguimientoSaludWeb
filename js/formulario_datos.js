@@ -31,12 +31,15 @@ window.onload = function () {
 
   btnInsertarRegistro.addEventListener("click", () => {
 
-    let nombre_usu=nomusuario_barra_nav.innerHTML.split(" ")[1];
-    let apellido1_usu=nomusuario_barra_nav.innerHTML.split(" ")[2];
-    let apellido2_usu=nomusuario_barra_nav.innerHTML.split(" ")[3];
-    let mediciones_prueba = {
+    idusuario_seleccionado = sessionStorage.getItem("id_usuario").split(".")[0];
+    console.log(idusuario_seleccionado);
+    var nombre_usu=nomusuario_barra_nav.innerHTML.split(" ")[1];
+    var apellido1_usu=nomusuario_barra_nav.innerHTML.split(" ")[2];
+    var apellido2_usu=nomusuario_barra_nav.innerHTML.split(" ")[3];
 
-      ID:parseInt(idusuario_seleccionado),
+    var mediciones_prueba = {
+
+      N:parseInt(idusuario_seleccionado),
       Nombre: nombre_usu,
       Apellidos: `${apellido1_usu} ${apellido2_usu}`,
       Fecha: it_fecha.value,

@@ -1,30 +1,31 @@
 export var matriz_resultado = [];
 
-export function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
+export async function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
 
   var solicitudApertura = indexedDB.open(nmbBD, 1);
+  console.log(datos_registro);
 
+  await solicitudApertura.addEventListener("success", async(event) => {
 
-  solicitudApertura.addEventListener("success", async(event) => {
-
-    var db = await event.target.result;
+    var db = event.target.result;
     var transac = db.transaction([nmbObjSt], "readwrite");
     var objSt = transac.objectStore(nmbObjSt);
 
 
     var solicitudInsertarRegistro = objSt.add(datos_registro);
 
-  solicitudInsertarRegistro.addEventListener("success", async(event) => {
+  await solicitudInsertarRegistro.addEventListener("success", (event) => {
 
-      await console.log("Dato agregado: " + event.target.result);
+      console.log(event.target.result);
+      console.log("Dato agregado: " + event.target.result);
 
       alert(`REGISTRO: ${datos_registro.Nombre} ${datos_registro.Apellidos} insertado correctamente.`);
 
     });
 
-  solicitudInsertarRegistro.addEventListener("error", (event) => {
+  solicitudInsertarRegistro.addEventListener("error", async(event) => {
 
-      console.error("Error al insertar el registro: " + event.target.errorCode);
+      await console.error("Error al insertar el registro: " + event.target.errorCode);
 
     });
 
@@ -35,24 +36,23 @@ export function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
 
     });
 
-    transac.addEventListener("error", (event) => {
+    transac.addEventListener("error", async(event) => {
 
-      console.error("Error en la transacción: " + event.target.errorCode);
+      await console.error("Error en la transacción: " + event.target.errorCode);
 
     })
 
 
   });
 
-  solicitudApertura.addEventListener("error", (event) => {
+  solicitudApertura.addEventListener("error", async(event) => {
 
-    console.error("Error al abrir la base de datos: " + event.target.errorCode);
+    await console.error("Error al abrir la base de datos: " + event.target.errorCode);
 
   });
 
   //location.reload(); 
 }
-
 
 export function cargarDatosDB(nmbBD, nmbObjSt) {
 
@@ -69,7 +69,6 @@ export function cargarDatosDB(nmbBD, nmbObjSt) {
 
       var cursorRequest = objectStore.openCursor();
 
-
       cursorRequest.onsuccess = (event) => {
 
         var cursor = event.target.result;
@@ -82,12 +81,13 @@ export function cargarDatosDB(nmbBD, nmbObjSt) {
 
           cursor.continue();
 
-
         } else {
 
           console.log("No hay más datos.");
           resolve(matriz_resultado);
+
         }
+      
       };
 
     }

@@ -1,10 +1,10 @@
 //API de IndexedDB en https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
 
+import { cargarDatosDB, insertarRegistro } from "./manejo_idb.mjs";
 var selector_usuario;
 var itNombre, itApellidos;
 var formulario_nuevo_usuario;
 var btnEntrar;
-var solicitud;
 
 function crearDB(nmbBD) {
 
@@ -55,7 +55,7 @@ function crearDB(nmbBD) {
     
     
     var objectStoreMediciones = db.createObjectStore("Mediciones", { autoIncrement: true });
-    objectStoreMediciones.createIndex("por_id", "ID", { unique: true });
+    objectStoreMediciones.createIndex("por_id", "N", { unique: false });
     objectStoreMediciones.createIndex("por_nombre", "Nombre", { unique: false });
     objectStoreMediciones.createIndex("por_apellidos", "Apellidos", { unique: false });
     objectStoreMediciones.createIndex("por_fecha", "Fecha", { unique: false });
@@ -72,61 +72,6 @@ function crearDB(nmbBD) {
   });
 
 }
-
-
-async function insertarRegistro(nmbBD,nmbObjSt,datos_registro){
-
-  var solicitudApertura = indexedDB.open(nmbBD, 1);
-
-
-  await solicitudApertura.addEventListener("success",(event)=>{
-
-    var db = event.target.result;
-    var transac = db.transaction([nmbObjSt],"readwrite");
-    var objSt = transac.objectStore(nmbObjSt);
-
-
-    var solicitudInsertarRegistro = objSt.add(datos_registro);
-
-    solicitudInsertarRegistro.addEventListener("success",(event)=>{
-
-      console.log("Dato agregado: " + event.target.result);      
-
-      alert(`REGISTRO: ${datos_registro.Nombre} ${datos_registro.Apellidos} insertado correctamente.`);
-
-    });
-
-    solicitudInsertarRegistro.addEventListener("error",(event)=>{
-
-      console.error("Error al insertar el registro: " + event.target.errorCode);
-
-    });
-    
-    transac.addEventListener("complete",()=>{
-
-      console.log("Transacción completa.");
-
-
-    });
-
-    transac.addEventListener("error",(event)=>{
-
-      console.error("Error en la transacción: " + event.target.errorCode);      
-
-    })
-
-
-  });
-
-  solicitudApertura.addEventListener("error",(event)=>{
-
-    console.error("Error al abrir la base de datos: " + event.target.errorCode);
-
-  });
-  
-   location.reload(); 
-}
-
 
 function borrarRegistro(){
 
@@ -153,13 +98,21 @@ window.onload = () => {
   }
 
   crearDB("Seguimiento_Salud_Web");
-  cargarDatosDB("Seguimiento_Salud_Web", "Usuarios");
+  cargarDatosDB("Seguimiento_Salud_Web", "Usuarios").then((matriz)=>{
+
+    agregarOpcionesListaDesplegable(matriz);
+
+
+
+  });
 
   btnEntrar.addEventListener("click", async() => {
 
+
     if (selector_usuario.value === "Crear Nuevo") {
 
-      await insertarRegistro("Seguimiento_Salud_Web","Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value });
+      await insertarRegistro("Seguimiento_Salud_Web","Usuarios", {Nombre: itNombre.value, Apellidos: itApellidos.value });
+      location.reload();
 
     } else {
 
@@ -167,7 +120,6 @@ window.onload = () => {
       navegarConDatos("formulario_datos.html", indi);
 
     }
-
 
 
   });
@@ -216,139 +168,16 @@ function mostrarFormularioNuevoUsuario(opc) {
 
 }
 
-function agregarOpcionesListaDesplegable(indi, opc) {
+function agregarOpcionesListaDesplegable(matriz) {
+ 
+  matriz.forEach((elemento,ind)=>{
 
+    let opcion = document.createElement("option");
+    console.log(elemento);
+    opcion.value = (ind + 1) + ".-" + elemento.Nombre + " " + elemento.Apellidos;
+    opcion.text = (ind + 1) + ".-" + elemento.Nombre + " " + elemento.Apellidos;
+    selector_usuario.appendChild(opcion);
 
-  var opcion = document.createElement("option");
-  opcion.value = indi + ".- " + opc.Nombre + " " + opc.Apellidos;
-  opcion.text = indi + ".- " + opc.Nombre + " " + opc.Apellidos;
-  selector_usuario.appendChild(opcion);
-
-}
-
-
-
-function cargarDatosDB(nmbBD, nmbObjSt) {
-
-  var solicitud = indexedDB.open(nmbBD, 1);
-
-  solicitud.onsuccess = (event) => {
-
-    var db = event.target.result;
-
-    var transaccion = db.transaction(nmbObjSt, "readonly");
-
-    var objectStore = transaccion.objectStore(nmbObjSt);
-
-    var cursorRequest = objectStore.openCursor();
-
-    cursorRequest.onsuccess = (event) => {
-
-      var cursor = event.target.result;
-
-      if (cursor) {
-
-        var usuario = cursor.value;
-        agregarOpcionesListaDesplegable(cursor.primaryKey, usuario);
-        cursor.continue();
-
-
-      } else {
-
-        console.log("No hay más datos.");
-      }
-
-    };
-
-  }
-
-  solicitud.onerror = (event) => {
-
-    alert("No fue posible cargar la lista de usuarios: " + event.errorCode);
-
-
-  }
+  });
 
 }
-
-
-
-/*
-
-
-function ejecutarCRUD(nmbObjStore,operac, dato, callback) {
-
-
-  solicitud.onupgradeneeded = function (event) {
-
-    var db = event.target.result;
-    var transaction = db.transaction([nmbObjStore], "readwrite");
-    var objectStore = transaction.objectStore(nmbObjStore);
-
-    switch (operac) {
-      case "crear":
-        var solicitudAgregarObjeto = objectStore.add(dato);
-        solicitudAgregarObjeto.onsuccess = function (event) {
-          console.log("Dato agregador correctamente con id: " + event.target.result);
-          if (callback) callback(event.target.result);
-
-          alert(`${dato.Nombre} ${dato.Apellidos} correctamente agregado/a.`);
-        };
-        solicitudAgregarObjeto.onerror = function (event) {
-          console.error("Error agregando el objeto: " + event.target.errorCode);
-        };
-        break;
-
-      case "leer":
-        var solicitudLectura = objectStore.get(dato);
-        solicitudLectura.onsuccess = function (event) {
-          console.log("Dato recuperado correctamente: ", event.target.result);
-          if (callback) callback(event.target.result);
-        };
-        solicitudlectura.onerror = function (event) {
-          console.error("Error al recuperar el dato: " + event.target.errorCode);
-        };
-        break;
-      case "actualizar":
-        var solicitudActualizar = objectStore.put(dato);
-        solicitudActualizar.onsuccess = function (event) {
-          console.log("Dato actualizado correctamente:");
-          if (callback) callback();
-        };
-        solicitudActualizar.onerror = function (event) {
-          console.error("Error al actualizar el dato: " + event.target.errorCode);
-        };
-        break;
-      case "borrar":
-        var solicitudBorrar = objectStore.delete(dato);
-        solicitudBorrar.onsuccess = function (event) {
-          console.log("Dato borrado correctamente:");
-          if (callback) callback();
-        };
-        solicitudBorrar.onerror = function (event) {
-          console.error("Error al borrar el dato: " + event.target.errorCode);
-        };
-        break;
-      default:
-        console.error("Operación Inválida: " + operation);
-    }
-
-    transaction.oncomplete = function () {
-      console.log("Transacción completa.");
-    };
-
-    transaction.onerror = function (event) {
-      console.error("Error en la transacción: " + event.target.errorCode);
-    };
-  };
-
-  solicitud.onerror = function (event) {
-    console.error("Error en la base de datos: " + event.target.errorCode);
-  };
-
-  location.reload();
-
-
-}
-
-*/
