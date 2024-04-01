@@ -83,6 +83,19 @@ html,body{
     color:white;
 }
 
+#btnEliminarUsuario{
+
+   margin-left:8vw;
+   margin-right:8vw; 
+    width:12vw;
+    height:2vw;
+    border-radius:6px;
+    border-style:ridge;
+    border-color:rgb(255, 3, 3);
+    background:linear-gradient(135deg,#b83c3c,#af3030,#aa261c);
+    color:white;
+}
+
 #lblNombre,#lblApellidos{
 
     margin-top:1vh;

@@ -4,7 +4,8 @@ import { cargarDatosDB, insertarRegistro } from "./manejo_idb.mjs";
 var selector_usuario;
 var itNombre, itApellidos;
 var formulario_nuevo_usuario;
-var btnEntrar;
+
+var btnEntrar,btnEliminarUsuario;
 
 function crearDB(nmbBD) {
 
@@ -82,14 +83,12 @@ function borrarRegistro(){
 
 window.onload = () => {
 
-
   selector_usuario = document.getElementById('select_usuarios');
   formulario_nuevo_usuario = document.getElementById('div_interno_nuevo_usuario');
   itNombre = document.getElementById('itNombre');
   itApellidos = document.getElementById('itApellidos');
   btnEntrar = document.getElementById('btnEntrar');
-
-
+  btnEliminarUsuario = document.getElementById('btnEliminarUsuario');
 
   if (selector_usuario.options.length === 1) {
 
@@ -101,8 +100,6 @@ window.onload = () => {
   cargarDatosDB("Seguimiento_Salud_Web", "Usuarios").then((matriz)=>{
 
     agregarOpcionesListaDesplegable(matriz);
-
-
 
   });
 
@@ -129,11 +126,16 @@ window.onload = () => {
     if (selector_usuario.value === "Crear Nuevo") {
 
       mostrarFormularioNuevoUsuario(1);
-
+      btnEliminarUsuario.classList.add("invisible");
+      btnEliminarUsuario.classList.remove("visible");
+      btnEntrar.innerHTML = "Crear Usuario";
     } else {
 
 
       mostrarFormularioNuevoUsuario(0);
+      btnEntrar.innerHTML = "Continuar";
+      btnEliminarUsuario.classList.remove("invisible");
+      btnEliminarUsuario.classList.add("visible");
 
     }
 
@@ -157,7 +159,7 @@ function mostrarFormularioNuevoUsuario(opc) {
 
     formulario_nuevo_usuario.classList.remove("invisible");
     formulario_nuevo_usuario.classList.add('visible');
-
+    
   } else {
 
     formulario_nuevo_usuario.classList.add("invisible");
