@@ -113,3 +113,35 @@ table,td{
     border-radius:6px;
     border-width:3px;
 }
+
+#btnInsertarRegistro,#btnEliminarRegistro,#btnAnteriorRegistro,#btnSiguienteRegistro{
+
+    margin-top:2vh;
+    width:50%;
+    border-radius:6px;
+
+}
+
+#btnInsertarRegistro{
+
+    background:linear-gradient(128deg,#277427,#57ab57,#275d27);
+    color:white;
+}
+
+#btnEliminarRegistro{
+
+    background:linear-gradient(128deg,#861818,#dc4949,#7d0808);
+    color:white;
+}
+
+#btnAnteriorRegistro{
+
+    background:linear-gradient(-128deg,#74b975 90%,#efffd0,#6eaa66);
+    color:white;
+}
+
+#btnSiguienteRegistro{
+
+    background:linear-gradient(128deg,#74b975 90%,#f4ffdd,#6eaa66);
+    color:white;
+}

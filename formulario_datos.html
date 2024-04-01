@@ -25,7 +25,7 @@
             <h3 class="titul">Seguimiento Básico De Salud</h3>
 
         </div>
-        
+
         <div>
 
             <h4 id="nomusuario_barra_nav"></h4>
@@ -40,7 +40,7 @@
 
     </div>
 
-    <div class = "div_entrada_valores">
+    <div class="div_entrada_valores">
 
         <img src="recursos/img/enfermera_formulario.png">
 
@@ -48,19 +48,61 @@
 
             <table>
 
-                <tr><td style="width:100%">Fecha</td><td><input id="it_fecha" type="date" class="texto_centrado"></input></td></tr>
-                <tr><td>Peso</td><td><input id="it_peso" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Glucosa</td><td><input id="it_glucosa" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Oxígeno</td><td><input id="it_o2" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Sístole</td><td><input id="it_sist" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Diástole</td><td><input id="it_diast" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Pulsaciones</td><td><input id="it_ppm" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Pasos</td><td><input id="it_pasos" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Kilómetros</td><td><input id="it_kms" type="number" class="texto_centrado"></input></td></tr>
-                <tr><td>Calorías</td><td><input id="it_cals" type="number" class="texto_centrado"></input></td></tr>
-                
+                <tr>
+                    <td style="width:100%">Fecha</td>
+                    <td><input id="it_fecha" type="date" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Peso</td>
+                    <td><input id="it_peso" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Glucosa</td>
+                    <td><input id="it_glucosa" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Oxígeno</td>
+                    <td><input id="it_o2" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Sístole</td>
+                    <td><input id="it_sist" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Diástole</td>
+                    <td><input id="it_diast" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Pulsaciones</td>
+                    <td><input id="it_ppm" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Pasos</td>
+                    <td><input id="it_pasos" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Kilómetros</td>
+                    <td><input id="it_kms" type="number" class="texto_centrado"></input></td>
+                </tr>
+                <tr>
+                    <td>Calorías</td>
+                    <td><input id="it_cals" type="number" class="texto_centrado"></input></td>
+                </tr>
+
             </table>
-            <button type="button" id="btnInsertarRegistro">Insertar Registro</button>
+            <div style="display:flex;flex-direction:row">
+
+                <button type="button" id="btnInsertarRegistro">Guardar</button>
+                <button type="button" id="btnEliminarRegistro">Eliminar</button>
+
+            </div>
+
+            <div style="display:flex;flex-direction:row">
+
+                <button type="button" id="btnAnteriorRegistro">Anterior</button>
+                <button type="button" id="btnSiguienteRegistro">Siguiente</button>
+
+            </div>
         </form>
     </div>
 </body>
