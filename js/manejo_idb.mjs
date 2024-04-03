@@ -1,6 +1,60 @@
 export var matriz_resultado = [];
 
+export function abrirDB(nmbBD,nombreEvento){
 
+  const solicitud = window.indexedDB.open(nmbBD,1);
+
+  return manejarSolicitudAperturaDB(solicitud,nombreEvento);
+
+}
+
+function manejarSolicitudAperturaDB(solicitud,nombreEvento){
+
+  return new Promise((resolve,reject)=>{
+    solicitud.addEventListener(nombreEvento, (event)=>{
+
+      resolve(event.target.result);
+
+    });
+
+  });
+
+}
+
+export function crearAlmacénDeObjetos(db,nmbObjSt,opc){
+
+  return db.createObjectStore(nmbObjSt, opc);
+
+}
+
+export function crearÍndice(nmbObjSt,nmbÍndice,único){
+
+  nmbObjSt.createIndex(`por_${nmbÍndice}`, nmbÍndice, { unique: único });
+
+}
+
+export function insertarRegistro(nmbBD,nmbObjSt,datos){
+
+  
+  let transacción = nmbBD.transaction(nmbObjSt,"readwrite");
+  const objst = transacción.objectStore(nmbObjSt);
+  objst.add(datos);
+  return manejarTransacción(transacción,"complete");
+
+
+}
+
+function manejarTransacción(transacción,nombreEvento){
+
+    transacción.addEventListener(nombreEvento,(event)=>{
+
+      console.log("Transacción completa.");
+
+    });
+}
+
+/*
+ 
 export function crearDB(nmbBD) {
 
   //Análisis del código: "indexedDB" es un objeto "IDBFactory"
@@ -67,253 +121,4 @@ export function crearDB(nmbBD) {
   });
 
 }
-
-export async function ejecutarCRUD(nmbBD, nmbObjSt, operac, dato, tipoLectura, num_reg) {
-
-  let solicitud = indexedDB.open(nmbBD, 1);
-
-  await solicitud.addEventListener("success", (event) => {
-
-    let db = event.target.result;
-    let transac = db.transaction([nmbObjSt], "readwrite");
-    let objSt = transac.objectStore(nmbObjSt);
-
-    switch (operac) {
-
-      case "crear":
-
-        let solicitudCrear = objSt.add(dato);
-
-        solicitudCrear.onsuccess = (event) => {
-
-          console.log("Dato agregado: " + event.target.result);
-
-          alert(`${dato.Nombre} ${dato.Apellidos} - CORRECTO.`);
-
-        }
-
-        break;
-
-      case "leer_todos":
-
-        let solicitudLeerTodos = objSt.openCursor();
-
-        solicitudLeerTodos.onsuccess = (event) => {
-
-          let cursor = event.target.result;
-
-          if (cursor) {
-
-            let objeto;
-
-            if (tipoLectura === "registros") {
-
-              objeto = cursor.value;
-
-            } else if (tipoLectura === "claves") {
-
-              objeto = cursor.key;
-
-            }
-
-            matriz_resultado.push(objeto);
-
-            cursor.continue();
-
-          } else {
-
-            console.log("No hay más datos.");
-          }
-        }
-        solicitudLeerTodos.onerror = (event) => {
-
-          alert("No fue posible cargar la lista de usuarios: " + event.errorCode);
-
-        }
-        break;
-
-      case "eliminar":
-
-        let solicitudEliminarRegistro = objSt.delete(num_reg);
-
-        solicitudEliminarRegistro.onsuccess = (event) => {
-
-          console.log("Registro eliminado: " + event.target.result);
-
-        }
-
-        solicitudEliminarRegistro.onerror = (event) => {
-
-          alert("No fue posible eliminar el registro:\n" + event.target.errorCode);
-
-        }
-        transac.addEventListener("complete", () => {
-
-          console.log("Transacción completa.");
-
-        });
-
-        transac.addEventListener("error", (event) => {
-
-          console.error("Error en la transacción: " + event.target.errorCode);
-
-
-        });
-        break;
-    }
-
-
-  });
-
-  return matriz_resultado;
-
-}
-
-/*
-
-export async function insertarRegistro(nmbBD, nmbObjSt, datos_registro) {
-
-  var solicitudApertura = indexedDB.open(nmbBD, 1);
-
-  solicitudApertura.addEventListener("success", async (event) => {
-
-    var db = event.target.result;
-    var transac = db.transaction([nmbObjSt], "readwrite");
-    var objSt = transac.objectStore(nmbObjSt);
-
-    var solicitudInsertarRegistro = objSt.add(datos_registro);
-
-    await solicitudInsertarRegistro.addEventListener("success", (event) => {
-
-      console.log(event.target.result);
-      console.log("Dato agregado: " + event.target.result);
-
-      alert(`REGISTRO: ${datos_registro.Nombre} ${datos_registro.Apellidos} insertado correctamente.`);
-
-    });
-    solicitudInsertarRegistro.addEventListener("error", async (event) => {
-
-      await console.error("Error al insertar el registro: " + event.target.errorCode);
-
-    });
-
-
-    transac.addEventListener("complete", async () => {
-
-      await console.log("Transacción completa.");
-
-
-    });
-
-    transac.addEventListener("error", async (event) => {
-
-      await console.error("Error en la transacción: " + event.target.errorCode);
-
-    });
-
-
-
-  });
-
-
-
-
-}
-
-
-export function cargarDatosDB(nmbBD, nmbObjSt) {
-
-  return new Promise((resolve, reject) => {
-    var solicitud = indexedDB.open(nmbBD, 1);
-
-    solicitud.onsuccess = (event) => {
-
-      var db = event.target.result;
-
-      var transaccion = db.transaction(nmbObjSt, "readonly");
-
-      var objectStore = transaccion.objectStore(nmbObjSt);
-
-      var cursorRequest = objectStore.openCursor();
-
-      cursorRequest.onsuccess = (event) => {
-
-        var cursor = event.target.result;
-
-        if (cursor) {
-
-          var usuario = cursor.value;
-
-          matriz_resultado.push(cursor.key, usuario);
-
-          cursor.continue();
-
-        } else {
-
-          console.log("No hay más datos.");
-          resolve(matriz_resultado);
-
-        }
-
-      };
-
-    }
-
-    solicitud.onerror = (event) => {
-
-      alert("No fue posible cargar la lista de usuarios: " + event.errorCode);
-
-
-    }
-
-
-  });
-
-}
-
-export async function eliminarRegistro(nmbBD, nmbObjSt, num_reg) {
-
-  var solicitudApertura = indexedDB.open(nmbBD, 1);
-
-  solicitudApertura.addEventListener("success", async (event) => {
-
-    var db = event.target.result;
-    var transac = db.transaction([nmbObjSt], "readwrite");
-    var objSt = transac.objectStore(nmbObjSt);
-
-    var solicitudEliminarRegistro = objSt.delete(num_reg);
-
-    solicitudEliminarRegistro.addEventListener("success", (event) => {
-
-      console.log(event.target.result);
-      console.log("Dato eliminado: " + event.target.result);
-
-      alert(`REGISTRO: ${num_reg} eliminado correctamente.`);
-
-    });
-    solicitudEliminarRegistro.addEventListener("error", async (event) => {
-
-      console.error("Error al eliminar el registro: " + event.target.errorCode);
-
-    });
-
-
-    transac.addEventListener("complete", async () => {
-
-      await console.log("Transacción completa.");
-
-
-    });
-
-    transac.addEventListener("error", async (event) => {
-
-      await console.error("Error en la transacción: " + event.target.errorCode);
-
-    });
-
-
-  });
-
-}
-
 */

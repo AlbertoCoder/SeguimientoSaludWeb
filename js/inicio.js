@@ -1,12 +1,12 @@
 //API de IndexedDB en https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
 
-import { crearDB, ejecutarCRUD } from "./manejo_idb.mjs";
+import { abrirDB,crearAlmacénDeObjetos,crearÍndice,insertarRegistro } from "./manejo_idb.mjs";
 var selector_usuario;
 var itNombre, itApellidos;
 var formulario_nuevo_usuario;
 
 var btnEntrar, btnEliminarUsuario;
-
+var baseDeDatos,almacénUsuarios,almacénMediciones;
 
 window.onload = () => {
 
@@ -23,20 +23,61 @@ window.onload = () => {
 
   }
 
-  crearDB("Seguimiento_Salud_Web");
+  abrirDB("Seguimiento_Salud_Web","success").then(db=>{
+
+    baseDeDatos=db;
 
 
-  agregarOpcionesListaDesplegable();
+  }).catch(error=>{
 
+    console.error(error);
+
+  });
+
+  abrirDB("Seguimiento_Salud_Web","upgradeneeded").then(db=>{
+
+    almacénUsuarios = crearAlmacénDeObjetos(db,"Usuarios",{autoIncrement:true});
+    almacénMediciones = crearAlmacénDeObjetos(db,"Mediciones",{autoIncrement:true});
+
+    crearÍndice(almacénUsuarios,"Nombre",false);
+    crearÍndice(almacénUsuarios,"Apellidos",false);
+
+    crearÍndice(almacénMediciones,"id_usuario",false);
+    crearÍndice(almacénMediciones,"Fecha",false);
+    crearÍndice(almacénMediciones,"Glucosa",false);
+    crearÍndice(almacénMediciones,"Peso",false);
+    crearÍndice(almacénMediciones,"O2",false);
+    crearÍndice(almacénMediciones,"Sist",false);
+    crearÍndice(almacénMediciones,"Diast",false);
+    crearÍndice(almacénMediciones,"PPM",false);
+    crearÍndice(almacénMediciones,"Pasos",false);
+    crearÍndice(almacénMediciones,"Kms",false);
+    crearÍndice(almacénMediciones,"Cals",false);
+
+    baseDeDatos = db;
+    
+  }).catch(error=>{
+
+    console.error(error);
+
+  });
 
   btnEntrar.addEventListener("click", async () => {
 
+    console.log(baseDeDatos);
 
     if (selector_usuario.value === "Crear Nuevo") {
+      insertarRegistro(baseDeDatos,"Usuarios",{Nombre:itNombre.value,Apellidos:itApellidos.value});
 
-      await ejecutarCRUD("Seguimiento_Salud_Web", "Usuarios", "crear", { Nombre: itNombre.value, Apellidos: itApellidos.value }, null, null);
+       baseDeDatos.close();
 
-      location.reload();
+      abrirDB("Seguimiento_Salud_Web","success").then(db=>{
+       
+        baseDeDatos = db;
+
+      });
+
+      //location.reload();
 
     } else {
 
@@ -112,7 +153,7 @@ async function agregarOpcionesListaDesplegable() {
 
     var matriz = await ejecutarCRUD("Seguimiento_Salud_Web", "Usuarios", "leer_todos", null, "registros", null);
     console.log(matriz);
-    
+
     matriz.forEach((elemento) => {
       console.log("Hey");
       let opcion = document.createElement("option");
