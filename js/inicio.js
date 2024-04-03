@@ -70,9 +70,9 @@ window.onload = () => {
       insertarRegistro(baseDeDatos, "Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value }).then(event => {
 
         console.log(event.target.result);
-        alert(`${itNombre.value} ${itApellidos.value} -- CORRECTO.`);
       });
 
+      alert(`${itNombre.value} ${itApellidos.value} -- CORRECTO.`);
       location.reload();
 
     } else {
