@@ -1,12 +1,12 @@
 //API de IndexedDB en https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
 
-import { abrirDB,crearAlmacénDeObjetos,crearÍndice,insertarRegistro } from "./manejo_idb.mjs";
+import { abrirDB, crearAlmacénDeObjetos, crearÍndice, insertarRegistro } from "./manejo_idb.mjs";
 var selector_usuario;
 var itNombre, itApellidos;
 var formulario_nuevo_usuario;
 
 var btnEntrar, btnEliminarUsuario;
-var baseDeDatos,almacénUsuarios,almacénMediciones;
+var baseDeDatos, almacénUsuarios, almacénMediciones;
 
 window.onload = () => {
 
@@ -23,40 +23,40 @@ window.onload = () => {
 
   }
 
-  abrirDB("Seguimiento_Salud_Web","success").then(db=>{
+  abrirDB("Seguimiento_Salud_Web", "upgradeneeded").then(db => {
 
-    baseDeDatos=db;
+    almacénUsuarios = crearAlmacénDeObjetos(db, "Usuarios", { autoIncrement: true });
+    almacénMediciones = crearAlmacénDeObjetos(db, "Mediciones", { autoIncrement: true });
 
+    crearÍndice(almacénUsuarios, "Nombre", false);
+    crearÍndice(almacénUsuarios, "Apellidos", false);
 
-  }).catch(error=>{
+    crearÍndice(almacénMediciones, "id_usuario", false);
+    crearÍndice(almacénMediciones, "Fecha", false);
+    crearÍndice(almacénMediciones, "Glucosa", false);
+    crearÍndice(almacénMediciones, "Peso", false);
+    crearÍndice(almacénMediciones, "O2", false);
+    crearÍndice(almacénMediciones, "Sist", false);
+    crearÍndice(almacénMediciones, "Diast", false);
+    crearÍndice(almacénMediciones, "PPM", false);
+    crearÍndice(almacénMediciones, "Pasos", false);
+    crearÍndice(almacénMediciones, "Kms", false);
+    crearÍndice(almacénMediciones, "Cals", false);
+
+    baseDeDatos = db;
+
+  }).catch(error => {
 
     console.error(error);
 
   });
 
-  abrirDB("Seguimiento_Salud_Web","upgradeneeded").then(db=>{
-
-    almacénUsuarios = crearAlmacénDeObjetos(db,"Usuarios",{autoIncrement:true});
-    almacénMediciones = crearAlmacénDeObjetos(db,"Mediciones",{autoIncrement:true});
-
-    crearÍndice(almacénUsuarios,"Nombre",false);
-    crearÍndice(almacénUsuarios,"Apellidos",false);
-
-    crearÍndice(almacénMediciones,"id_usuario",false);
-    crearÍndice(almacénMediciones,"Fecha",false);
-    crearÍndice(almacénMediciones,"Glucosa",false);
-    crearÍndice(almacénMediciones,"Peso",false);
-    crearÍndice(almacénMediciones,"O2",false);
-    crearÍndice(almacénMediciones,"Sist",false);
-    crearÍndice(almacénMediciones,"Diast",false);
-    crearÍndice(almacénMediciones,"PPM",false);
-    crearÍndice(almacénMediciones,"Pasos",false);
-    crearÍndice(almacénMediciones,"Kms",false);
-    crearÍndice(almacénMediciones,"Cals",false);
+  abrirDB("Seguimiento_Salud_Web", "success").then(db => {
 
     baseDeDatos = db;
-    
-  }).catch(error=>{
+
+
+  }).catch(error => {
 
     console.error(error);
 
@@ -67,17 +67,12 @@ window.onload = () => {
     console.log(baseDeDatos);
 
     if (selector_usuario.value === "Crear Nuevo") {
-      insertarRegistro(baseDeDatos,"Usuarios",{Nombre:itNombre.value,Apellidos:itApellidos.value});
+      insertarRegistro(baseDeDatos, "Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value }).then(event => {
 
-       baseDeDatos.close();
-
-      abrirDB("Seguimiento_Salud_Web","success").then(db=>{
-       
-        baseDeDatos = db;
-
+        console.log(event.target.result);
       });
 
-      //location.reload();
+      location.reload();
 
     } else {
 

@@ -1,17 +1,17 @@
 export var matriz_resultado = [];
 
-export function abrirDB(nmbBD,nombreEvento){
+export function abrirDB(nmbBD, nombreEvento) {
 
-  const solicitud = window.indexedDB.open(nmbBD,1);
+  const solicitud = window.indexedDB.open(nmbBD, 1);
 
-  return manejarSolicitudAperturaDB(solicitud,nombreEvento);
+  return manejarSolicitudAperturaDB(solicitud, nombreEvento);
 
 }
 
-function manejarSolicitudAperturaDB(solicitud,nombreEvento){
+function manejarSolicitudAperturaDB(solicitud, nombreEvento) {
 
-  return new Promise((resolve,reject)=>{
-    solicitud.addEventListener(nombreEvento, (event)=>{
+  return new Promise((resolve, reject) => {
+    solicitud.addEventListener(nombreEvento, (event) => {
 
       resolve(event.target.result);
 
@@ -21,36 +21,39 @@ function manejarSolicitudAperturaDB(solicitud,nombreEvento){
 
 }
 
-export function crearAlmacénDeObjetos(db,nmbObjSt,opc){
+export function crearAlmacénDeObjetos(db, nmbObjSt, opc) {
 
   return db.createObjectStore(nmbObjSt, opc);
 
 }
 
-export function crearÍndice(nmbObjSt,nmbÍndice,único){
+export function crearÍndice(nmbObjSt, nmbÍndice, único) {
 
   nmbObjSt.createIndex(`por_${nmbÍndice}`, nmbÍndice, { unique: único });
 
 }
 
-export function insertarRegistro(nmbBD,nmbObjSt,datos){
+export function insertarRegistro(nmbBD, nmbObjSt, datos) {
 
-  
-  let transacción = nmbBD.transaction(nmbObjSt,"readwrite");
+
+  let transacción = nmbBD.transaction(nmbObjSt, "readwrite");
   const objst = transacción.objectStore(nmbObjSt);
   objst.add(datos);
-  return manejarTransacción(transacción,"complete");
+  return manejarTransacción(transacción, "complete");
 
 
 }
 
-function manejarTransacción(transacción,nombreEvento){
+function manejarTransacción(transacción, nombreEvento) {
 
-    transacción.addEventListener(nombreEvento,(event)=>{
+  return new Promise((resolve, reject) => {
+    transacción.addEventListener(nombreEvento, (event) => {
 
-      console.log("Transacción completa.");
+      resolve("Transacción completa.");
 
     });
+
+  });
 }
 
 /*
