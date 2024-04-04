@@ -1,6 +1,13 @@
 //API de IndexedDB en https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
 
-import { abrirDB, crearAlmacénDeObjetos, crearÍndice, insertarRegistro } from "./manejo_idb.mjs";
+import {
+  abrirDB,
+  crearAlmacénDeObjetos,
+  crearÍndice,
+  insertarRegistro,
+  leerTodosLosRegistros,
+  eliminarRegistro
+} from "./manejo_idb.mjs";
 var selector_usuario;
 var itNombre, itApellidos;
 var formulario_nuevo_usuario;
@@ -54,6 +61,8 @@ window.onload = () => {
   abrirDB("Seguimiento_Salud_Web", "success").then(db => {
 
     baseDeDatos = db;
+    agregarOpcionesListaDesplegable();
+    //leerTodosLosRegistros(baseDeDatos,"Usuarios");
 
 
   }).catch(error => {
@@ -62,6 +71,7 @@ window.onload = () => {
 
   });
 
+
   btnEntrar.addEventListener("click", async () => {
 
     console.log(baseDeDatos);
@@ -69,11 +79,11 @@ window.onload = () => {
     if (selector_usuario.value === "Crear Nuevo") {
       insertarRegistro(baseDeDatos, "Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value }).then(resultado => {
 
-        console.log(resultado);
+        console.log(`Objeto agregado ${resultado}`);
       });
 
       alert(`${itNombre.value} ${itApellidos.value} -- CORRECTO.`);
-      //location.reload();
+      location.reload();
 
     } else {
 
@@ -81,7 +91,6 @@ window.onload = () => {
       navegarConDatos("formulario_datos.html", indi);
 
     }
-
 
   });
 
@@ -108,7 +117,23 @@ window.onload = () => {
 
   btnEliminarUsuario.addEventListener("click", () => {
 
-    eliminarRegistro("Seguimiento_Salud_Web", "Usuarios", 1);
+    try {
+
+      eliminarRegistro(baseDeDatos, "Usuarios", selector_usuario.value.split(" ")[0]).then(msj => {
+
+
+        console.log(`Objeto con id: ${msj} eliminado.`);
+
+        alert(`${selector_usuario.value} eliminado.`);
+      });
+
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
 
 
   });
@@ -143,20 +168,24 @@ function mostrarFormularioNuevoUsuario(opc) {
 
 }
 
-async function agregarOpcionesListaDesplegable() {
+function agregarOpcionesListaDesplegable() {
 
   try {
 
-    var matriz = await ejecutarCRUD("Seguimiento_Salud_Web", "Usuarios", "leer_todos", null, "registros", null);
-    console.log(matriz);
+    leerTodosLosRegistros(baseDeDatos, "Usuarios", "registros").then(mapa => {
+      let claves = Array.from(mapa.keys());
+      let valores = Array.from(mapa.values());
 
-    matriz.forEach((elemento) => {
-      console.log("Hey");
-      let opcion = document.createElement("option");
-      opcion.value = elemento.Nombre + " " + elemento.Apellidos;
-      opcion.text = elemento.Nombre + " " + elemento.Apellidos;
-      selector_usuario.appendChild(opcion);
+      claves.forEach((elemento, ind) => {
+        let opcion = document.createElement("option");
+        opcion.value = elemento + " " + valores[ind].Nombre + " " + valores[ind].Apellidos;
+        opcion.text = elemento + " " + valores[ind].Nombre + " " + valores[ind].Apellidos;
+        selector_usuario.appendChild(opcion);
+      });
+
+
     });
+
 
 
   } catch (error) {

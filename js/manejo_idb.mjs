@@ -35,29 +35,63 @@ export function crearÍndice(nmbObjSt, nmbÍndice, único) {
 
 export function insertarRegistro(nmbBD, nmbObjSt, datos) {
 
+  return new Promise((resolve, reject) => {
 
-  let transacción = nmbBD.transaction(nmbObjSt, "readwrite");
-  const objst = transacción.objectStore(nmbObjSt);
-  objst.add(datos);
-  return manejarTransacción(transacción, "complete");
+    nmbBD.transaction(nmbObjSt, "readwrite")
+      .objectStore(nmbObjSt)
+      .add(datos).onsuccess= (event) => {
+
+        resolve(datos);
+
+
+      }
+
+    });
+
+}
+
+export function leerTodosLosRegistros(nmbBD, nmbObjSt) {
+
+  const resultado_registros = new Map();
+
+  return new Promise((resolve, reject) => {
+
+    nmbBD.transaction(nmbObjSt, "readonly")
+      .objectStore(nmbObjSt)
+      .openCursor().onsuccess = (event) => {
+
+        if (event.target.result) {
+          resultado_registros.set(event.target.result.key, event.target.result.value);
+          event.target.result.continue();
+
+        } else {
+          resolve(resultado_registros);
+        }
+      }
+
+
+  });
 
 
 }
 
-function manejarTransacción(transacción, nombreEvento) {
+
+export function eliminarRegistro(nmbBD, nmbObjSt, num_reg) {
 
   return new Promise((resolve, reject) => {
-    transacción.addEventListener(nombreEvento, (event) => {
 
-      resolve("Transacción completa.");
+    nmbBD.transaction(nmbObjSt, "readwrite")
+      .objectStore(nmbObjSt)
+      .delete(parseInt(num_reg)).onsuccess = (event) => {
 
-    });
+        resolve(`${parseInt(num_reg)}`);
 
+      };
   });
 }
 
 /*
- 
+
 export function crearDB(nmbBD) {
 
   //Análisis del código: "indexedDB" es un objeto "IDBFactory"
@@ -89,19 +123,19 @@ export function crearDB(nmbBD) {
     console.log("Nombre de la base de datos: " + event.target.result.name);
     console.log("Versión: " + event.target.result.version);
 
-    //El método "createObjectStore" del objeto "db" crea y devuelve un nuevo objeto que implementa
-    //la interfaz "IDBObjectStore" (es decir, una tabla de base de datos).
-    //El primer parámetro corresponde al nombre del "objectStore" (dicho de otro modo, el nombre de la tabla)
-    //y el segundo parámetro corresponde a una matriz de opciones, entre las cuales caben destacar
-    //el "keyPath" (la ruta que hace referencia al nombre del campo clave) y "autoIncrement", un valor
-    //booleano que, de ser establecido en verdadero, indicará que la tabla tiene un generador de clave
-    //autoincremental. 
+//El método "createObjectStore" del objeto "db" crea y devuelve un nuevo objeto que implementa
+//la interfaz "IDBObjectStore" (es decir, una tabla de base de datos).
+//El primer parámetro corresponde al nombre del "objectStore" (dicho de otro modo, el nombre de la tabla)
+//y el segundo parámetro corresponde a una matriz de opciones, entre las cuales caben destacar
+//el "keyPath" (la ruta que hace referencia al nombre del campo clave) y "autoIncrement", un valor
+//booleano que, de ser establecido en verdadero, indicará que la tabla tiene un generador de clave
+//autoincremental. 
     var objectStoreUsuarios = db.createObjectStore("Usuarios", { autoIncrement: true });
 
-    //El método "createIndex" del objeto "objectStoreUsuarios" (que implementa la interfaz "IDBObjectStore")
-    //crea y devuelve un nuevo objeto que implementa la interfaz "IDBIndex".
-    //Los parámetros corresponden al nombre del índice "por_nombre", al campo "Nombre" y las opciones
-    //"unique:false" (no es un campo con valor único). 
+//El método "createIndex" del objeto "objectStoreUsuarios" (que implementa la interfaz "IDBObjectStore")
+//crea y devuelve un nuevo objeto que implementa la interfaz "IDBIndex".
+//Los parámetros corresponden al nombre del índice "por_nombre", al campo "Nombre" y las opciones
+//"unique:false" (no es un campo con valor único). 
     objectStoreUsuarios.createIndex("por_nombre", "Nombre", { unique: false });
     objectStoreUsuarios.createIndex("por_apellidos", "Apellidos", { unique: false });
 
