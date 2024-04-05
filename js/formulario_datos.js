@@ -65,7 +65,7 @@ window.onload = function () {
 
     insertarRegistro(baseDeDatos, "Mediciones", mediciones_prueba).then(resultado=>{
 
-      alert(resultado);
+      alert(`Registro agregado con fecha ${resultado.Fecha}`);
 
     });
 

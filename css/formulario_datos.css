@@ -136,12 +136,12 @@ table,td{
 
 #btnAnteriorRegistro{
 
-    background:linear-gradient(-128deg,#74b975 90%,#efffd0,#6eaa66);
-    color:white;
+    background:white;
+    color:#277427;
 }
 
 #btnSiguienteRegistro{
 
-    background:linear-gradient(128deg,#74b975 90%,#f4ffdd,#6eaa66);
-    color:white;
+    background:white;
+    color:#277427;
 }
