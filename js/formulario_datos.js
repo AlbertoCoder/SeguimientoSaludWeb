@@ -16,7 +16,7 @@ window.onload = function () {
     baseDeDatos = db;
     leerUnRegistro(db, "Usuarios", parseInt(idusuario_seleccionado)).then(resultado => {
 
-      nomusuario_barra_nav.innerHTML = `Usuario/a: ${resultado.Nombre} ${resultado.Apellidos}`;
+      nomusuario_barra_nav.innerHTML = `Usuario/a: ${idusuario_seleccionado}`;
 
     });
     
@@ -40,11 +40,11 @@ window.onload = function () {
 
   btnInsertarRegistro.addEventListener("click", () => {
 
-    idusuario_seleccionado = sessionStorage.getItem("id_usuario");
-    console.log(idusuario_seleccionado);
-    var nombre_usu = nomusuario_barra_nav.innerHTML.split(" ")[1];
-    var apellido1_usu = nomusuario_barra_nav.innerHTML.split(" ")[2];
-    var apellido2_usu = nomusuario_barra_nav.innerHTML.split(" ")[3];
+    idusuario_seleccionado = sessionStorage.getItem("id_usuario").split(" ")[0];
+    
+    var nombre_usu = nomusuario_barra_nav.innerHTML.split(" ")[2];
+    var apellido1_usu = nomusuario_barra_nav.innerHTML.split(" ")[3];
+    var apellido2_usu = nomusuario_barra_nav.innerHTML.split(" ")[4];
 
     var mediciones_prueba = {
 
@@ -63,7 +63,11 @@ window.onload = function () {
       Cals: it_cals.value
     }
 
-    insertarRegistro("Seguimiento_Salud_Web", "Mediciones", mediciones_prueba);
+    insertarRegistro(baseDeDatos, "Mediciones", mediciones_prueba).then(resultado=>{
+
+      alert(resultado);
+
+    });
 
   });
 
