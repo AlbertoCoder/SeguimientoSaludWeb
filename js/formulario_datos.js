@@ -1,22 +1,31 @@
-import { cargarDatosDB, insertarRegistro } from "./manejo_idb.mjs";
+import { abrirDB, insertarRegistro, leerUnRegistro, leerTodosLosRegistros } from "./manejo_idb.mjs";
 
 var idusuario_seleccionado = sessionStorage.getItem("id_usuario");
 var nomusuario_barra_nav;
 var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, it_kms, it_cals;
 var btnInsertarRegistro;
 var usuario;
+var baseDeDatos;
 
 window.onload = function () {
 
-  cargarDatosDB("Seguimiento_Salud_Web", "Usuarios").then(matriz => {
+  nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
-    usuario = matriz[parseInt(idusuario_seleccionado) - 1];
-    nomusuario_barra_nav.innerHTML = `Usuario/a: ${usuario.Nombre} ${usuario.Apellidos}`;
+  abrirDB("Seguimiento_Salud_Web", "success").then(db => {
+
+    baseDeDatos = db;
+    leerUnRegistro(db, "Usuarios", parseInt(idusuario_seleccionado)).then(resultado => {
+
+      nomusuario_barra_nav.innerHTML = `Usuario/a: ${resultado.Nombre} ${resultado.Apellidos}`;
+
+    });
+    
+  }).catch(error => {
+
+    console.error(error);
 
   });
 
-
-  nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
   it_fecha = document.getElementById("it_fecha");
   it_peso = document.getElementById("it_peso");
   it_glucosa = document.getElementById("it_glucosa");
@@ -31,15 +40,15 @@ window.onload = function () {
 
   btnInsertarRegistro.addEventListener("click", () => {
 
-    idusuario_seleccionado = sessionStorage.getItem("id_usuario").split(".")[0];
+    idusuario_seleccionado = sessionStorage.getItem("id_usuario");
     console.log(idusuario_seleccionado);
-    var nombre_usu=nomusuario_barra_nav.innerHTML.split(" ")[1];
-    var apellido1_usu=nomusuario_barra_nav.innerHTML.split(" ")[2];
-    var apellido2_usu=nomusuario_barra_nav.innerHTML.split(" ")[3];
+    var nombre_usu = nomusuario_barra_nav.innerHTML.split(" ")[1];
+    var apellido1_usu = nomusuario_barra_nav.innerHTML.split(" ")[2];
+    var apellido2_usu = nomusuario_barra_nav.innerHTML.split(" ")[3];
 
     var mediciones_prueba = {
 
-      N:parseInt(idusuario_seleccionado),
+      N: parseInt(idusuario_seleccionado),
       Nombre: nombre_usu,
       Apellidos: `${apellido1_usu} ${apellido2_usu}`,
       Fecha: it_fecha.value,

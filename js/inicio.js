@@ -87,7 +87,7 @@ window.onload = () => {
 
     } else {
 
-      let indi = selector_usuario.value.split('.')[0];
+      let indi = selector_usuario.value.split(' ')[0];
       navegarConDatos("formulario_datos.html", indi);
 
     }
@@ -125,6 +125,9 @@ window.onload = () => {
         console.log(`Objeto con id: ${msj} eliminado.`);
 
         alert(`${selector_usuario.value} eliminado.`);
+
+        location.reload();
+
       });
 
 

@@ -39,14 +39,30 @@ export function insertarRegistro(nmbBD, nmbObjSt, datos) {
 
     nmbBD.transaction(nmbObjSt, "readwrite")
       .objectStore(nmbObjSt)
-      .add(datos).onsuccess= (event) => {
+      .add(datos).onsuccess = (event) => {
 
         resolve(datos);
+
+      }
+
+  });
+
+}
+
+export function leerUnRegistro(nmbBD, nmbObjSt, num_reg) {
+
+  return new Promise((resolve, reject) => {
+
+    nmbBD.transaction(nmbObjSt, "readwrite")
+      .objectStore(nmbObjSt)
+      .get(num_reg).onsuccess = (event) => {
+
+        resolve(event.target.result);
 
 
       }
 
-    });
+  });
 
 }
 
