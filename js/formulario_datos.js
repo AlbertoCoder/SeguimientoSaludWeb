@@ -69,7 +69,30 @@ window.onload = function () {
 
     });
 
+    mostrarRegistroEnFormulario();
+     
   });
 
 }
 
+function mostrarRegistroEnFormulario(){
+
+
+  leerTodosLosRegistros(baseDeDatos,"Mediciones").then(resultado=>{
+
+    console.log("Valor: "+ resultado.get(resultado.size).Fecha);
+    it_fecha.value = resultado.get(resultado.size).Fecha;
+    it_peso.value = resultado.get(resultado.size).Peso;
+    it_glucosa.value = resultado.get(resultado.size).Glucosa;
+    it_o2.value = resultado.get(resultado.size).O2;
+    it_sist.value = resultado.get(resultado.size).Sist;
+    it_diast.value = resultado.get(resultado.size).Diast;
+    it_ppm.value = resultado.get(resultado.size).PPM;
+    it_pasos.value = resultado.get(resultado.size).Pasos;
+    it_kms.value = resultado.get(resultado.size).Kms;
+    it_cals.value = resultado.get(resultado.size).Cals;
+
+  });
+
+
+}
