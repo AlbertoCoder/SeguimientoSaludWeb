@@ -3,7 +3,7 @@ body {
 
 
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7b2, #a9ecce, #ffffff) !important;
 
 }
@@ -55,25 +55,37 @@ body {
 
 }
 
-.div_entrada_valores {
+.div_informe {
 
     display: flex;
     flex-direction: row;
-    margin-left:25vw;
-    margin-right:25vw;
-    width:50%;
+    margin-left:5vw;
+    margin-right:5vw;
+    width:90%;
+    height:80%;
     border-radius: 10px;
     border-style: groove;
     box-shadow: 5px 5px 10px black;
     padding: 2vw;
-    background: linear-gradient(to bottom, #41a97aaa, #72e7b2aa, #a9ecceaa);
 }
 
+#divtabla{
+
+    width:90%;
+    height:80%;
+    overflow:scroll;
+
+}
 #form_entrada_valores {
 
     color:white;
-     
 
+}
+
+table{
+
+    background:white;
+    width:100%; 
 }
 
 .tit_pag {
@@ -105,16 +117,33 @@ input[type=date]{
 
 
 }
+
 table,td{
 
     border:1px solid;
-    background:#00000040;
     text-align:center;
     padding:0.5vh;
     border-radius:6px;
-    border-width:3px;
+    border-width:2px;
 }
+th{
+    border-color:white;
+    width:100px;
+}
+thead{
+    background: #007755 !important;
+    color:white;
+    position:sticky;
+    top:0;
+    height:40px;
 
+}
+tr,td{
+
+    border-width:2px;
+    border-style:groove;
+    height:40px;
+}
 #btnInsertarRegistro,#btnEliminarRegistro{
 
     margin-top:2vh;
