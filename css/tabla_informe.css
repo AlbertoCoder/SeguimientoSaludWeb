@@ -54,7 +54,11 @@ body {
 
 
 }
+#img_enfermera{
 
+    height:80%;
+
+}
 .div_informe {
 
     display: flex;
@@ -76,12 +80,6 @@ body {
     overflow:scroll;
 
 }
-#form_entrada_valores {
-
-    color:white;
-
-}
-
 table{
 
     background:white;
@@ -143,46 +141,4 @@ tr,td{
     border-width:2px;
     border-style:groove;
     height:40px;
-}
-#btnInsertarRegistro,#btnEliminarRegistro{
-
-    margin-top:2vh;
-    width:50%;
-    border-radius:6px;
-
-}
-
-#btnLimpiarFormulario{
-
-
-    margin-top:2vh;
-    width:100%;
-    border-radius:6px;
-    color:green;
-    background:white;
-
-}
-
-#btnInsertarRegistro{
-
-    background:linear-gradient(128deg,#277427,#57ab57,#275d27);
-    color:white;
-}
-
-#btnEliminarRegistro{
-
-    background:linear-gradient(128deg,#861818,#dc4949,#7d0808);
-    color:white;
-}
-
-#btnAnteriorRegistro{
-
-    background:white;
-    color:#277427;
-}
-
-#btnSiguienteRegistro{
-
-    background:white;
-    color:#277427;
 }

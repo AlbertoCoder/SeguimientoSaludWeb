@@ -6,6 +6,7 @@ var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, i
 var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
 var tabla_datos;
 var baseDeDatos;
+var selector_fecha_inicio,selector_fecha_fin;
 
 window.onload = function () {
 
@@ -29,56 +30,77 @@ window.onload = function () {
 
   });
 
-  it_fecha = document.getElementById("it_fecha");
-  it_peso = document.getElementById("it_peso");
-  it_glucosa = document.getElementById("it_glucosa");
-  it_o2 = document.getElementById("it_o2");
-  it_sist = document.getElementById("it_sist");
-  it_diast = document.getElementById("it_diast");
-  it_ppm = document.getElementById("it_ppm");
-  it_pasos = document.getElementById("it_pasos");
-  it_kms = document.getElementById("it_kms");
-  it_cals = document.getElementById("it_cals");
-  btnInsertarRegistro = document.getElementById("btnInsertarRegistro");
-  btnEliminarRegistro = document.getElementById("btnEliminarRegistro");
-  btnLimpiarFormulario = document.getElementById("btnLimpiarFormulario");
+  selector_fecha_inicio = document.getElementById("fecha_inicio");
+  selector_fecha_fin = document.getElementById("fecha_fin");
+  establecerFechasDefecto();
+  
+}
 
+function establecerFechasDefecto(){
+
+  const fecha_actual = new Date(Date.now());
+  const año = fecha_actual.getFullYear();
+  const mes = String(fecha_actual.getMonth() + 1).padStart(2, '0');
+  const día = 1;
+  console.log(día + "-" + mes + "-" + año);
+  selector_fecha_inicio.value = new Date("1-4-2024");
 }
 
 function generarRegistrosEntabla(baseDeDatos) {
 
   leerTodosLosRegistros(baseDeDatos, "Mediciones").then(mapa_datos => {
 
-    for (let registro = 1; registro <= mapa_datos.size; registro++) {
+    iterarMapaDeDatos(mapa_datos);
 
-      let índices = Object.keys(mapa_datos.get(registro));
-      if (mapa_datos.get(registro).N == parseInt(idusuario_seleccionado)) {
-        const nueva_fila = document.createElement('tr');
-        tabla_datos.appendChild(nueva_fila);
-
-        for (let celda = 0; celda <= 12; celda++) {
-
-          const nueva_celda = document.createElement('td');
-          if (celda === 0) {
-
-            nueva_celda.innerHTML = registro;
-            nueva_fila.appendChild(nueva_celda);
-
-          } else if (celda === 1 || celda === 2) {
-            continue;
-          } else {
-
-            nueva_celda.innerHTML = mapa_datos.get(registro)[índices[celda]];
-            nueva_fila.appendChild(nueva_celda);
-
-          }
-
-        }
-
-      }
-
-    }
   });
 
 }
 
+function iterarMapaDeDatos(mapa_datos) {
+
+
+  for (let registro = 1; registro <= mapa_datos.size; registro++) {
+
+
+    if (mapa_datos.get(registro).N == parseInt(idusuario_seleccionado)) {
+
+      const nueva_fila = document.createElement('tr');
+      nueva_fila.id = registro; 
+      tabla_datos.appendChild(nueva_fila);
+
+      iterarCeldas(mapa_datos, registro, nueva_fila);
+    }
+
+  }
+
+}
+
+
+function iterarCeldas(mapa_datos, registro, fila) {
+
+  let índices = Object.keys(mapa_datos.get(registro));
+
+  for (let celda = 0; celda <= 12; celda++) {
+
+    const nueva_celda = document.createElement('td');
+    
+    if (celda === 0) {
+
+      nueva_celda.innerHTML = registro;
+      fila.appendChild(nueva_celda);
+
+    } else if (celda === 1 || celda === 2) {
+
+      continue;
+
+    } else {
+
+      nueva_celda.innerHTML = mapa_datos.get(registro)[índices[celda]];
+      fila.appendChild(nueva_celda);
+
+    }
+
+  }
+
+
+}
