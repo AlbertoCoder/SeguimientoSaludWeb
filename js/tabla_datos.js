@@ -44,6 +44,7 @@ function establecerFechasDefecto(){
   const mes_siguiente = String(fecha_actual.getMonth() + 2).padStart(2, '0');
   selector_fecha_inicio.value = `${año}-${mes}-01`;
   selector_fecha_fin.value = new Date(`${año}-${mes_siguiente}-${-1}`).toISOString().slice(0,10);
+
 }
 
 function generarRegistrosEntabla(baseDeDatos) {
