@@ -40,10 +40,10 @@ function establecerFechasDefecto(){
 
   const fecha_actual = new Date(Date.now());
   const año = fecha_actual.getFullYear();
-  const mes = String(fecha_actual.getMonth() + 1).padStart(2, '0');
-  const día = 1;
-  console.log(día + "-" + mes + "-" + año);
-  selector_fecha_inicio.value = new Date("1-4-2024");
+  const mes = String(fecha_actual.getMonth() + 1).padStart(2, '0'); //El método 'padStart' extiende el rango de caracteres las posiciones indicadas (2) hacia la izquierda con el carácter ('0') y devuelve el resultado.
+  const mes_siguiente = String(fecha_actual.getMonth() + 2).padStart(2, '0');
+  selector_fecha_inicio.value = `${año}-${mes}-01`;
+  selector_fecha_fin.value = new Date(`${año}-${mes_siguiente}-${-1}`).toISOString().slice(0,10);
 }
 
 function generarRegistrosEntabla(baseDeDatos) {
@@ -93,7 +93,13 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
       continue;
 
-    } else {
+    } else if(celda === 3){
+      
+      nueva_celda.innerHTML = mapa_datos.get(registro).Fecha.split("-")[2] + " / " +
+                              mapa_datos.get(registro).Fecha.split("-")[1] + " / " +
+                              mapa_datos.get(registro).Fecha.split("-")[0]; 
+      fila.appendChild(nueva_celda);
+    }else {
 
       nueva_celda.innerHTML = mapa_datos.get(registro)[índices[celda]];
       fila.appendChild(nueva_celda);
