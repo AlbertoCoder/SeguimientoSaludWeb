@@ -7,7 +7,7 @@ var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
 var tabla_datos;
 var baseDeDatos;
 
-window.onload = function() {
+window.onload = function () {
 
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
@@ -51,19 +51,33 @@ function generarRegistrosEntabla(baseDeDatos) {
 
     for (let registro = 1; registro <= mapa_datos.size; registro++) {
 
-      const nueva_fila = document.createElement('tr');
-      tabla_datos.appendChild(nueva_fila);
+      let índices = Object.keys(mapa_datos.get(registro));
+      if (mapa_datos.get(registro).N == parseInt(idusuario_seleccionado)) {
+        const nueva_fila = document.createElement('tr');
+        tabla_datos.appendChild(nueva_fila);
 
-      for (let celda = 0; celda < 11; celda++) {
+        for (let celda = 0; celda <= 12; celda++) {
 
-        const nueva_celda = document.createElement('td');
-        nueva_celda.innerHTML = mapa_datos.get(registro).N;
-        nueva_fila.appendChild(nueva_celda);
+          const nueva_celda = document.createElement('td');
+          if (celda === 0) {
+
+            nueva_celda.innerHTML = registro;
+            nueva_fila.appendChild(nueva_celda);
+
+          } else if (celda === 1 || celda === 2) {
+            continue;
+          } else {
+
+            nueva_celda.innerHTML = mapa_datos.get(registro)[índices[celda]];
+            nueva_fila.appendChild(nueva_celda);
+
+          }
+
+        }
 
       }
 
     }
-
   });
 
 }
