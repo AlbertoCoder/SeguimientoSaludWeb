@@ -85,12 +85,36 @@ export function leerTodosLosRegistros(nmbBD, nmbObjSt) {
         }
       }
 
+  });
+
+}
+
+export function obtenerPromedios(nmbBD, nmbObjSt, índice) {
+
+
+  let promedio = 0;
+  let contador = 0;
+  return new Promise((resolve, reject) => {
+
+    nmbBD.transaction(nmbObjSt, "readonly")
+      .objectStore(nmbObjSt)
+      .openCursor().onsuccess = (event) => {
+
+        if (event.target.result) {
+          promedio += parseFloat(event.target.result.value[índice]);
+          contador++;
+          event.target.result.continue();
+
+        } else {
+          console.log("Promedio: " + promedio / contador);
+          resolve(promedio / contador);
+        }
+      }
 
   });
 
 
 }
-
 
 export function eliminarRegistro(nmbBD, nmbObjSt, num_reg) {
 
