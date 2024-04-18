@@ -121,12 +121,48 @@ window.onload = () => {
 
       eliminarRegistro(baseDeDatos, "Usuarios", selector_usuario.value.split(" ")[0]).then(msj => {
 
+        let confirmar = confirm(`¿Seguro que quieres eliminar el registro de usuario ${selector_usuario.value}?`);
 
-        console.log(`Objeto con id: ${msj} eliminado.`);
+        if (confirmar === true) {
 
-        alert(`${selector_usuario.value} eliminado.`);
+          leerTodosLosRegistros(baseDeDatos, "Mediciones").then(mapa => {
 
-        location.reload();
+            let valores = Array.from(mapa.values());
+
+            valores.forEach((elemento, ind) => {
+
+              console.log(elemento);
+
+              if (elemento.N === parseInt(selector_usuario.value.split(" ")[0])) {
+
+                eliminarRegistro(baseDeDatos, "Mediciones", ind + 1).then(num => {
+
+                  console.log(`Registro ${num} eliminado`)
+
+                });
+
+
+              }
+
+            });
+
+
+          });
+
+
+          console.log(`Objeto con id: ${msj} eliminado.`);
+
+          alert(`${selector_usuario.value} eliminado.`);
+
+          //location.reload();
+
+
+        } else {
+
+          alert("Aquí no ha pasado nada :-)");
+
+        }
+
 
       });
 

@@ -76,7 +76,9 @@ export function leerTodosLosRegistros(nmbBD, nmbObjSt) {
       .objectStore(nmbObjSt)
       .openCursor().onsuccess = (event) => {
 
+
         if (event.target.result) {
+
           resultado_registros.set(event.target.result.key, event.target.result.value);
           event.target.result.continue();
 
@@ -89,7 +91,7 @@ export function leerTodosLosRegistros(nmbBD, nmbObjSt) {
 
 }
 
-export function obtenerPromedios(nmbBD, nmbObjSt, índice) {
+export function obtenerPromedios(nmbBD, nmbObjSt, idusuario, índice) {
 
 
   let promedio = 0;
@@ -101,8 +103,10 @@ export function obtenerPromedios(nmbBD, nmbObjSt, índice) {
       .openCursor().onsuccess = (event) => {
 
         if (event.target.result) {
+
           promedio += parseFloat(event.target.result.value[índice]);
           contador++;
+          console.log(`El contador para el usuario con id ${event.target.result.value.N} está en ${contador}`);
           event.target.result.continue();
 
         } else {

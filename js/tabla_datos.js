@@ -10,7 +10,7 @@ var selector_fecha_inicio, selector_fecha_fin;
 var promedio_peso, promedio_glucosa, promedio_o2, promedio_sist, promedio_diast, promedio_ppm, promedio_pasos,
   promedio_kms, promedio_cals;
 var total_pasos, total_kms, total_cals;
-var datos_promedios;
+var datos_promedios, datos_totales;
 
 window.onload = function() {
 
@@ -18,6 +18,7 @@ window.onload = function() {
 
   tabla_datos = document.getElementById("tabla_datos");
   datos_promedios = document.getElementById("datos_promedios");
+  datos_totales = document.getElementById("datos_totales");
 
   abrirDB("Seguimiento_Salud_Web", "success").then(db => {
 
@@ -61,53 +62,8 @@ function establecerFechasDefecto() {
 
 }
 
-function evaluarÍndice(nombre_índice) {
 
-  switch (nombre_índice) {
-
-    case "Peso":
-
-      return " Kg."
-      break;
-
-    case "Glucosa":
-
-      return " mg/dl."
-
-    case "O2":
-
-      return " %"
-
-    case "Sist":
-
-      return " mmHg."
-
-    case "Diast":
-
-      return " mmHg"
-
-    case "PPM":
-
-      return " ppm."
-
-    case "Pasos":
-
-      return " "
-
-    case "Kms":
-
-      return " kms."
-
-    case "Cals":
-
-      return " cal."
-
-  }
-
-
-}
-
-function generarRegistrosEntabla(baseDeDatos, índices) {
+function generarRegistrosEntabla(baseDeDatos) {
 
   return new Promise((resolve, reject) => {
 
@@ -117,6 +73,7 @@ function generarRegistrosEntabla(baseDeDatos, índices) {
       iterarMapaDeDatos(mapa_datos);
 
     });
+
     baseDeDatos.transaction("Mediciones", "readonly")
       .objectStore("Mediciones").count().onsuccess = (event) => {
 
@@ -126,24 +83,9 @@ function generarRegistrosEntabla(baseDeDatos, índices) {
 
       };
 
-    índices.forEach((valor, índice) => {
-
-      obtenerPromedios(baseDeDatos, "Mediciones", valor).then(resultado => {
-
-        datos_promedios.rows[2].cells[índice].innerHTML = resultado + evaluarÍndice(valor);
-
-      });
-
-
-    });
-
-
+    reject("No se pudo.");
 
   });
-
-
-
-
 
 }
 
@@ -166,6 +108,53 @@ function iterarMapaDeDatos(mapa_datos) {
 
 }
 
+function obtenerPromedio(tabla_html, id_col) {
+
+  let promedio = 0;
+  let contador = 0;
+  Array.from(tabla_html.rows).forEach(fila => {
+
+    if (fila.rowIndex > 0) {
+      let contenido_celda = fila.cells[id_col].innerText;
+
+      if (contenido_celda != "") {
+
+        contador++;
+        promedio += parseFloat(contenido_celda);
+
+      }
+
+    }
+
+  });
+
+  return Math.round((promedio / contador));
+
+}
+
+function obtenerTotales(tabla_html, id_col) {
+
+  let total = 0;
+  let contador = 0;
+  Array.from(tabla_html.rows).forEach(fila => {
+
+    if (fila.rowIndex > 0) {
+      let contenido_celda = fila.cells[id_col].innerText;
+
+      if (contenido_celda != "") {
+
+        contador++;
+        total += parseFloat(contenido_celda);
+
+      }
+
+    }
+
+  });
+
+  return total;
+
+}
 
 function iterarCeldas(mapa_datos, registro, fila) {
 
@@ -200,6 +189,20 @@ function iterarCeldas(mapa_datos, registro, fila) {
     }
 
   }
+
+  datos_promedios.rows[2].cells[0].innerText = obtenerPromedio(tabla_datos, 2) + " Kg.";
+  datos_promedios.rows[2].cells[1].innerText = obtenerPromedio(tabla_datos, 3) + " mg/dl";
+  datos_promedios.rows[2].cells[2].innerText = obtenerPromedio(tabla_datos, 4) + " %";
+  datos_promedios.rows[2].cells[3].innerText = obtenerPromedio(tabla_datos, 5) + " mmHg";
+  datos_promedios.rows[2].cells[4].innerText = obtenerPromedio(tabla_datos, 6) + " mmHg";
+  datos_promedios.rows[2].cells[5].innerText = obtenerPromedio(tabla_datos, 7);
+  datos_promedios.rows[2].cells[6].innerText = obtenerPromedio(tabla_datos, 8);
+  datos_promedios.rows[2].cells[7].innerText = obtenerPromedio(tabla_datos, 9);
+  datos_promedios.rows[2].cells[8].innerText = obtenerPromedio(tabla_datos, 10);
+
+  datos_totales.rows[2].cells[0].innerText = obtenerTotales(tabla_datos, 8);
+  datos_totales.rows[2].cells[1].innerText = obtenerTotales(tabla_datos, 9);
+  datos_totales.rows[2].cells[2].innerText = obtenerTotales(tabla_datos, 10);
 
 }
 
