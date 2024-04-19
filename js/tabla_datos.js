@@ -1,4 +1,4 @@
-import { abrirDB, insertarRegistro, leerUnRegistro, leerTodosLosRegistros, obtenerPromedios } from "./manejo_idb.mjs";
+import { abrirDB, eliminarRegistro, leerUnRegistro, leerTodosLosRegistros, obtenerPromedios } from "./manejo_idb.mjs";
 
 var idusuario_seleccionado = sessionStorage.getItem("id_usuario");
 var nomusuario_barra_nav;
@@ -67,7 +67,6 @@ function generarRegistrosEntabla(baseDeDatos) {
 
   return new Promise((resolve, reject) => {
 
-
     leerTodosLosRegistros(baseDeDatos, "Mediciones").then(mapa_datos => {
 
       iterarMapaDeDatos(mapa_datos);
@@ -77,13 +76,11 @@ function generarRegistrosEntabla(baseDeDatos) {
     baseDeDatos.transaction("Mediciones", "readonly")
       .objectStore("Mediciones").count().onsuccess = (event) => {
 
-
         console.log(event.target.result);
         resolve(event.target.result);
+        reject("No se pudo.");
 
       };
-
-    reject("No se pudo.");
 
   });
 
@@ -91,20 +88,20 @@ function generarRegistrosEntabla(baseDeDatos) {
 
 function iterarMapaDeDatos(mapa_datos) {
 
+  Array.from(mapa_datos).forEach((registro => {
 
-  for (let registro = 1; registro <= mapa_datos.size; registro++) {
+    console.log(mapa_datos);
 
-
-    if (mapa_datos.get(registro).N == parseInt(idusuario_seleccionado)) {
+    if (registro[1].N == parseInt(idusuario_seleccionado)) {
 
       const nueva_fila = document.createElement('tr');
       nueva_fila.id = registro;
       tabla_datos.appendChild(nueva_fila);
 
-      iterarCeldas(mapa_datos, registro, nueva_fila);
+      iterarCeldas(mapa_datos, registro[0], nueva_fila);
     }
 
-  }
+  }));
 
 }
 
@@ -183,7 +180,18 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
     celda_eliminar.addEventListener(('click'), () => {
 
-      alert("También funciona.");
+      var registro_seleccionado = celda_eliminar.id.split("_")[1];
+
+      eliminarRegistro(baseDeDatos, "Mediciones", registro_seleccionado).then(resultado => {
+
+
+        alert("Eliminado correctamente.");
+
+        location.reload();
+
+      });
+
+
 
     });
 
@@ -198,8 +206,8 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
     } else if (celda === 3) {
 
-      nueva_celda.innerHTML = mapa_datos.get(registro).Fecha.split("-")[2] + " / " +
-        mapa_datos.get(registro).Fecha.split("-")[1] + " / " +
+      nueva_celda.innerHTML = mapa_datos.get(registro).Fecha.split("-")[2] + "/" +
+        mapa_datos.get(registro).Fecha.split("-")[1] + "/" +
         mapa_datos.get(registro).Fecha.split("-")[0];
       fila.appendChild(nueva_celda);
 

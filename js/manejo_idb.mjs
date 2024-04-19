@@ -76,7 +76,6 @@ export function leerTodosLosRegistros(nmbBD, nmbObjSt) {
       .objectStore(nmbObjSt)
       .openCursor().onsuccess = (event) => {
 
-
         if (event.target.result) {
 
           resultado_registros.set(event.target.result.key, event.target.result.value);
