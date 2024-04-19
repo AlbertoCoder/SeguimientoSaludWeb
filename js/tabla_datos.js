@@ -49,6 +49,48 @@ window.onload = function() {
   selector_fecha_fin = document.getElementById("fecha_fin");
   establecerFechasDefecto();
 
+  selector_fecha_inicio.addEventListener('change', () => {
+
+    let filas = tabla_datos.querySelectorAll('tr');
+
+    filas.forEach(function(fila, i) {
+      if (i != 0) {
+
+        fila.parentNode.removeChild(fila);
+      }
+    });
+
+    generarRegistrosEntabla(baseDeDatos).then(resultado => {
+
+      console.log(resultado);
+
+    });
+
+
+
+  });
+
+  selector_fecha_fin.addEventListener('change', () => {
+
+    let filas = tabla_datos.querySelectorAll('tr');
+
+    filas.forEach(function(fila, i) {
+      if (i != 0) {
+
+        fila.parentNode.removeChild(fila);
+      }
+    });
+
+    generarRegistrosEntabla(baseDeDatos).then(resultado => {
+
+      console.log(resultado);
+
+    });
+
+
+
+  });
+
 }
 
 function establecerFechasDefecto() {
@@ -69,7 +111,7 @@ function generarRegistrosEntabla(baseDeDatos) {
 
     leerTodosLosRegistros(baseDeDatos, "Mediciones").then(mapa_datos => {
 
-      iterarMapaDeDatos(mapa_datos);
+      iterarMapaDeDatos(mapa_datos, selector_fecha_inicio.value, selector_fecha_fin.value);
 
     });
 
@@ -86,13 +128,13 @@ function generarRegistrosEntabla(baseDeDatos) {
 
 }
 
-function iterarMapaDeDatos(mapa_datos) {
+function iterarMapaDeDatos(mapa_datos, fecha_inicio, fecha_fin) {
 
   Array.from(mapa_datos).forEach((registro => {
 
     console.log(mapa_datos);
 
-    if (registro[1].N == parseInt(idusuario_seleccionado)) {
+    if (registro[1].N == parseInt(idusuario_seleccionado) && (registro[1].Fecha >= fecha_inicio && registro[1].Fecha <= fecha_fin)) {
 
       const nueva_fila = document.createElement('tr');
       nueva_fila.id = registro;
