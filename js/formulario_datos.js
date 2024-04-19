@@ -1,5 +1,7 @@
 import { abrirDB, insertarRegistro, leerUnRegistro, leerTodosLosRegistros } from "./manejo_idb.mjs";
 
+var n = parseInt(sessionStorage.getItem("registro_edición"));
+
 var idusuario_seleccionado = sessionStorage.getItem("id_usuario");
 var nomusuario_barra_nav;
 var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, it_kms, it_cals;
@@ -20,6 +22,7 @@ window.onload = function() {
 
     });
 
+    mostrarRegistroEnFormulario(baseDeDatos);
   }).catch(error => {
 
     console.error(error);
@@ -65,13 +68,16 @@ window.onload = function() {
       Cals: it_cals.value
     }
 
-    insertarRegistro(baseDeDatos, "Mediciones", mediciones_prueba).then(resultado => {
+    insertarRegistro(baseDeDatos, "Mediciones", n, mediciones_prueba).then(resultado => {
+
 
       alert(`Registro agregado con fecha ${resultado.Fecha}`);
 
     });
 
-    mostrarRegistroEnFormulario();
+    n = null;
+
+    mostrarRegistroEnFormulario(baseDeDatos);
 
   });
 
@@ -79,26 +85,35 @@ window.onload = function() {
 
 }
 
-function mostrarRegistroEnFormulario() {
+function mostrarRegistroEnFormulario(nmbBD) {
 
 
-  leerTodosLosRegistros(baseDeDatos, "Mediciones").then(resultado => {
 
-    console.log("Valor: " + resultado.get(resultado.size).Fecha);
-    it_fecha.value = resultado.get(resultado.size).Fecha;
-    it_peso.value = resultado.get(resultado.size).Peso;
-    it_glucosa.value = resultado.get(resultado.size).Glucosa;
-    it_o2.value = resultado.get(resultado.size).O2;
-    it_sist.value = resultado.get(resultado.size).Sist;
-    it_diast.value = resultado.get(resultado.size).Diast;
-    it_ppm.value = resultado.get(resultado.size).PPM;
-    it_pasos.value = resultado.get(resultado.size).Pasos;
-    it_kms.value = resultado.get(resultado.size).Kms;
-    it_cals.value = resultado.get(resultado.size).Cals;
+
+  leerTodosLosRegistros(nmbBD, "Mediciones").then(resultado => {
+
+    try {
+
+      it_fecha.value = resultado.get(n).Fecha;
+      it_peso.value = resultado.get(n).Peso;
+      it_glucosa.value = resultado.get(n).Glucosa;
+      it_o2.value = resultado.get(n).O2;
+      it_sist.value = resultado.get(n).Sist;
+      it_diast.value = resultado.get(n).Diast;
+      it_ppm.value = resultado.get(n).PPM;
+      it_pasos.value = resultado.get(n).Pasos;
+      it_kms.value = resultado.get(n).Kms;
+      it_cals.value = resultado.get(n).Cals;
+
+
+
+    } catch (error) {
+
+      console.log("Inserción de nuevo registro.");
+
+    }
 
   });
-
-
 }
 
 function limpiarFormulario() {

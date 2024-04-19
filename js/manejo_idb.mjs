@@ -33,13 +33,13 @@ export function crearÍndice(nmbObjSt, nmbÍndice, único) {
 
 }
 
-export function insertarRegistro(nmbBD, nmbObjSt, datos) {
+export function insertarRegistro(nmbBD, nmbObjSt, num_reg, datos) {
 
   return new Promise((resolve, reject) => {
 
     nmbBD.transaction(nmbObjSt, "readwrite")
       .objectStore(nmbObjSt)
-      .add(datos).onsuccess = (event) => {
+      .put(datos, num_reg).onsuccess = (event) => {
 
         resolve(datos);
 

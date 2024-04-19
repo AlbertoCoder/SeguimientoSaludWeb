@@ -80,6 +80,24 @@ body {
     overflow:scroll;
 
 }
+
+.celda_roja{
+
+    background:radial-gradient(ellipse,#770000,#dd3400);
+    color:white;
+    font-size:1.1em;
+
+}
+
+.celda_verde{
+
+    background:radial-gradient(ellipse, #007700, #34dd00);
+    color:white;
+    font-size:1.2em;
+     
+}
+
+
 table{
 
     background:white;

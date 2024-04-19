@@ -115,6 +115,7 @@ function obtenerPromedio(tabla_html, id_col) {
   Array.from(tabla_html.rows).forEach(fila => {
 
     if (fila.rowIndex > 0) {
+
       let contenido_celda = fila.cells[id_col].innerText;
 
       if (contenido_celda != "") {
@@ -160,10 +161,31 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
   let índices = Object.keys(mapa_datos.get(registro));
 
-  for (let celda = 0; celda <= 12; celda++) {
-
+  for (let celda = 0; celda <= 14; celda++) {
 
     const nueva_celda = document.createElement('td');
+    const celda_editar = document.createElement('td');
+    const celda_eliminar = document.createElement('td');
+    celda_editar.innerHTML = "<i class=\"fas fa-edit\"></i>";
+    celda_editar.setAttribute('id', `edit_${registro}`);
+    celda_eliminar.innerHTML = "<i class=\"fas fa-trash\"></i>";
+    celda_eliminar.setAttribute('id', `elimi_${registro}`);
+
+
+    celda_editar.addEventListener(('click'), () => {
+
+      sessionStorage.setItem("registro_edición", registro);
+
+
+      window.location.href = "formulario_datos.html";
+
+    });
+
+    celda_eliminar.addEventListener(('click'), () => {
+
+      alert("También funciona.");
+
+    });
 
     if (celda === 0) {
 
@@ -180,15 +202,32 @@ function iterarCeldas(mapa_datos, registro, fila) {
         mapa_datos.get(registro).Fecha.split("-")[1] + " / " +
         mapa_datos.get(registro).Fecha.split("-")[0];
       fila.appendChild(nueva_celda);
+
+    } else if (celda === 13) {
+
+      fila.appendChild(celda_editar);
+    } else if (celda === 14) {
+
+
+      fila.appendChild(celda_eliminar);
+
     } else {
 
       let dato = mapa_datos.get(registro)[índices[celda]];
+
+
       nueva_celda.innerHTML = dato;
+
+      evaluar_dato(celda, nueva_celda, dato);
+      evaluar_dato(1, datos_promedios.rows[2].cells[1], dato);
+
       fila.appendChild(nueva_celda);
 
     }
 
+
   }
+
 
   datos_promedios.rows[2].cells[0].innerText = obtenerPromedio(tabla_datos, 2) + " Kg.";
   datos_promedios.rows[2].cells[1].innerText = obtenerPromedio(tabla_datos, 3) + " mg/dl";
@@ -204,5 +243,29 @@ function iterarCeldas(mapa_datos, registro, fila) {
   datos_totales.rows[2].cells[1].innerText = obtenerTotales(tabla_datos, 9);
   datos_totales.rows[2].cells[2].innerText = obtenerTotales(tabla_datos, 10);
 
+
 }
 
+function evaluar_dato(num_celda, celda, dato) {
+
+
+  if (num_celda === 1) {
+
+    if (dato < 70) {
+
+      celda.classList.add("celda_roja");
+
+    } else if (dato >= 70 && dato < 100) {
+
+      celda.classList.add("celda_verde");
+
+    } else {
+
+      celda.classList.add("celda_roja");
+
+    }
+
+  }
+
+
+}

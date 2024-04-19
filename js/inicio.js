@@ -77,7 +77,7 @@ window.onload = () => {
     console.log(baseDeDatos);
 
     if (selector_usuario.value === "Crear Nuevo") {
-      insertarRegistro(baseDeDatos, "Usuarios", { Nombre: itNombre.value, Apellidos: itApellidos.value }).then(resultado => {
+      insertarRegistro(baseDeDatos, "Usuarios", null, { Nombre: itNombre.value, Apellidos: itApellidos.value }).then(resultado => {
 
         console.log(`Objeto agregado ${resultado}`);
       });
