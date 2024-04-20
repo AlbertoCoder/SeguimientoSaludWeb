@@ -2,15 +2,11 @@ import { abrirDB, eliminarRegistro, leerUnRegistro, leerTodosLosRegistros, obten
 
 var idusuario_seleccionado = sessionStorage.getItem("id_usuario");
 var nomusuario_barra_nav;
-var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, it_kms, it_cals;
-var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
 var tabla_datos;
 var baseDeDatos;
 var selector_fecha_inicio, selector_fecha_fin;
-var promedio_peso, promedio_glucosa, promedio_o2, promedio_sist, promedio_diast, promedio_ppm, promedio_pasos,
-  promedio_kms, promedio_cals;
-var total_pasos, total_kms, total_cals;
 var datos_promedios, datos_totales;
+var btnInicio, btnFormulario, btnGráfico;
 
 window.onload = function() {
 
@@ -19,6 +15,27 @@ window.onload = function() {
   tabla_datos = document.getElementById("tabla_datos");
   datos_promedios = document.getElementById("datos_promedios");
   datos_totales = document.getElementById("datos_totales");
+  btnInicio = document.getElementById("btnInicio");
+  btnFormulario = document.getElementById("btnFormulario");
+
+  btnInicio.addEventListener("click", function() {
+
+    window.location.href = "index.html";
+
+
+  });
+
+  btnFormulario.addEventListener("click", function() {
+
+    let último_registro = tabla_datos.rows.length - 1;
+
+    let valor_celda = tabla_datos.rows[último_registro].cells[0].innerText.split(" ")[0];
+
+    sessionStorage.setItem("registro_edición", parseInt(valor_celda) + 1);
+
+    window.location.href = "formulario_datos.html";
+
+  });
 
   abrirDB("Seguimiento_Salud_Web", "success").then(db => {
 
@@ -67,7 +84,6 @@ window.onload = function() {
     });
 
 
-
   });
 
   selector_fecha_fin.addEventListener('change', () => {
@@ -86,7 +102,6 @@ window.onload = function() {
       console.log(resultado);
 
     });
-
 
 
   });
@@ -121,6 +136,18 @@ function generarRegistrosEntabla(baseDeDatos) {
         console.log(event.target.result);
         resolve(event.target.result);
         reject("No se pudo.");
+
+
+        setTimeout(function() {
+
+          let promedio_glucosa = parseInt(datos_promedios.rows[2].cells[1].innerText.split(" ")[0]);
+          evaluar_dato(1, datos_promedios.rows[2].cells[1], promedio_glucosa);
+
+        }, 200
+
+
+
+        );
 
       };
 
@@ -268,8 +295,6 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
       nueva_celda.innerHTML = dato;
 
-      evaluar_dato(celda, nueva_celda, dato);
-      evaluar_dato(1, datos_promedios.rows[2].cells[1], dato);
 
       fila.appendChild(nueva_celda);
 
@@ -298,22 +323,20 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
 function evaluar_dato(num_celda, celda, dato) {
 
-
   if (num_celda === 1) {
 
-    if (dato < 70) {
 
-      celda.classList.add("celda_roja");
+    if ((dato > 70) && (dato < 100)) {
 
-    } else if (dato >= 70 && dato < 100) {
-
+      celda.classList.remove("celda_roja");
       celda.classList.add("celda_verde");
 
     } else {
 
       celda.classList.add("celda_roja");
-
+      celda.classList.remove("celda_verde");
     }
+
 
   }
 

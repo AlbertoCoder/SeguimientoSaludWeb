@@ -6,12 +6,21 @@ var idusuario_seleccionado = sessionStorage.getItem("id_usuario");
 var nomusuario_barra_nav;
 var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, it_kms, it_cals;
 var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
-var usuario;
 var baseDeDatos;
+var btnInicio, btnTabla, btnGráfico;
 
 window.onload = function() {
 
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
+
+  btnInicio = document.getElementById("btnInicio");
+
+  btnInicio.addEventListener("click", function() {
+
+    window.location.href = "index.html";
+
+
+  });
 
   abrirDB("Seguimiento_Salud_Web", "success").then(db => {
 
@@ -70,8 +79,8 @@ window.onload = function() {
 
     insertarRegistro(baseDeDatos, "Mediciones", n, mediciones_prueba).then(resultado => {
 
-
       alert(`Registro agregado con fecha ${resultado.Fecha}`);
+      window.location.href = "tabla_datos.html";
 
     });
 

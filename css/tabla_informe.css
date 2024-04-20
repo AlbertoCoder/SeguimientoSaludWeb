@@ -83,7 +83,11 @@ body {
 
 .celda_roja{
 
-    background:radial-gradient(ellipse,#770000,#dd3400);
+    animation-name:"peligro";
+    animation-duration:0.5s;
+    animation-iteration-count:infinite;
+    animation-direction:alternate-reverse;
+    animation-timing-function:ease-in-out;
     color:white;
     font-size:1.1em;
 
@@ -91,9 +95,15 @@ body {
 
 .celda_verde{
 
-    background:radial-gradient(ellipse, #007700, #34dd00);
+    animation-name:"saludable";
+    animation-duration:2s;
+    animation-iteration-count:infinite;
+    animation-direction:alternate-reverse;
+    animation-timing-function:ease-in-out;
+
     color:white;
     font-size:1.2em;
+    font-weight:bold; 
      
 }
 
@@ -161,4 +171,27 @@ tr,td{
     border-width:2px;
     border-style:groove;
     height:5px;
+}
+@keyframes peligro {
+  0%   {background:#770000;}
+  25%  {background:#880000;}
+  50%  {background:#990000;}
+  75%  {background:#ee0000;}
+  100% {background:#ee0000;}
+}
+
+
+@keyframes saludable {
+  0%   {background:linear-gradient(-135deg,#00aa00,#00aa00,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#007700);}
+  10%  {background:linear-gradient(-135deg,#007700,#00aa00,#00aa00,#007700,#007700,#007700,#007700,#007700,#007700,#007700);}
+  20%  {background:linear-gradient(-135deg,#007700,#007700,#00aa00,#00aa00,#007700,#007700,#007700,#007700,#007700,#007700);}
+  30%  {background:linear-gradient(-135deg,#007700,#007700,#007700,#00aa00,#00aa00,#007700,#007700,#007700,#007700,#007700);}
+  40% {background:linear-gradient(-135deg,#007700,#007700,#007700,#007700,#00aa00,#00aa00,#007700,#007700,#007700,#007700);}
+  50% {background:linear-gradient(-135deg,#007700,#007700,#007700,#007700,#007700,#00aa00,#00aa00,#007700,#007700,#007700);}
+  60% {background:linear-gradient(-135deg,#007700,#007700,#007700,#007700,#007700,#007700,#00aa00,#00aa00,#007700,#007700);}
+  70% {background:linear-gradient(-135deg,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#00aa00,#00aa00,#007700);}
+  80% {background:linear-gradient(-135deg,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#00aa00,#00aa00,#00aa00);}
+  90% {background:linear-gradient(-135deg,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#00aa00,#00aa00);}
+  100% {background:linear-gradient(-135deg,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#007700,#00aa00);}
+
 }

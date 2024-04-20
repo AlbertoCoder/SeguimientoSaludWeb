@@ -21,7 +21,17 @@
 
         <img id="cruzverde" src="recursos/img/cruz_sanitaria.png">
 
-        <h3 class="titul">Seguimiento Básico De Salud</h3>
+        <h3 class="titul" style="display:flex;flex-direction:row;flex-grow:1;text-align:left;">Seguimiento Básico De
+            Salud</h3>
+
+        <div style="flex-grow:7;"></div>
+
+        <button type="button" id="btnTabla"
+            style="color:white;padding:0.5vw;font-size:1.2em;background:#00000060;border-radius: 12px 0px 0px 6px;">Tabla</button>
+        <button type="button" id="btnFormulario"
+            style="color:white;padding:0.5vw;font-size:1.2em;background:#00000060;border-radius: 12px 0px 0px 6px;">Formulario</button>
+        <button type="button" id="btnGráfico"
+            style="color:white;padding:0.5vw;font-size:1.2em;background:#00000060;border-radius: 12px 0px 0px 6px;">Gráfico</button>
 
     </nav>
 
@@ -32,22 +42,22 @@
         <div class="div_interno">
 
             <h3 id="mensaje_sel_usuario">Por favor, selecciona un/a usuario/a:</h3>
-            
+
             <select name="usuarios" id="select_usuarios">
                 <option value="Crear Nuevo" selected>Crear Nuevo</option>
-              </select>
-              <hr>
-        <div id="div_interno_nuevo_usuario" class="invisible">
+            </select>
+            <hr>
+            <div id="div_interno_nuevo_usuario" class="invisible">
 
-            <label id="lblNombre">Nombre</label>
-            <input id="itNombre" type="text" class="entradaTexto">
-            <label id="lblApellidos">Apellidos</label>
-            <input id="itApellidos" type="text" class="entradaTexto">
-        </div>
-        <hr>
-              <button id="btnEntrar" type="button">Crear Usuario</button>
-              <hr>
-              <button id="btnEliminarUsuario" type="button" class="invisible">Eliminar Usuario</button>
+                <label id="lblNombre">Nombre</label>
+                <input id="itNombre" type="text" class="entradaTexto">
+                <label id="lblApellidos">Apellidos</label>
+                <input id="itApellidos" type="text" class="entradaTexto">
+            </div>
+            <hr>
+            <button id="btnEntrar" type="button">Crear Usuario</button>
+            <hr>
+            <button id="btnEliminarUsuario" type="button" class="invisible">Eliminar Usuario</button>
         </div>
 
 
