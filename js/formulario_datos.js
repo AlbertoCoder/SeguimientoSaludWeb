@@ -7,7 +7,7 @@ var nomusuario_barra_nav;
 var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, it_kms, it_cals;
 var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
 var baseDeDatos;
-var btnInicio, btnTabla, btnGráfico;
+var btnInicio, btnTabla;
 
 window.onload = function() {
 
@@ -18,6 +18,15 @@ window.onload = function() {
   btnInicio.addEventListener("click", function() {
 
     window.location.href = "index.html";
+
+
+  });
+
+  btnTabla = document.getElementById("btnTabla");
+
+  btnTabla.addEventListener("click", function() {
+
+    window.location.href = "tabla_datos.html";
 
 
   });

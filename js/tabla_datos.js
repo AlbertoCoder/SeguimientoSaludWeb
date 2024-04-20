@@ -7,6 +7,7 @@ var baseDeDatos;
 var selector_fecha_inicio, selector_fecha_fin;
 var datos_promedios, datos_totales;
 var btnInicio, btnFormulario, btnGráfico;
+var tit_sección;
 
 window.onload = function() {
 
@@ -68,6 +69,8 @@ window.onload = function() {
 
   selector_fecha_inicio.addEventListener('change', () => {
 
+    let titsección = document.getElementById("tit_sección");
+    titsección.innerHTML += `  (Período ${invertirFecha(selector_fecha_inicio.value)} a ${invertirFecha(selector_fecha_fin.value)})`;
     let filas = tabla_datos.querySelectorAll('tr');
 
     filas.forEach(function(fila, i) {
@@ -105,6 +108,16 @@ window.onload = function() {
 
 
   });
+
+}
+
+function invertirFecha(fecha) {
+
+  let día = fecha.split("-")[2];
+  let mes = fecha.split("-")[1];
+  let año = fecha.split("-")[0];
+
+  return `${día}/${mes}/${año}`;
 
 }
 

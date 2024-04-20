@@ -11,7 +11,6 @@ import {
 var selector_usuario;
 var itNombre, itApellidos;
 var formulario_nuevo_usuario;
-var btnTabla, btnFormulario, btnGráfico;
 var btnEntrar, btnEliminarUsuario;
 var baseDeDatos, almacénUsuarios, almacénMediciones;
 
@@ -23,24 +22,6 @@ window.onload = () => {
   itApellidos = document.getElementById('itApellidos');
   btnEntrar = document.getElementById('btnEntrar');
   btnEliminarUsuario = document.getElementById('btnEliminarUsuario');
-  btnTabla = document.getElementById("btnTabla");
-  btnFormulario = document.getElementById("btnFormulario");
-  btnGráfico = document.getElementById("btnGráfico");
-
-  btnTabla.addEventListener("click", function() {
-
-    if (!comprobarSiUsuarioSeleccionado()) {
-      sessionStorage.setItem("id_usuario", selector_usuario.value);
-      window.location.href = "tabla_datos.html";
-
-    } else {
-
-      alert("Por favor, selecciona un usuario para poder mostrar la tabla.");
-
-    }
-
-
-  });
 
   if (selector_usuario.options.length === 1) {
 
@@ -106,7 +87,7 @@ window.onload = () => {
     } else {
 
       let indi = selector_usuario.value.split(' ')[0];
-      navegarConDatos("formulario_datos.html", indi);
+      navegarConDatos("tabla_datos.html", indi);
 
     }
 
@@ -124,7 +105,7 @@ window.onload = () => {
 
 
       mostrarFormularioNuevoUsuario(0);
-      btnEntrar.innerHTML = "Introducir Datos";
+      btnEntrar.innerHTML = "Continuar";
       btnEliminarUsuario.classList.remove("invisible");
       btnEliminarUsuario.classList.add("visible");
 
@@ -252,8 +233,3 @@ function agregarOpcionesListaDesplegable() {
   }
 }
 
-function comprobarSiUsuarioSeleccionado() {
-
-  return selector_usuario.value === "Crear Nuevo";
-
-}
