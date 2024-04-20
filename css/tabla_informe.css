@@ -172,6 +172,25 @@ tr,td{
     border-style:groove;
     height:5px;
 }
+
+#div_grafico{
+
+    display:none;
+  position: fixed;
+  top: 21.5%;
+  left: 26.5%;
+  width: 66.3%;
+  height: 50%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 9999; /* Ensure it's on top of other elements */
+
+}
+
+.visible{
+
+    display:flex;
+
+}
 @keyframes peligro {
   0%   {background:#770000;}
   25%  {background:#880000;}

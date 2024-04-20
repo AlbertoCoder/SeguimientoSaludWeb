@@ -7,7 +7,8 @@ var baseDeDatos;
 var selector_fecha_inicio, selector_fecha_fin;
 var datos_promedios, datos_totales;
 var btnInicio, btnFormulario, btnGráfico;
-var tit_sección;
+var div_grafico;
+
 
 window.onload = function() {
 
@@ -18,6 +19,8 @@ window.onload = function() {
   datos_totales = document.getElementById("datos_totales");
   btnInicio = document.getElementById("btnInicio");
   btnFormulario = document.getElementById("btnFormulario");
+  btnGráfico = document.getElementById("btnGrafico");
+  div_grafico = document.getElementById("div_grafico");
 
   btnInicio.addEventListener("click", function() {
 
@@ -37,6 +40,25 @@ window.onload = function() {
     window.location.href = "formulario_datos.html";
 
   });
+
+  btnGráfico.addEventListener("click", function() {
+
+
+    if (div_grafico.style.display === 'none') {
+
+      div_grafico.style.display = 'block';
+
+    } else {
+
+
+      div_grafico.style.display = 'none';
+
+    }
+
+
+
+  });
+
 
   abrirDB("Seguimiento_Salud_Web", "success").then(db => {
 
@@ -254,7 +276,7 @@ function iterarCeldas(mapa_datos, registro, fila) {
     celda_editar.addEventListener(('click'), () => {
 
       sessionStorage.setItem("registro_edición", registro);
-
+      sessionStorage.setItem("opcInserción", registro);
 
       window.location.href = "formulario_datos.html";
 
@@ -263,7 +285,7 @@ function iterarCeldas(mapa_datos, registro, fila) {
     celda_eliminar.addEventListener(('click'), () => {
 
       var registro_seleccionado = celda_eliminar.id.split("_")[1];
-
+      sessionStorage.setItem("opcInserción", null);
       eliminarRegistro(baseDeDatos, "Mediciones", registro_seleccionado).then(resultado => {
 
 

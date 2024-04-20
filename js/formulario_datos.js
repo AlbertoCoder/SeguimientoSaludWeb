@@ -8,10 +8,13 @@ var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, i
 var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
 var baseDeDatos;
 var btnInicio, btnTabla;
+var opcInserción;
 
 window.onload = function() {
 
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
+
+  opcInserción = sessionStorage.getItem("opcInserción");
 
   btnInicio = document.getElementById("btnInicio");
 
@@ -86,7 +89,7 @@ window.onload = function() {
       Cals: it_cals.value
     }
 
-    insertarRegistro(baseDeDatos, "Mediciones", n, mediciones_prueba).then(resultado => {
+    insertarRegistro(baseDeDatos, "Mediciones", n, opcInserción, mediciones_prueba).then(resultado => {
 
       alert(`Registro agregado con fecha ${resultado.Fecha}`);
       window.location.href = "tabla_datos.html";
