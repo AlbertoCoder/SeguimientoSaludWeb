@@ -37,13 +37,26 @@ export function insertarRegistro(nmbBD, nmbObjSt, num_reg, opcInserción, datos)
 
   return new Promise((resolve, reject) => {
 
-    nmbBD.transaction(nmbObjSt, "readwrite")
-      .objectStore(nmbObjSt)
-      .put(datos, opcInserción).onsuccess = (event) => {
+    let transac = nmbBD.transaction(nmbObjSt, "readwrite");
+    let objst = transac.objectStore(nmbObjSt);
+   
+    if(num_reg!=null){
+
+      objst.put(datos, num_reg).onsuccess = (event) =>{
 
         resolve(datos);
 
       }
+
+    }else{
+
+      objst.put(datos).onsuccess = (event) =>{
+
+        resolve(datos);
+
+      }
+
+    }
 
   });
 

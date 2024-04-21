@@ -12,13 +12,22 @@
     <link rel='stylesheet' type='text/css' media='screen' href='/css/tabla_informe.css'>
     <link rel="icon" type="image/x-icon" href="./recursos/img/cruz_sanitaria.png">
     <script src='js/tabla_datos.js' type="module"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+
+
 </head>
 
 <body>
 
 
     <div id="div_grafico">
-        <h1>Hola, buenas.</h1>
+
+
+
+            <canvas id="myChart" style="width:80%;max-width:80%;"></canvas>
+
     </div>
 
 
@@ -162,9 +171,23 @@
 
                     </tr>
                 </table>
+        
+        
             </div>
             <hr>
+       
+        <div class="div" style="display:flex;flex-direction:row;">
+
             <button type="button" id="btnGrafico" style="width:10%;">Gráfico</button>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+            <label for="vehicle1">Peso</label><br>
+            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+            <label for="vehicle2">Glucosa</label><br>
+            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+            <label for="vehicle3">Oxígeno</label><br>
+
+        </div>
+       
         </div>
 
     </div>

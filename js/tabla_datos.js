@@ -10,7 +10,7 @@ var btnInicio, btnFormulario, btnGráfico;
 var div_grafico;
 
 
-window.onload = function() {
+window.onload = function () {
 
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
@@ -22,14 +22,14 @@ window.onload = function() {
   btnGráfico = document.getElementById("btnGrafico");
   div_grafico = document.getElementById("div_grafico");
 
-  btnInicio.addEventListener("click", function() {
+  btnInicio.addEventListener("click", function () {
 
     window.location.href = "index.html";
 
 
   });
 
-  btnFormulario.addEventListener("click", function() {
+  btnFormulario.addEventListener("click", function () {
 
     let último_registro = tabla_datos.rows.length - 1;
 
@@ -41,12 +41,38 @@ window.onload = function() {
 
   });
 
-  btnGráfico.addEventListener("click", function() {
+  btnGráfico.addEventListener("click", function () {
 
 
     if (div_grafico.style.display === 'none') {
 
       div_grafico.style.display = 'block';
+
+      const xValues = [100,200,300,400,500,600,700,800,900,1000];
+
+      new Chart("Evolución", {
+        type: "line",
+        data: {
+          labels: xValues,
+          datasets: [{ 
+            data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+            borderColor: "red",
+            fill: false
+          }, { 
+            data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+            borderColor: "green",
+            fill: false
+          }, { 
+            data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+            borderColor: "blue",
+            fill: false
+          }]
+        },
+        options: {
+          legend: {display: false}
+        }
+      });
+
 
     } else {
 
@@ -95,7 +121,7 @@ window.onload = function() {
     titsección.innerHTML = `INFORME (Período ${invertirFecha(selector_fecha_inicio.value)} a ${invertirFecha(selector_fecha_fin.value)})`;
     let filas = tabla_datos.querySelectorAll('tr');
 
-    filas.forEach(function(fila, i) {
+    filas.forEach(function (fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -115,7 +141,7 @@ window.onload = function() {
 
     let filas = tabla_datos.querySelectorAll('tr');
 
-    filas.forEach(function(fila, i) {
+    filas.forEach(function (fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -173,7 +199,7 @@ function generarRegistrosEntabla(baseDeDatos) {
         reject("No se pudo.");
 
 
-        setTimeout(function() {
+        setTimeout(function () {
 
           let promedio_glucosa = parseInt(datos_promedios.rows[2].cells[1].innerText.split(" ")[0]);
           evaluar_dato(1, datos_promedios.rows[2].cells[1], promedio_glucosa);
