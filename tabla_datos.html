@@ -76,11 +76,11 @@
                 el día...
             </label>
             <input type="date" style="width:50%;align-self:center;text-align:center;" id="fecha_fin">
-            <img src="recursos/img/enfermera_formulario.png" id="img_enfermera">
+            <img src="recursos/img/enfermera_formulario.png" id="img_enfermera" class="no_imprimible">
 
         </div>
 
-        <div id="divtabla" style="display:flex;flex-direction:column;">
+        <div class="no_imprimible" id="divtabla" style="display:flex;flex-direction:column;">
             <div id="divtabla" style="display:flex;flex-direction:column;">
 
                 <table id="tabla_datos">
@@ -179,12 +179,7 @@
         <div class="div" style="display:flex;flex-direction:row;">
 
             <button type="button" id="btnGrafico" style="width:10%;">Gráfico</button>
-            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-            <label for="vehicle1">Peso</label><br>
-            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-            <label for="vehicle2">Glucosa</label><br>
-            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-            <label for="vehicle3">Oxígeno</label><br>
+            <button type="button" id="btnImprimir" style="width:10%;margin-left:1vw;">Imprimir</button>
 
         </div>
        

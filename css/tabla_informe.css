@@ -184,7 +184,8 @@ td {
 
     display: none;
     position: fixed;
-    border-radius:12px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 15px black;
     top: 14%;
     left: 27%;
     width: 66%;
@@ -197,6 +198,22 @@ td {
 .visible {
 
     display: flex;
+
+}
+
+@media print {
+
+    .imprimible {
+
+        display: flex;
+
+    }
+
+    .no_imprimible {
+
+        display: none;
+
+    }
 
 }
 

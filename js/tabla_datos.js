@@ -6,7 +6,7 @@ var tabla_datos;
 var baseDeDatos;
 var selector_fecha_inicio, selector_fecha_fin;
 var datos_promedios, datos_totales;
-var btnInicio, btnFormulario, btnGráfico;
+var btnInicio, btnFormulario, btnGráfico,btnImprimir;
 var div_grafico;
 var categorías_eje_x_gráfico = [];
 var conjunto_datos_peso = [];
@@ -27,6 +27,13 @@ window.onload = function () {
   btnFormulario = document.getElementById("btnFormulario");
   btnGráfico = document.getElementById("btnGrafico");
   div_grafico = document.getElementById("div_grafico");
+  btnImprimir = document.getElementById("btnImprimir");
+
+  btnImprimir.addEventListener("click",()=>{
+
+    window.print();
+
+  });
 
   btnInicio.addEventListener("click", function () {
 
