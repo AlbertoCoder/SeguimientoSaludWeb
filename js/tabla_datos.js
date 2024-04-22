@@ -112,16 +112,36 @@ window.onload = function () {
 
         },
         options: {
+
+          scales: {
+            y: {
+                ticks: {
+                    font: {
+                        size: 84 // Set the font size for ticks on the y-axis
+                    }
+                }
+            },
+            x: {
+                ticks: {
+                    font: {
+                        size: 84 // Set the font size for ticks on the x-axis
+                    }
+                }
+            }
+        },
+          
           title:{
 
             display:true,
-            text:'Evolución',
+            text:`Evolución ${idusuario_seleccionado.slice(1,50)}`,
             position:'top',
-            fontSize:18
+            fontSize:34
           },
           legend: { display: true, 
             position: "right",labels:{fontSize:16} },
-          spanGaps:false
+          spanGaps:false,
+
+        
         }
       });
 
