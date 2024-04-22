@@ -189,7 +189,7 @@ window.onload = function () {
   selector_fecha_inicio.addEventListener('change', () => {
 
     let titsección = document.getElementById("tit_sección");
-    titsección.innerHTML = `INFORME (Período ${invertirFecha(selector_fecha_inicio.value)} a ${invertirFecha(selector_fecha_fin.value)})`;
+    titsección.innerHTML = `INFORME &emsp;(Período ${invertirFecha(selector_fecha_inicio.value)} a ${invertirFecha(selector_fecha_fin.value)})`;
     let filas = tabla_datos.querySelectorAll('tr');
 
     filas.forEach(function (fila, i) {
