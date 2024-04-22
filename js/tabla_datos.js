@@ -8,7 +8,13 @@ var selector_fecha_inicio, selector_fecha_fin;
 var datos_promedios, datos_totales;
 var btnInicio, btnFormulario, btnGráfico;
 var div_grafico;
-
+var categorías_eje_x_gráfico = [];
+var conjunto_datos_peso = [];
+var conjunto_datos_glucosa = [];
+var conjunto_datos_o2 = [];
+var conjunto_datos_sist = [];
+var conjunto_datos_diast = [];
+var conjunto_datos_ppm = [];
 
 window.onload = function () {
 
@@ -43,36 +49,74 @@ window.onload = function () {
 
   btnGráfico.addEventListener("click", function () {
 
+    generarEjeXGráfico(tabla_datos);
+
+    incrustarDatosGráfico(tabla_datos, 2);
+    incrustarDatosGráfico(tabla_datos, 3);
+    incrustarDatosGráfico(tabla_datos, 4);
+    incrustarDatosGráfico(tabla_datos, 5);
+    incrustarDatosGráfico(tabla_datos, 6);
+    incrustarDatosGráfico(tabla_datos, 7);
 
     if (div_grafico.style.display === 'none') {
 
       div_grafico.style.display = 'block';
 
-      const xValues = [100,200,300,400,500,600,700,800,900,1000];
+      const etiquetas_X = Array.from(categorías_eje_x_gráfico);
+
+      console.log(etiquetas_X);
 
       new Chart("Evolución", {
         type: "line",
         data: {
-          labels: xValues,
-          datasets: [{ 
-            data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
-            borderColor: "red",
+          labels: etiquetas_X,
+
+          datasets: [{
+            label:"Peso (Kg.)",
+            data: conjunto_datos_peso,
+            borderColor: "orange",
             fill: false
-          }, { 
-            data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+          }, {
+            label:"Glucosa (mg/dL)",
+            data: conjunto_datos_glucosa,
             borderColor: "green",
             fill: false
-          }, { 
-            data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+          }, {
+            label:"Oxígeno En Sangre (%)",
+            data: conjunto_datos_o2,
+            borderColor: "lightblue",
+            fill: false
+          }, {
+            label:"Sístole (mmHg)",
+            data: conjunto_datos_sist,
+            borderColor: "red",
+            fill: false
+          }, {
+            label:"Diástole (mmHg)",
+            data: conjunto_datos_diast,
             borderColor: "blue",
             fill: false
+          }, {
+            label:"Frecuencia Cardíaca (ppm)",
+            data: conjunto_datos_ppm,
+            borderColor: "purple",
+            fill: false
           }]
+
         },
         options: {
-          legend: {display: false}
+          title:{
+
+            display:true,
+            text:'Evolución',
+            position:'top',
+            fontSize:18
+          },
+          legend: { display: true, 
+            position: "right",labels:{fontSize:16} },
+          spanGaps:false
         }
       });
-
 
     } else {
 
@@ -235,6 +279,56 @@ function iterarMapaDeDatos(mapa_datos, fecha_inicio, fecha_fin) {
 
 }
 
+function generarEjeXGráfico(tabla_html) {
+
+  categorías_eje_x_gráfico = [];
+
+  Array.from(tabla_html.rows).forEach(fila => {
+
+    if (fila.rowIndex > 0) {
+
+      categorías_eje_x_gráfico.push(fila.cells[1].innerText);
+    }
+
+  });
+
+}
+
+function incrustarDatosGráfico(tabla_html, id_col) {
+
+  let promedio = 0;
+  let contador = 0;
+
+  Array.from(tabla_html.rows).forEach(fila => {
+
+    if (fila.rowIndex > 0) {
+
+      var contenido_celda = fila.cells[id_col].innerText;
+
+
+      if (id_col === 2) {
+
+        conjunto_datos_peso.push(contenido_celda);
+
+      } else if (id_col === 3) {
+
+        conjunto_datos_glucosa.push(contenido_celda);
+      } else if (id_col === 4) {
+
+        conjunto_datos_o2.push(contenido_celda);
+      } else if (id_col === 5) {
+        conjunto_datos_sist.push(contenido_celda);
+      } else if (id_col === 6) {
+        conjunto_datos_diast.push(contenido_celda);
+      } else if (id_col === 7) {
+        conjunto_datos_ppm.push(contenido_celda);
+      }
+
+
+    }
+
+  });
+}
 function obtenerPromedio(tabla_html, id_col) {
 
   let promedio = 0;
@@ -244,6 +338,7 @@ function obtenerPromedio(tabla_html, id_col) {
     if (fila.rowIndex > 0) {
 
       let contenido_celda = fila.cells[id_col].innerText;
+
 
       if (contenido_celda != "") {
 
