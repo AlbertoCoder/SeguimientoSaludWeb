@@ -196,10 +196,21 @@ td {
     top: 14%;
     left: 26.5%;
     width: 66.4%;
-    height: 59%;
+    height: 57%;
     background-color: rgba(255, 255, 255, 1);
     z-index: 1;
 
+}
+
+.filtros{
+
+        box-shadow:3px 3px 10px black;
+
+}
+#tabla_datos{
+
+
+        box-shadow:3px 3px 10px black;
 }
 
     #datos_promedios {
@@ -207,12 +218,14 @@ td {
         width: 80% !important;
         page-break-after:avoid;
         margin-right:2vw;
+        box-shadow:3px 3px 10px black;
     }
     
     #datos_totales {
         margin-top:0px;
         width: 20% !important;
         page-break-after:avoid;
+        box-shadow:3px 3px 10px black;
 
     }
 .visible {
@@ -311,7 +324,6 @@ td {
     height: 85%;
     border-radius: 10px;
     border-style: ridge;
-    box-shadow: 5px 5px 10px teal;
     padding: 2vw;
 }
 
