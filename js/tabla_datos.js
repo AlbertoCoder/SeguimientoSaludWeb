@@ -304,11 +304,11 @@ function generarRegistrosEntabla(baseDeDatos) {
           let promedio_sist = parseInt(datos_promedios.rows[2].cells[3].innerText.split(" ")[0]);
           let promedio_diast = parseInt(datos_promedios.rows[2].cells[4].innerText.split(" ")[0]);
           let promedio_ppm = parseInt(datos_promedios.rows[2].cells[5].innerText.split(" ")[0]);
-          evaluar_dato(datos_promedios.rows[2].cells[1], promedio_glucosa,70,100,120);
-          evaluar_dato(datos_promedios.rows[2].cells[2], promedio_o2,93,95,99,100);
+          evaluar_dato(datos_promedios.rows[2].cells[1], promedio_glucosa,70,80,100,130);
+          evaluar_dato(datos_promedios.rows[2].cells[2], promedio_o2,93,97,100,101);
           evaluar_dato(datos_promedios.rows[2].cells[3], promedio_sist,80,110,150,160);
           evaluar_dato(datos_promedios.rows[2].cells[4], promedio_diast,50,60,80,81);
-          evaluar_dato(datos_promedios.rows[2].cells[5], promedio_diast,55,60,80,120);
+          evaluar_dato(datos_promedios.rows[2].cells[5], promedio_ppm,55,60,80,120);
 
         }, 200
 
@@ -569,11 +569,11 @@ function evaluar_dato(celda, dato,límite1,límite2,límite3,límite4) {
 
       resaltarCelda(celda,"peligro");
 
-    } else if((dato >= límite1) && (dato < límite2) && (dato>=límite3 && dato<límite4)) {
+    } else if((dato >= límite1) && (dato < límite2) || (dato>=límite3 && dato<límite4)) {
       
       resaltarCelda(celda,"precaución");
 
-    }else{
+    }else if((dato >= límite2) && (dato<=límite3)){
 
 
       resaltarCelda(celda,"normal");
