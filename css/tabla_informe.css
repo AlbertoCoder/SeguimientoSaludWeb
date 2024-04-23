@@ -57,7 +57,8 @@ body {
 
 #img_enfermera {
 
-    height: 90%;
+    margin-top:0.5vw;
+    height: 80%;
 
 }
 
@@ -244,6 +245,18 @@ td {
 .visible {
 
     display: flex;
+
+}
+
+.botones:hover{
+
+    background:teal;
+    color:white;
+}
+
+.botones{
+
+    border-radius:7px;
 
 }
 

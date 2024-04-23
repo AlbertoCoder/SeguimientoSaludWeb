@@ -149,7 +149,7 @@ window.onload = function () {
             display: true,
             position: "right", labels: { fontSize: 16 }
           },
-          spanGaps: false,
+          spanGaps: true,
 
 
         }
