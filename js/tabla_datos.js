@@ -15,8 +15,16 @@ var conjunto_datos_o2 = [];
 var conjunto_datos_sist = [];
 var conjunto_datos_diast = [];
 var conjunto_datos_ppm = [];
+var img_enfermera;
 
 window.onload = function () {
+
+
+  setTimeout(() => {
+
+    div_grafico.style.display = 'none';
+
+  }, 50);
 
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
@@ -28,6 +36,7 @@ window.onload = function () {
   btnGráfico = document.getElementById("btnGrafico");
   div_grafico = document.getElementById("div_grafico");
   btnImprimir = document.getElementById("btnImprimir");
+  img_enfermera = document.getElementById("img_enfermera");
 
   btnImprimir.addEventListener("click", () => {
 
@@ -56,112 +65,24 @@ window.onload = function () {
 
   btnGráfico.addEventListener("click", function () {
 
-    generarEjeXGráfico(tabla_datos);
+    if (btnGráfico.textContent === "Ver Gráfico") {
+      btnGráfico.textContent = "Ocultar Gráfico";
+    } else {
+      btnGráfico.textContent = "Ver Gráfico";
+    }
 
-    incrustarDatosGráfico(tabla_datos, 2);
-    incrustarDatosGráfico(tabla_datos, 3);
-    incrustarDatosGráfico(tabla_datos, 4);
-    incrustarDatosGráfico(tabla_datos, 5);
-    incrustarDatosGráfico(tabla_datos, 6);
-    incrustarDatosGráfico(tabla_datos, 7);
 
     if (div_grafico.style.display === 'none') {
 
-      div_grafico.style.display = 'block';
 
-      const etiquetas_X = Array.from(categorías_eje_x_gráfico);
-
-      console.log(etiquetas_X);
-
-      new Chart(`Evolución`, {
-        type: "line",
-        data: {
-          labels: etiquetas_X,
-
-          datasets: [{
-            label: "Peso (Kg.)",
-            data: conjunto_datos_peso,
-            borderColor: "orange",
-            fill: false,
-            tension:0
-          }, {
-            label: "Glucosa (mg/dL)",
-            data: conjunto_datos_glucosa,
-            borderColor: "green",
-            fill: false,
-            tension:0
-          }, {
-            label: "Oxígeno En Sangre (%)",
-            data: conjunto_datos_o2,
-            borderColor: "lightblue",
-            fill: false,
-            tension:0
-          }, {
-            label: "Sístole (mmHg)",
-            data: conjunto_datos_sist,
-            borderColor: "red",
-            fill: false,
-            tension:0
-          }, {
-            label: "Diástole (mmHg)",
-            data: conjunto_datos_diast,
-            borderColor: "blue",
-            fill: false,
-            tension:0
-          }, {
-            label: "Frecuencia Cardíaca (ppm)",
-            data: conjunto_datos_ppm,
-            borderColor: "purple",
-            fill: false,
-            tension:0
-          }]
-
-        },
-        options: {
-          scales: {
-            xAxes: [{
-              gridLines: {
-                display: true // Display vertical grid lines
-            },   
-              
-              
-              ticks: {
-                minRotation:45,
-                maxRotation:45,
-                    fontSize: 18 // Set font size for x axis ticks
-                }
-            }],
-            yAxes: [{
-                ticks: {
-                    fontSize: 18 // Set font size for y axis ticks
-                }
-            }]
-        },
-
-          title: {
-
-            display: true,
-            text: `${idusuario_seleccionado.slice(1, 50)}`,
-            position: 'top',
-            fontSize: 34
-          },
-          legend: {
-            display: true,
-            position: "right", labels: { fontSize: 16 }
-          },
-          spanGaps: true,
-
-
-        }
-      });
+      mostrarOcultarGráfico(1);
+      crearGráfico();
 
     } else {
 
-
-      div_grafico.style.display = 'none';
+      mostrarOcultarGráfico(0);
 
     }
-
 
 
   });
@@ -244,7 +165,7 @@ window.onload = function () {
 
 }
 
-function diferenciaEnDías(fecha_inicio,fecha_fin){
+function diferenciaEnDías(fecha_inicio, fecha_fin) {
 
   var marca_temporal1 = new Date("2024-04-23").getTime();
   var marca_temporal2 = new Date("2024-04-28").getTime();
@@ -304,16 +225,15 @@ function generarRegistrosEntabla(baseDeDatos) {
           let promedio_sist = parseInt(datos_promedios.rows[2].cells[3].innerText.split(" ")[0]);
           let promedio_diast = parseInt(datos_promedios.rows[2].cells[4].innerText.split(" ")[0]);
           let promedio_ppm = parseInt(datos_promedios.rows[2].cells[5].innerText.split(" ")[0]);
-          evaluar_dato(datos_promedios.rows[2].cells[1], promedio_glucosa,70,80,100,130);
-          evaluar_dato(datos_promedios.rows[2].cells[2], promedio_o2,93,97,100,101);
-          evaluar_dato(datos_promedios.rows[2].cells[3], promedio_sist,80,110,150,160);
-          evaluar_dato(datos_promedios.rows[2].cells[4], promedio_diast,50,60,80,81);
-          evaluar_dato(datos_promedios.rows[2].cells[5], promedio_ppm,55,60,80,120);
+          evaluar_dato(datos_promedios.rows[2].cells[1], promedio_glucosa, 70, 80, 100, 130);
+          evaluar_dato(datos_promedios.rows[2].cells[2], promedio_o2, 93, 97, 100, 101);
+          evaluar_dato(datos_promedios.rows[2].cells[3], promedio_sist, 80, 110, 150, 160);
+          evaluar_dato(datos_promedios.rows[2].cells[4], promedio_diast, 50, 60, 80, 81);
+          evaluar_dato(datos_promedios.rows[2].cells[5], promedio_ppm, 55, 60, 80, 120);
+
+          mostrarEmociónEnfermera();
 
         }, 200
-
-
-
         );
 
       };
@@ -368,21 +288,21 @@ function incrustarDatosGráfico(tabla_html, id_col) {
       var contenido_celda = fila.cells[id_col].innerText;
 
 
-      if (id_col === 2 && contenido_celda!="") {
+      if (id_col === 2 && contenido_celda != "") {
 
         conjunto_datos_peso.push(contenido_celda);
 
-      } else if (id_col === 3 && contenido_celda!="") {
+      } else if (id_col === 3 && contenido_celda != "") {
 
         conjunto_datos_glucosa.push(contenido_celda);
-      } else if (id_col === 4 && contenido_celda!="") {
+      } else if (id_col === 4 && contenido_celda != "") {
 
         conjunto_datos_o2.push(contenido_celda);
-      } else if (id_col === 5 && contenido_celda!="") {
+      } else if (id_col === 5 && contenido_celda != "") {
         conjunto_datos_sist.push(contenido_celda);
-      } else if (id_col === 6 && contenido_celda!="") {
+      } else if (id_col === 6 && contenido_celda != "") {
         conjunto_datos_diast.push(contenido_celda);
-      } else if (id_col === 7 && contenido_celda!="") {
+      } else if (id_col === 7 && contenido_celda != "") {
         conjunto_datos_ppm.push(contenido_celda);
       }
 
@@ -390,7 +310,10 @@ function incrustarDatosGráfico(tabla_html, id_col) {
     }
 
   });
+
+
 }
+
 function obtenerPromedio(tabla_html, id_col) {
 
   let promedio = 0;
@@ -539,44 +462,197 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
 }
 
-function resaltarCelda(celda,tipo){
+function resaltarCelda(celda, tipo) {
 
-  if(tipo==="normal"){
+  if (tipo === "normal") {
 
-      celda.classList.remove("celda_ambar");
-      celda.classList.remove("celda_roja");
-      celda.classList.add("celda_verde");
+    celda.classList.remove("celda_ambar");
+    celda.classList.remove("celda_roja");
+    celda.classList.add("celda_verde");
 
-  }else if(tipo==="precaución"){
+  } else if (tipo === "precaución") {
 
-      celda.classList.add("celda_ambar");
-      celda.classList.remove("celda_roja");
-      celda.classList.remove("celda_verde");
+    celda.classList.add("celda_ambar");
+    celda.classList.remove("celda_roja");
+    celda.classList.remove("celda_verde");
 
-  }else if(tipo==="peligro"){
+  } else if (tipo === "peligro") {
 
-      celda.classList.remove("celda_ambar");
-      celda.classList.add("celda_roja");
-      celda.classList.remove("celda_verde");
+    celda.classList.remove("celda_ambar");
+    celda.classList.add("celda_roja");
+    celda.classList.remove("celda_verde");
   }
 
 
 }
 
-function evaluar_dato(celda, dato,límite1,límite2,límite3,límite4) {
+function evaluar_dato(celda, dato, límite1, límite2, límite3, límite4) {
 
-    if ((dato < límite1) || dato > límite4) {
+  if ((dato < límite1) || dato > límite4) {
 
-      resaltarCelda(celda,"peligro");
+    resaltarCelda(celda, "peligro");
 
-    } else if((dato >= límite1) && (dato < límite2) || (dato>=límite3 && dato<límite4)) {
-      
-      resaltarCelda(celda,"precaución");
+  } else if ((dato >= límite1) && (dato < límite2) || (dato >= límite3 && dato < límite4)) {
 
-    }else if((dato >= límite2) && (dato<=límite3)){
+    resaltarCelda(celda, "precaución");
+
+  } else if ((dato >= límite2) && (dato <= límite3)) {
 
 
-      resaltarCelda(celda,"normal");
-    } 
+    resaltarCelda(celda, "normal");
+  }
+
+}
+
+function crearGráfico() {
+
+  generarEjeXGráfico(tabla_datos);
+
+  incrustarDatosGráfico(tabla_datos, 2);
+  incrustarDatosGráfico(tabla_datos, 3);
+  incrustarDatosGráfico(tabla_datos, 4);
+  incrustarDatosGráfico(tabla_datos, 5);
+  incrustarDatosGráfico(tabla_datos, 6);
+  incrustarDatosGráfico(tabla_datos, 7);
+
+  const etiquetas_X = Array.from(categorías_eje_x_gráfico);
+
+  console.log(etiquetas_X);
+
+  let graf = new Chart(`Evolución`, {
+    type: "line",
+    data: {
+      labels: etiquetas_X,
+
+      datasets: [{
+        label: "Peso (Kg.)",
+        data: conjunto_datos_peso,
+        borderColor: "orange",
+        fill: false,
+        tension: 0
+      }, {
+        label: "Glucosa (mg/dL)",
+        data: conjunto_datos_glucosa,
+        borderColor: "green",
+        fill: false,
+        tension: 0
+      }, {
+        label: "Oxígeno En Sangre (%)",
+        data: conjunto_datos_o2,
+        borderColor: "lightblue",
+        fill: false,
+        tension: 0
+      }, {
+        label: "Sístole (mmHg)",
+        data: conjunto_datos_sist,
+        borderColor: "red",
+        fill: false,
+        tension: 0
+      }, {
+        label: "Diástole (mmHg)",
+        data: conjunto_datos_diast,
+        borderColor: "blue",
+        fill: false,
+        tension: 0
+      }, {
+        label: "Frecuencia Cardíaca (ppm)",
+        data: conjunto_datos_ppm,
+        borderColor: "purple",
+        fill: false,
+        tension: 0
+      }]
+
+    },
+    options: {
+      animation: {
+        duration: 5000
+      },
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: true // Display vertical grid lines
+          },
+
+
+          ticks: {
+            minRotation: 45,
+            maxRotation: 45,
+            fontSize: 18 // Set font size for x axis ticks
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            fontSize: 18 // Set font size for y axis ticks
+          }
+        }]
+      },
+
+      title: {
+
+        display: true,
+        text: `${idusuario_seleccionado.slice(1, 50)}`,
+        position: 'top',
+        fontSize: 34
+      },
+      legend: {
+        display: true,
+        position: "right", labels: { fontSize: 16 }
+      },
+      spanGaps: true,
+
+
+    }
+  });
+
+
+  return graf;
+}
+
+function actualizarGráfico(gráfico) {
+
+  gráfico.update();
+
+
+
+}
+
+function mostrarOcultarGráfico(opción) {
+
+  if (opción === 1) {
+
+    div_grafico.style.display = 'flex';
+
+  } else if (opción === 0) {
+
+    div_grafico.style.display = 'none';
+  }
+
+}
+function comprobarSiDatoAlterado() {
+
+
+  for (let i = 0; i < 5; i++) {
+
+    if (datos_promedios.rows[2].cells[i].classList.contains("celda_roja")) {
+
+      return "recursos/img/enfermera_formulario_alerta.png";
+    
+    } else if (datos_promedios.rows[2].cells[i].classList.contains("celda_ambar")) {
+
+      return "recursos/img/enfermera_formulario_precau.png";
+    
+    }
+
+  }
+
+  return "recursos/img/enfermera_formulario.png";
+
+}
+
+
+function mostrarEmociónEnfermera() {
+
+  img_enfermera.src = comprobarSiDatoAlterado();
+
 
 }

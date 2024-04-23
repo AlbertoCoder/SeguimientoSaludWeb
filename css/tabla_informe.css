@@ -203,7 +203,7 @@ td {
 
 #div_grafico {
 
-    display: none;
+    display: flex;
     position: fixed;
     border-radius: 12px;
     border-style:line;
@@ -260,13 +260,39 @@ td {
 
 }
 
+    #info_desarrollo{
+
+        font-size:1.4em;
+        color-adjust: exact; /* Firefox */
+        background:rgba(0, 128, 128, 0.7) !important;
+        color:white !important;
+        border-radius:2px 2px 8px 8px;
+        width:90%;
+        margin-left:5%;
+        margin-right:5%;
+
+    }
 @media print {
 
     @page {
         size: A4 landscape;
         margin: 0;
     }
-    
+   
+    #div_información{
+
+        text-align:center;
+        margin-left:12%;
+    }
+    #info_desarrollo{
+
+        font-size:1em;
+        color-adjust: exact; /* Firefox */
+        background:#00000090 !important;
+        color:white !important;
+        border-radius:8px 8px 8px 8px;
+
+    }
     td {
         -webkit-print-color-adjust: exact; /* Chrome, Safari */
         color-adjust: exact; /* Firefox */

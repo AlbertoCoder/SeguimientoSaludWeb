@@ -12,6 +12,8 @@ var opcInserción;
 
 window.onload = function() {
 
+
+
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
   opcInserción = sessionStorage.getItem("opcInserción");
