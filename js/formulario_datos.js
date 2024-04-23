@@ -92,7 +92,7 @@ window.onload = function() {
     insertarRegistro(baseDeDatos, "Mediciones", n, opcInserción, mediciones_prueba).then(resultado => {
 
 
-      alert(`Registro agregado con fecha ${resultado.Fecha}`);
+      alert(`Registro guardado con fecha ${resultado.Fecha}`);
       window.location.href = "tabla_datos.html";
 
     });
