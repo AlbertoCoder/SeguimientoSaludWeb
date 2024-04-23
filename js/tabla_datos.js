@@ -531,21 +531,47 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
 }
 
+function resaltarCelda(celda,tipo){
+
+  if(tipo==="normal"){
+
+      celda.classList.remove("celda_ambar");
+      celda.classList.remove("celda_roja");
+      celda.classList.add("celda_verde");
+
+  }else if(tipo==="precaución"){
+
+      celda.classList.add("celda_ambar");
+      celda.classList.remove("celda_roja");
+      celda.classList.remove("celda_verde");
+
+  }else if(tipo==="peligro"){
+
+      celda.classList.remove("celda_ambar");
+      celda.classList.add("celda_roja");
+      celda.classList.remove("celda_verde");
+  }
+
+
+}
+
 function evaluar_dato(num_celda, celda, dato) {
 
   if (num_celda === 1) {
 
 
-    if ((dato > 70) && (dato < 100)) {
+    if ((dato >= 80) && (dato <= 100)) {
 
-      celda.classList.remove("celda_roja");
-      celda.classList.add("celda_verde");
+      resaltarCelda(celda,"normal");
 
-    } else {
+    } else if((dato <80) && (dato >= 70) || (dato)>100 && (dato)<120) {
+      resaltarCelda(celda,"precaución");
 
-      celda.classList.add("celda_roja");
-      celda.classList.remove("celda_verde");
-    }
+    }else{
+
+
+      resaltarCelda(celda,"peligro");
+    } 
 
 
   }
