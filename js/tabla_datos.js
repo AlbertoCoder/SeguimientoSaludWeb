@@ -375,8 +375,10 @@ function iterarCeldas(mapa_datos, registro, fila) {
     const celda_eliminar = document.createElement('td');
     celda_editar.innerHTML = "<i class=\"fas fa-edit\"></i>";
     celda_editar.setAttribute('id', `edit_${registro}`);
+    celda_editar.classList.add("no_imprimible");
     celda_eliminar.innerHTML = "<i class=\"fas fa-trash\"></i>";
     celda_eliminar.setAttribute('id', `elimi_${registro}`);
+    celda_eliminar.classList.add("no_imprimible");
 
 
     celda_editar.addEventListener(('click'), () => {
