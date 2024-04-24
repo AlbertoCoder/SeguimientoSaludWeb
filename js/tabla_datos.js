@@ -66,10 +66,10 @@ window.onload = function () {
   btnGráfico.addEventListener("click", function () {
 
   document.documentElement.requestFullscreen();
-    if (btnGráfico.textContent === "Ver Gráfico") {
-      btnGráfico.textContent = "Ocultar Gráfico";
+    if (btnGráfico.textContent === "Gráfico") {
+      btnGráfico.textContent = "Tabla";
     } else {
-      btnGráfico.textContent = "Ver Gráfico";
+      btnGráfico.textContent = "Gráfico";
     }
 
 
@@ -664,17 +664,17 @@ function comprobarSiDatoAlterado() {
 
     if (datos_promedios.rows[2].cells[i].classList.contains("celda_roja")) {
 
-      return "recursos/img/enfermera_formulario_alerta.png";
+      return "recursos/img/Enfermera_Datos_Peligro.png";
     
     } else if (datos_promedios.rows[2].cells[i].classList.contains("celda_ambar")) {
 
-      return "recursos/img/enfermera_formulario_precau.png";
+      return "recursos/img/Enfermera_Datos_Precau.png";
     
     }
 
   }
 
-  return "recursos/img/enfermera_formulario.png";
+  return "recursos/img/Enfermera_Datos.png";
 
 }
 

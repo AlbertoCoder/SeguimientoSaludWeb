@@ -4,13 +4,13 @@ body {
 
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7b2, #a9ecce, #ffffff) !important;
+    background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7c2, #a9ecdd, #ffffff) !important;
 
 }
 
 .barra_nav {
 
-    background: #41a97a !important;
+    background: linear-gradient(110deg,rgb(11, 94, 94) 15%,rgb(24, 144, 144),rgb(53, 176, 176),teal) !important;
     color: white;
     border-style: inset;
     display: flex;
@@ -55,6 +55,13 @@ body {
 
 }
 
+#tit_sección{
+
+    background:teal;
+    border-radius:6px 6px 0px 0px;
+
+}
+
 .div_entrada_valores {
 
     display: flex;
@@ -66,7 +73,7 @@ body {
     border-style: groove;
     box-shadow: 5px 5px 10px black;
     padding: 2vw;
-    background: linear-gradient(to bottom, #41a97aaa, #72e7b2aa, #a9ecceaa);
+    background: radial-gradient(circle, rgb(92, 168, 168) 60%,rgb(78, 158, 158) 20%, rgb(5, 83, 83) 20%);
 }
 
 #form_entrada_valores {
@@ -136,7 +143,7 @@ table,td{
 
 #btnInsertarRegistro{
 
-    background:linear-gradient(128deg,#277427,#57ab57,#275d27);
+    background:linear-gradient(128deg,rgb(2, 68, 68),rgb(42, 191, 191),rgb(2, 65, 65));
     color:white;
 }
 

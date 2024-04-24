@@ -3,18 +3,18 @@ html,body{
 
     width:100vw;
     height:100vh;
-    background:radial-gradient(ellipse,#ffffff,#ffffff,#72e7b2,#a9ecce,#ffffff) !important;
+    background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7c2, #a9ecdd, #ffffff) !important;
 
 }
-.barra_nav{
+.barra_nav {
 
-    background:#41a97a !important;
-    color:white;
-    border-style:inset;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    height:6vh;
+    background: linear-gradient(110deg,rgb(11, 94, 94) 15%,rgb(24, 144, 144),rgb(53, 176, 176),teal) !important;
+    color: white;
+    border-style: inset;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 6vh;
 }
 
 #cruzverde{

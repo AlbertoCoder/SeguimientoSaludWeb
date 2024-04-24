@@ -4,7 +4,7 @@ body {
 
     width: 100vw;
     height: 100%;
-    background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7b2, #a9ecce, #ffffff) !important;
+    background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7c2, #a9ecdd, #ffffff) !important;
 
 }
 
@@ -227,14 +227,15 @@ td {
 
 #div_grafico {
 
+
     display: flex;
     position: fixed;
     border-radius: 12px;
     border-style:line;
     top: 18%;
-    left: 26.5%;
-    width: 66.4%;
-    height: 57%;
+    left: 28.3%;
+    width: 64.6%;
+    height: 55%;
     background-color: rgba(255, 255, 255, 1);
     z-index: 1;
 
@@ -347,18 +348,23 @@ td {
 
 }
 
-    
+ 
 
     #div_información{
 
-        text-align:center;
-        margin-left:12%;
+        display: flex;
+        position: fixed;
+        top: 80%;
+        width: 95%;
+        left:3%;
+        height: 4%;
+        z-index: 1;
     }
     #info_desarrollo{
 
         font-size:1em;
         color-adjust: exact; /* Firefox */
-        background:#00000090 !important;
+        background:teal !important;
         color:white !important;
         border-radius:8px 8px 8px 8px;
 
@@ -422,7 +428,7 @@ td {
 
     #div_grafico {
 
-        margin-top:2vw;
+        margin-top:0;
         display: none;
         position: fixed;
         top: 9%;
@@ -532,43 +538,43 @@ td {
     }
 
     10% {
-        background: linear-gradient(-130deg, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal, teal, teal);
+        background: linear-gradient(-135deg, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal, teal, teal);
     }
 
     20% {
-        background: linear-gradient(-125deg, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal, teal);
+        background: linear-gradient(-135deg, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal, teal);
     }
 
     30% {
-        background: linear-gradient(-120deg, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal);
+        background: linear-gradient(-135deg, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal);
     }
 
     40% {
-        background: linear-gradient(-115deg, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal);
+        background: linear-gradient(-135deg, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal);
     }
 
     50% {
-        background: linear-gradient(-110deg, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal);
+        background: linear-gradient(-135deg, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal);
     }
 
     60% {
-        background: linear-gradient(-105deg, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal);
+        background: linear-gradient(-135deg, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal);
     }
 
     70% {
-        background: linear-gradient(-100deg, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal);
+        background: linear-gradient(-135deg, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal);
     }
 
     80% {
-        background: linear-gradient(-95deg, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, #33b8bd);
+        background: linear-gradient(-135deg, teal, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd);
     }
 
     90% {
-        background: linear-gradient(-90deg, teal, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd);
+        background: linear-gradient(-135deg, teal, teal, teal, teal, teal, teal, teal, teal, teal, #33b8bd);
     }
 
     100% {
-        background: linear-gradient(-88deg, teal, teal, teal, teal, teal, teal, teal, teal, teal, #33b8bd);
+        background: linear-gradient(-135deg, teal, teal, teal, teal, teal, teal, teal, teal, teal, teal);
     }
 
 }
