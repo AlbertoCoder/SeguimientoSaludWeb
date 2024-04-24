@@ -247,10 +247,16 @@ td {
 }
 #tabla_datos{
 
-
+        
         box-shadow:3px 3px 10px black;
 }
 
+#divtabla::-webkit-scrollbar{
+
+    width:0;
+    height:0;
+        
+}
     #datos_promedios {
         margin-top:0px;
         width: 80% !important;
