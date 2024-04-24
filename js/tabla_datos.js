@@ -65,6 +65,7 @@ window.onload = function () {
 
   btnGráfico.addEventListener("click", function () {
 
+  document.documentElement.requestFullscreen();
     if (btnGráfico.textContent === "Ver Gráfico") {
       btnGráfico.textContent = "Ocultar Gráfico";
     } else {
@@ -190,12 +191,30 @@ function invertirFecha(fecha) {
 
 function establecerFechasDefecto() {
 
-  const fecha_actual = new Date(Date.now());
+  // Obtener la fecha actual:
+  const fecha_actual = new Date();
+
+  // Obtener el año y el mes de la fecha actual:
   const año = fecha_actual.getFullYear();
-  const mes = String(fecha_actual.getMonth() + 1).padStart(2, '0'); //El método 'padStart' extiende el rango de caracteres las posiciones indicadas (2) hacia la izquierda con el carácter ('0') y devuelve el resultado.
-  const mes_siguiente = String(fecha_actual.getMonth() + 2).padStart(2, '0');
+
+  //Los meses están representados por una matriz (Array),
+  //por lo que el mes de Abril (por ejemplo) tiene un índice '3' 
+  //en la matriz.
+  const mes = String(fecha_actual.getMonth() +1).padStart(2,'0'); // El método 'padStart' coloca
+                                                                  // tantos caracteres a la izquierda
+                                                                  // de la cadena como refleje el
+                                                                  // valor entero del primer parámetro
+                                                                  // del método. El segundo parámetro
+                                                                  // especifica el carácter añadido.
+  // Obtener el último día del mes actual:
+  // (Al especificar el día '0' en el método constructor del objeto 'Date'
+  // se obtiene el último día del mes. Así está definido en la API de 
+  // JavaScript).
+  const último_día_mes_actual = new Date(año,mes,0).getDate();
+
   selector_fecha_inicio.value = `${año}-${mes}-01`;
-  selector_fecha_fin.value = new Date(`${año}-${mes_siguiente}-${-1}`).toISOString().slice(0, 10);
+  selector_fecha_fin.value = `${año}-${mes}-${último_día_mes_actual}`;
+
 
 }
 
@@ -379,7 +398,7 @@ function iterarCeldas(mapa_datos, registro, fila) {
     celda_eliminar.innerHTML = "<i class=\"fas fa-trash\"></i>";
     celda_eliminar.setAttribute('id', `elimi_${registro}`);
     celda_eliminar.classList.add("no_imprimible");
-
+    
 
     celda_editar.addEventListener(('click'), () => {
 
@@ -541,7 +560,7 @@ function crearGráfico() {
       }, {
         label: "Oxígeno En Sangre (%)",
         data: conjunto_datos_o2,
-        borderColor: "lightblue",
+        borderColor: "cyan",
         fill: false,
         tension: 0
       }, {
@@ -572,7 +591,9 @@ function crearGráfico() {
       scales: {
         xAxes: [{
           gridLines: {
-            display: true // Display vertical grid lines
+            display: true, // Display vertical grid lines
+            color:"teal",
+            borderDash:[4,4,4]
           },
 
 
@@ -583,6 +604,12 @@ function crearGráfico() {
           }
         }],
         yAxes: [{
+
+          gridLines:{
+          display:true,
+          color:"teal",
+            borderDash:[4,4,4]
+          },
           ticks: {
             fontSize: 18 // Set font size for y axis ticks
           }

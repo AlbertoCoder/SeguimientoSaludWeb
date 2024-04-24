@@ -23,7 +23,7 @@
 
     <div id="div_grafico">
 
-            <canvas id="Evolución" class="no_imprimible"></canvas>
+        <canvas id="Evolución" class="no_imprimible"></canvas>
 
     </div>
 
@@ -48,13 +48,18 @@
 
         <button type="button" id="btnInicio"
             style="color:white;padding:0.5vw;font-size:1.2em;background:#00000060;border-radius: 12px 0px 0px 6px;">Inicio</button>
-        <button type="button" id="btnFormulario"
+        <button type="button" id="btnFormulario" class="btnesNav"
             style="color:white;padding:0.5vw;font-size:1.2em;background:#00000060;border-radius: 12px 0px 0px 6px;">Formulario</button>
         <button type="button" id="btnInformación"
             style="color:white;padding:0.5vw;font-size:1.2em;background:#00000060;border-radius: 12px 0px 0px 6px;">Información</button>
 
     </nav>
 
+    <div id="div_información" style="text-align:center;">
+
+        <h5 id="info_desarrollo">Seguimiento Básico De Salud - Desarrollado sin ánimo de lucro por Alberto Álvarez
+            Portero (2024). </h5>
+    </div>
     <div class="tit_pag">
 
         <h2 id="tit_sección">INFORME</h2>
@@ -65,15 +70,16 @@
 
         <div style="display:flex;flex-direction:column;background:rgba(0, 128, 128, 0.409);border-radius:12px;">
             <label class="no_imprimible filtros"
-                style="margin-top:2vh;text-align:center;width:50%;font-weight:bold;padding:0.2vw;align-self:center;color:white;background:#00220070;border-radius:6px 6px 0px 0px;">
+                style="margin-top:2vh;text-align:center;width:50%;font-weight:bold;padding:0.2vw;align-self:center;color:white;background:teal;border-radius:6px 6px 0px 0px;">
                 Desde el día...</label>
-            <input class = "no_imprimible filtros" type="date" style="width:50%;align-self:center;margin-bottom:1vh;text-align:center;"
-                id="fecha_inicio">
+            <input class="no_imprimible filtros" type="date"
+                style="width:50%;align-self:center;margin-bottom:1vh;text-align:center;" id="fecha_inicio">
             <label class="no_imprimible filtros"
-                style="text-align:center;width:50%;font-weight:bold;padding:0.2vw;align-self:center;color:white;background:#00220070;border-radius:6px 6px 0px 0px;">Hasta
+                style="text-align:center;width:50%;font-weight:bold;padding:0.2vw;align-self:center;color:white;background:teal;border-radius:6px 6px 0px 0px;">Hasta
                 el día...
             </label>
-            <input class="no_imprimible filtros" type="date" style="width:50%;align-self:center;text-align:center;" id="fecha_fin">
+            <input class="no_imprimible filtros" type="date" style="width:50%;align-self:center;text-align:center;"
+                id="fecha_fin">
             <img src="recursos/img/enfermera_formulario.png" id="img_enfermera" class="no_imprimible">
 
         </div>
@@ -168,27 +174,24 @@
 
                     </tr>
                 </table>
-        
-        
+
+
             </div>
             <hr>
-       
-        <div class="div" style="display:flex;flex-direction:row;width:100%;">
 
-            <button class="no_imprimible botones" type="button" id="btnGrafico" style="width:10%;margin-left:40%;">Ver Gráfico</button>
-            <button class="no_imprimible botones" type="button" id="btnImprimir" style="width:10%;margin-left:1%; margin-right:39%;">Imprimir</button>
+            <div class="div" style="display:flex;flex-direction:row;width:100%;">
 
-        </div>
-       
+                <button class="no_imprimible botones" type="button" id="btnGrafico"
+                    style="width:10%;margin-left:40%;">Ver Gráfico</button>
+                <button class="no_imprimible botones" type="button" id="btnImprimir"
+                    style="width:10%;margin-left:1%; margin-right:39%;">Imprimir</button>
+
+            </div>
+
         </div>
 
     </div>
 
-    <div id="div_información" style="text-align:center;">
-
-        <h5 id="info_desarrollo">Seguimiento Básico De Salud - Desarrollado sin ánimo de lucro por Alberto Álvarez Portero (2024).  </h5>
-        <p>(Este programa es gratuito. Cógelo, úsalo. El conocimiento humano pertenece al mundo).&emsp;<a href="mailto//:alberto_personal@protonmail.com">alberto_personal@protonmail.com</a></p>
-    </div>
 </body>
 
 </html>

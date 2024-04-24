@@ -10,13 +10,28 @@ body {
 
 .barra_nav {
 
-    background: #41a97a !important;
+    background: linear-gradient(110deg,rgb(11, 94, 94) 15%,rgb(24, 144, 144),rgb(53, 176, 176),teal) !important;
     color: white;
     border-style: inset;
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 6vh;
+}
+
+.btnesNav{
+
+
+    -webkit-animation-name: "brillo";
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction:alternate-reverse;
+    -webkit-animation-timing-function: ease-in-out;
+
+    color: white;
+
+
+
 }
 
 #cruzverde {
@@ -55,6 +70,14 @@ body {
 
 }
 
+    #tit_sección{
+
+        -webkit-print-color-adjust: exact; /* Chrome, Safari */
+        color-adjust: exact; /* Firefox */
+        background:teal !important;
+        width:100% !important;
+        border-radius:12px 12px 0px 0px;
+    }
 #img_enfermera {
 
     margin-top:0.5vw;
@@ -86,6 +109,7 @@ body {
 
     #Evolución {
 
+        background:#ffffff11;
         width: 100%;
         max-width: 100%;
         height: 100%;
@@ -94,35 +118,35 @@ body {
 
 .celda_ambar{
 
-    animation-name: "precaución";
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
-    animation-timing-function: ease-in-out;
+    -webkit-animation-name: "precaución";
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate-reverse;
+    -webkit-animation-timing-function: ease-in-out;
     color: white;
-    font-size: 1.1em;
-
+    font-size: 1.35em;
+    font-weight:bold;
 }
 
 .celda_roja {
 
-    animation-name: "peligro";
-    animation-duration: 0.5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
-    animation-timing-function: ease-in-out;
+    -webkit-animation-name: "peligro";
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate-reverse;
+    -webkit-animation-timing-function: ease-in-out;
     color: white;
-    font-size: 1.1em;
-
+    font-size: 1.25em;
+    font-weight:bold;
 }
 
 .celda_verde {
 
-    animation-name: "saludable";
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate-reverse;
-    animation-timing-function: ease-in-out;
+    -webkit-animation-name: "saludable";
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction:reverse;
+    -webkit-animation-timing-function: ease-in-out;
 
     color: white;
     font-size: 1.2em;
@@ -184,7 +208,7 @@ th {
 }
 
 thead {
-    background: #007755 !important;
+    background: teal !important;
     color: white;
     position: sticky;
     top: 0;
@@ -207,7 +231,7 @@ td {
     position: fixed;
     border-radius: 12px;
     border-style:line;
-    top: 14%;
+    top: 18%;
     left: 26.5%;
     width: 66.4%;
     height: 57%;
@@ -262,9 +286,9 @@ td {
 
     #info_desarrollo{
 
-        font-size:1.4em;
+        font-size:1.2em;
         color-adjust: exact; /* Firefox */
-        background:rgba(0, 128, 128, 0.7) !important;
+        background:teal !important;
         color:white !important;
         border-radius:2px 2px 8px 8px;
         width:90%;
@@ -278,7 +302,47 @@ td {
         size: A4 landscape;
         margin: 0;
     }
-   
+  
+.celda_ambar{
+
+    animation-name: "precaución";
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-timing-function: ease-in-out;
+    color: white;
+    font-size: 1.35em;
+    font-weight:bold;
+}
+
+.celda_roja {
+
+    animation-name: "peligro";
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-timing-function: ease-in-out;
+    color: white;
+    font-size: 1.25em;
+    font-weight:bold;
+}
+
+.celda_verde {
+
+    animation-name: "saludable";
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction:reverse;
+    animation-timing-function: ease-in-out;
+
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+
+}
+
+    
+
     #div_información{
 
         text-align:center;
@@ -311,7 +375,6 @@ td {
         background:teal !important;
         width:110% !important;
         border-radius:12px 12px 0px 0px;
-        padding:1vh;
     }
     thead {
         
@@ -405,23 +468,23 @@ td {
 
 @keyframes precaución {
     0% {
-        background: #bb6f2d;
+        background: #806b15;
     }
 
     25% {
-        background: #b35f16;
+        background: #7f7413;
     }
 
     50% {
-        background: #8b4f12;
+        background: #ab9a16;
     }
 
     75% {
-        background: #824711;
+        background: #ad9617;
     }
 
     100% {
-        background: #67340a;
+        background: #bb9a13;
     }
 }
 @keyframes peligro {
@@ -459,47 +522,65 @@ td {
 
 @keyframes saludable {
     0% {
-        background: linear-gradient(-135deg, #00aa00, #00aa00, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #007700);
+        background: linear-gradient(-135deg, #33b8bd, #33b8bd, teal, teal, teal, teal, teal, teal, teal, teal);
     }
 
     10% {
-        background: linear-gradient(-135deg, #007700, #00aa00, #00aa00, #007700, #007700, #007700, #007700, #007700, #007700, #007700);
+        background: linear-gradient(-130deg, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal, teal, teal);
     }
 
     20% {
-        background: linear-gradient(-135deg, #007700, #007700, #00aa00, #00aa00, #007700, #007700, #007700, #007700, #007700, #007700);
+        background: linear-gradient(-125deg, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal, teal);
     }
 
     30% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #00aa00, #00aa00, #007700, #007700, #007700, #007700, #007700);
+        background: linear-gradient(-120deg, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal, teal);
     }
 
     40% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #007700, #00aa00, #00aa00, #007700, #007700, #007700, #007700);
+        background: linear-gradient(-115deg, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal, teal);
     }
 
     50% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #007700, #007700, #00aa00, #00aa00, #007700, #007700, #007700);
+        background: linear-gradient(-110deg, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal, teal);
     }
 
     60% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #007700, #007700, #007700, #00aa00, #00aa00, #007700, #007700);
+        background: linear-gradient(-105deg, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal, teal);
     }
 
     70% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #00aa00, #00aa00, #007700);
+        background: linear-gradient(-100deg, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, teal);
     }
 
     80% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #00aa00, #00aa00, #00aa00);
+        background: linear-gradient(-95deg, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd, #33b8bd);
     }
 
     90% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #00aa00, #00aa00);
+        background: linear-gradient(-90deg, teal, teal, teal, teal, teal, teal, teal, teal, #33b8bd, #33b8bd);
     }
 
     100% {
-        background: linear-gradient(-135deg, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #007700, #00aa00);
+        background: linear-gradient(-88deg, teal, teal, teal, teal, teal, teal, teal, teal, teal, #33b8bd);
     }
+
+}
+
+@keyframes brillo{
+
+    from{
+        box-shadow:0px 0px 2px white;
+        background:teal;
+        color:white;
+    }
+
+    to{
+
+        box-shadow:0px 0px 22px white;
+        background:white;
+        color:teal;
+    }
+
 
 }

@@ -13,6 +13,7 @@ var opcInserción;
 window.onload = function() {
 
 
+  document.documentElement.requestFullscreen();
 
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
