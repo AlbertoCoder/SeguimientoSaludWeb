@@ -229,12 +229,14 @@ td {
 
 
     display: flex;
+    border-style:groove;
+    border-width:12px;
     position: fixed;
     border-radius: 12px;
     border-style:line;
     top: 18%;
-    left: 28.3%;
-    width: 64.6%;
+    left: 30.7%;
+    width: 62.2%;
     height: 55%;
     background-color: rgba(255, 255, 255, 1);
     z-index: 1;
@@ -318,8 +320,8 @@ td {
     animation-direction: alternate-reverse;
     animation-timing-function: ease-in-out;
     color: white;
-    font-size: 1.35em;
-    font-weight:bold;
+    font-size: 1.35em !important;
+    font-weight:bold !important;
 }
 
 .celda_roja {
@@ -330,8 +332,8 @@ td {
     animation-direction: alternate-reverse;
     animation-timing-function: ease-in-out;
     color: white;
-    font-size: 1.25em;
-    font-weight:bold;
+    font-size: 1.25em !important;
+    font-weight:bold !important;
 }
 
 .celda_verde {
@@ -343,8 +345,8 @@ td {
     animation-timing-function: ease-in-out;
 
     color: white;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 1.2em !important;
+    font-weight: bold !important;
 
 }
 
@@ -354,7 +356,7 @@ td {
 
         display: flex;
         position: fixed;
-        top: 80%;
+        top: 93%;
         width: 95%;
         left:3%;
         height: 4%;
@@ -365,7 +367,7 @@ td {
         font-size:1em;
         color-adjust: exact; /* Firefox */
         background:teal !important;
-        color:white !important;
+        color:black !important;
         border-radius:8px 8px 8px 8px;
 
     }
@@ -377,16 +379,24 @@ td {
         color: #000000; /* Set text color to black */
         /* Add any other necessary print-specific styles */
         width:2%;
-        border-width:1px;
+        border-width:3px;
+        border-color:teal;
     }
    
     #tit_sección{
 
         -webkit-print-color-adjust: exact; /* Chrome, Safari */
         color-adjust: exact; /* Firefox */
+        margin-left:-4%;
         background:teal !important;
-        width:110% !important;
-        border-radius:12px 12px 0px 0px;
+        width:108% !important;
+        border-radius:12px 12px 12px 12px;
+        margin-top:3vw;
+        padding:2vw;
+    }
+    th{
+
+
     }
     thead {
         
@@ -422,8 +432,8 @@ td {
 
         width: 100%;
         max-width: 100%;
-        height: 185%;
-        max-height: 185%;
+        height: 99%;
+        max-height: 99%;
     }
 
     #div_grafico {
@@ -431,11 +441,12 @@ td {
         margin-top:0;
         display: none;
         position: fixed;
-        top: 9%;
-        left: 6.5%;
-        width: 88%;
-        height: 30%;
+        top: 17%;
+        left: 2.5%;
+        width: 94.5%;
+        height: 50%;
         z-index: 1;
+        background-color: rgba(255, 255, 255, 1);
 
     }
 
@@ -444,22 +455,29 @@ td {
 
     display: flex;
     flex-direction: row;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    margin-top:0px;
-    width: 100%;
+    margin-left: 1.5vw;
+    margin-right: 1vw;
+    margin-top:1vw;
+    width: 96%;
     height: 85%;
     border-radius: 10px;
     border-style: ridge;
     padding: 2vw;
 }
 
+#div_tablas_promedios_totales{
+
+    margin-top:7vw !important;
+
+
+}
 
     #datos_promedios {
         margin-top:0px;
         width: 80% !important;
         page-break-after:avoid;
         margin-right:2vw;
+        border-style:ridge;
     }
     
     #datos_totales {
