@@ -14,6 +14,15 @@ var formulario_nuevo_usuario;
 var btnEntrar, btnEliminarUsuario;
 var baseDeDatos, almacénUsuarios, almacénMediciones;
 
+if('serviceWorker' in navigator){
+
+  navigator.serviceWorker.register('../sw.js')
+      .then((reg) => console.log('Trabajador de servicio registrado.', reg))
+      .catch((err) => console.log('Trabajador de servicio NO registrado.', err));
+
+
+}
+
 window.onload = () => {
 
   selector_usuario = document.getElementById('select_usuarios');
