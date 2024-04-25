@@ -107,12 +107,12 @@ self.addEventListener('install', (event) =>{
             './js/formulario_datos.js',
             './js/tabla_datos.js',
 
-            './recursos/img/cruz_sanitaria.png',
+            './recursos/img/cruz_sanitaria.webp',
             './recursos/img/icono.png',
-            './recursos/img/Enfermera_Datos.png',
-            './recursos/img/Enfermera_Datos_Precau.png',
-            './recursos/img/Enfermera_Datos_Peligro.png',
-
+            './recursos/img/Enfermera_Datos.webp',
+            './recursos/img/Enfermera_Datos_Precau.webp',
+            './recursos/img/Enfermera_Datos_Peligro.webp',
+            './recursos/img/Enfermera_formulario.webp',
         ])
 
     );

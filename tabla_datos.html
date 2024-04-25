@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <link rel="manifest" href="manifest.json"/>
     <title>Seguimiento Básico De Salud v2.0 - Tabla Datos</title>
+    <meta name="theme-color" content="#317EFB"> 
+    <meta name="description" content="PWA para el seguimiento de parámetros básicos de salud"> 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel='stylesheet' type='text/css' href='/css/tabla_informe.css'>
-    <link rel="icon" type="image/x-icon" href="./recursos/img/cruz_sanitaria.png">
+    <link rel="icon" type="image/x-icon" href="./recursos/img/cruz_sanitaria.webp">
     <script src='js/tabla_datos.js' type="module"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
@@ -31,7 +33,7 @@
     <nav class="navbar navbar-expand-lg navbar-light barra_nav no_imprimible">
 
 
-        <img id="cruzverde" src="recursos/img/cruz_sanitaria.png">
+        <img id="cruzverde" src="recursos/img/cruz_sanitaria.webp">
 
         <div>
 
@@ -81,12 +83,12 @@
             </label>
             <input class="no_imprimible filtros" type="date" style="width:50%;align-self:center;text-align:center;"
                 id="fecha_fin">
-            <img src="recursos/img/enfermera_formulario.png" id="img_enfermera" class="no_imprimible">
+            <img id="img_enfermera" class="no_imprimible">
 
         </div>
 
         <div id="divtabla" style="display:flex;flex-direction:column;">
-            <div id="divtabla" style="display:flex;flex-direction:column;">
+            <div id="divtabla_interno" style="display:flex;flex-direction:column;">
 
                 <table id="tabla_datos">
 

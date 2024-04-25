@@ -665,17 +665,17 @@ function comprobarSiDatoAlterado() {
 
     if (datos_promedios.rows[2].cells[i].classList.contains("celda_roja")) {
 
-      return "recursos/img/Enfermera_Datos_Peligro.png";
+      return "recursos/img/Enfermera_Datos_Peligro.webp";
     
     } else if (datos_promedios.rows[2].cells[i].classList.contains("celda_ambar")) {
 
-      return "recursos/img/Enfermera_Datos_Precau.png";
+      return "recursos/img/Enfermera_Datos_Precau.webp";
     
     }
 
   }
 
-  return "recursos/img/Enfermera_Datos.png";
+  return "recursos/img/Enfermera_Datos.webp";
 
 }
 

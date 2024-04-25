@@ -99,11 +99,18 @@ body {
     padding: 2vw;
 }
 
-#divtabla {
+#divtabla_interno {
 
     width: 100%;
     height: 95%;
     overflow: scroll;
+    
+}
+
+#divtabla_interno::-webkit-scrollbar{
+
+    width:0;
+    height:0;
 
 }
 
@@ -254,6 +261,11 @@ td {
         box-shadow:3px 3px 10px black;
 }
 
+#divtabla{
+
+    height:100%;
+
+}
 #divtabla::-webkit-scrollbar{
 
     width:0;
@@ -312,6 +324,14 @@ td {
         margin: 0;
     }
   
+#divtabla_interno {
+
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    
+}
+
 .celda_ambar{
 
     animation-name: "precaución";
@@ -467,7 +487,7 @@ td {
 
 #div_tablas_promedios_totales{
 
-    margin-top:7vw !important;
+    margin-top:0vw !important;
 
 
 }
