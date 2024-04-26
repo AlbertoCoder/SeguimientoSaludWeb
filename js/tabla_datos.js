@@ -17,7 +17,10 @@ var conjunto_datos_diast = [];
 var conjunto_datos_ppm = [];
 var img_enfermera;
 var graf;
-
+var tamanyo_titulo_graf = 34;
+var tamanyo_leyenda_graf = 16;
+var tamanyo_marcas_graf = 18;
+var visibilidad_leyenda = true;
 window.onload = function() {
 
 
@@ -67,7 +70,9 @@ window.onload = function() {
 
   btnGráfico.addEventListener("click", function() {
 
-    document.documentElement.requestFullscreen();
+    definirTamanyosFuentesGráfico();
+
+    //document.documentElement.requestFullscreen();
     if (btnGráfico.textContent === "Gráfico") {
       btnGráfico.textContent = "Tabla";
     } else {
@@ -630,7 +635,7 @@ function crearGráfico() {
           ticks: {
             minRotation: 45,
             maxRotation: 45,
-            fontSize: 18 // Set font size for x axis ticks
+            fontSize: tamanyo_marcas_graf // Set font size for x axis ticks
           }
         }],
         yAxes: [{
@@ -641,7 +646,7 @@ function crearGráfico() {
             borderDash: [4, 4, 4]
           },
           ticks: {
-            fontSize: 18 // Set font size for y axis ticks
+            fontSize: tamanyo_marcas_graf // Set font size for y axis ticks
           }
         }]
       },
@@ -651,11 +656,11 @@ function crearGráfico() {
         display: true,
         text: `${idusuario_seleccionado.slice(1, 50)}`,
         position: 'top',
-        fontSize: 34
+        fontSize: tamanyo_titulo_graf,
       },
       legend: {
-        display: true,
-        position: "right", labels: { fontSize: 16 }
+        display: visibilidad_leyenda,
+        position: "left", labels: { fontSize: tamanyo_leyenda_graf, position: "top" }
       },
       spanGaps: true,
 
@@ -713,5 +718,19 @@ function mostrarEmociónEnfermera() {
 
   img_enfermera.src = comprobarSiDatoAlterado();
 
+
+}
+
+function definirTamanyosFuentesGráfico() {
+
+  let mql = window.matchMedia("(orientation: portrait)");
+
+  if (mql.matches === true) {
+
+    tamanyo_titulo_graf = 15;
+    tamanyo_marcas_graf = 8;
+    tamanyo_leyenda_graf = 8;
+    //visibilidad_leyenda = false;
+  }
 
 }

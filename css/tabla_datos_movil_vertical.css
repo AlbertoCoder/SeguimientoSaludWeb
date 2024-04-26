@@ -31,14 +31,13 @@ html,body{
 #divtabla_interno{
 
     margin-top:1vh;
-    height:55%;
+    height:48%;
 
 }
 
 #div_tablas_promedios_totales {
 
     width: 100%;
-    height: 95%;
     overflow: scroll;
     height:14vh; 
 }
@@ -129,6 +128,7 @@ html,body{
 }
 #div_selectores_fecha{
 
+    background:transparent;
     display:flex !important;
     flex-direction:row !important;
     width:100%;
@@ -173,5 +173,32 @@ html,body{
     -1px 1px 0 #000,
     1px 1px 0 #000;  
 
+}
+
+#div_grafico{
+
+    display: flex;
+    flex-direction:row;
+    overflow:auto;
+    border-style:groove;
+    border-width:12px;
+    position: fixed;
+    border-radius: 12px;
+    border-style:line;
+    top: 20%;
+    left: 0%;
+    width: 100% !important;
+    height: 45%;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 1;
+
+}
+
+#Evolución {
+
+        width: 250% !important;
+        max-width: 250% !important;
+        height: 100% !important;
+        max-height: 100% !important;
 }
 
