@@ -21,6 +21,8 @@ var tamanyo_titulo_graf = 34;
 var tamanyo_leyenda_graf = 16;
 var tamanyo_marcas_graf = 18;
 var visibilidad_leyenda = true;
+var ancho_graf, alto_graf;
+
 window.onload = function() {
 
 
@@ -730,7 +732,10 @@ function definirTamanyosFuentesGráfico() {
     tamanyo_titulo_graf = 15;
     tamanyo_marcas_graf = 8;
     tamanyo_leyenda_graf = 8;
-    //visibilidad_leyenda = false;
+  } else {
+
+    document.getElementById("Evolución").style.width = "100%";
+
   }
 
 }
