@@ -1,0 +1,174 @@
+
+@media screen and (orientation: portrait){
+
+
+html,body{
+    
+
+    width:100vw;
+    height:100vh;
+    background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7c2, #a9ecdd, #ffffff) !important;
+    overflow:hidden;
+}
+.barra_nav {
+
+    background: linear-gradient(110deg,rgb(11, 94, 94) 15%,rgb(24, 144, 144),rgb(53, 176, 176),teal) !important;
+    color: green;
+    border-style: inset;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 8vh;
+}
+
+#cruzverde{
+    width: 10vw;
+    height: 10vw;
+    align-self: center;
+    margin-left:1vw;
+}
+
+.titul{
+    padding-left: 1.5vw;
+    color: white;
+    font-size:1em;
+    font-family: 'Arial';
+    height:1.5vh;
+}
+
+#select_usuarios{
+
+    margin-top:8vh;
+    margin-left:15vw !important;
+    margin-right:15vw !important;
+    font-size:1.5em !important;
+    width:64vw !important;
+    text-align:center;
+}
+
+.inicio_ses{
+
+    position:relative;
+    display:inline-block;
+    margin-left:0%;
+    margin-right:20%;
+    margin-top:1vh !important;
+}
+
+#img_enfermera{
+
+    width:100vw;
+    height:40vh;
+
+}
+.texto_con_contorno{
+
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+
+}
+.div_interno{
+
+    position:absolute;
+    top:60%;
+    left:4vw;
+    align-items:center;
+}
+
+#div_interno_nuevo_usuario{
+
+    display:flex;
+    margin-left:0vw;
+    width:99% !important;
+    flex-direction:column !important;
+}
+#lblNombre,#lblApellidos{
+ background:teal;
+ border-radius:6px 6px 0px 0px;
+ padding-left:3vw;
+    color:white;
+    font-size:1.2em !important;
+}
+#itNombre,#itApellidos{
+
+   width:100% !important;
+   text-align:center;
+    font-size:1.5em;
+}
+#mensaje_sel_usuario{
+
+    font-size:1.2em;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style:italic;
+    margin-left:2.7vw; 
+    margin-top:3.5vh;
+}
+
+#select_usuarios{
+
+    margin-left:8vw;
+    margin-right:8vw;
+    font-size:1.2em !important;
+    width:12vw;
+}
+
+#div_btn_cont_elim{
+
+    display:flex;
+    flex-direction:row;
+
+}
+#btnEntrar{
+
+
+   margin-left:0vw;
+   margin-right:3vw; 
+    width:45vw;
+    height:10vw;
+    border-radius:6px;
+    border-style:ridge;
+    border-color:lightgreen;
+    background:linear-gradient(135deg,#0b7474,#00aa77 80%,#135447);
+    color:white;
+    font-size:1.2em;
+}
+
+#btnEliminarUsuario{
+
+   margin-left:0vw;
+    width:45vw;
+    height:10vw;
+    font-size:1.2em;
+    border-radius:6px;
+    border-style:ridge;
+    border-color:rgb(255, 3, 3);
+    background:linear-gradient(135deg,#b83c3c,#af3030,#aa261c);
+    color:white;
+}
+
+#lblNombre,#lblApellidos{
+
+    margin-top:1vh;
+    font-size:2vh;
+    margin-right:0.5vw;
+    width:94% !important;
+}
+
+#itNombre{
+
+    width:94% !important;
+    margin-right:0.5vw; 
+
+
+}
+
+#itApellidos{
+
+    width:94% !important;
+    width:9vw;
+
+}
+}

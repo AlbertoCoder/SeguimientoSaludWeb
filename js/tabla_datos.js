@@ -16,8 +16,9 @@ var conjunto_datos_sist = [];
 var conjunto_datos_diast = [];
 var conjunto_datos_ppm = [];
 var img_enfermera;
+var graf;
 
-window.onload = function () {
+window.onload = function() {
 
 
   setTimeout(() => {
@@ -44,14 +45,14 @@ window.onload = function () {
 
   });
 
-  btnInicio.addEventListener("click", function () {
+  btnInicio.addEventListener("click", function() {
 
     window.location.href = "index.html";
 
 
   });
 
-  btnFormulario.addEventListener("click", function () {
+  btnFormulario.addEventListener("click", function() {
 
     let último_registro = tabla_datos.rows.length - 1;
 
@@ -64,9 +65,9 @@ window.onload = function () {
 
   });
 
-  btnGráfico.addEventListener("click", function () {
+  btnGráfico.addEventListener("click", function() {
 
-  document.documentElement.requestFullscreen();
+    document.documentElement.requestFullscreen();
     if (btnGráfico.textContent === "Gráfico") {
       btnGráfico.textContent = "Tabla";
     } else {
@@ -78,12 +79,19 @@ window.onload = function () {
 
 
       mostrarOcultarGráfico(1);
-      crearGráfico();
+
+
+      llenarDatos();
+      graf = crearGráfico();
+
 
     } else {
 
       mostrarOcultarGráfico(0);
+      restablecerConjuntosDatos();
+      console.log(`Antes: ${graf}`);
 
+      console.log(`Después: ${graf}`);
     }
 
 
@@ -123,10 +131,11 @@ window.onload = function () {
 
     let titsección = document.getElementById("tit_sección");
 
+
     titsección.innerHTML = `INFORME: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
     let filas = tabla_datos.querySelectorAll('tr');
 
-    filas.forEach(function (fila, i) {
+    filas.forEach(function(fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -149,7 +158,7 @@ window.onload = function () {
     let titsección = document.getElementById("tit_sección");
 
     titsección.innerHTML = `INFORME: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
-    filas.forEach(function (fila, i) {
+    filas.forEach(function(fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -164,6 +173,7 @@ window.onload = function () {
 
 
   });
+
 
 }
 
@@ -201,17 +211,17 @@ function establecerFechasDefecto() {
   //Los meses están representados por una matriz (Array),
   //por lo que el mes de Abril (por ejemplo) tiene un índice '3' 
   //en la matriz.
-  const mes = String(fecha_actual.getMonth() +1).padStart(2,'0'); // El método 'padStart' coloca
-                                                                  // tantos caracteres a la izquierda
-                                                                  // de la cadena como refleje el
-                                                                  // valor entero del primer parámetro
-                                                                  // del método. El segundo parámetro
-                                                                  // especifica el carácter añadido.
+  const mes = String(fecha_actual.getMonth() + 1).padStart(2, '0'); // El método 'padStart' coloca
+  // tantos caracteres a la izquierda
+  // de la cadena como refleje el
+  // valor entero del primer parámetro
+  // del método. El segundo parámetro
+  // especifica el carácter añadido.
   // Obtener el último día del mes actual:
   // (Al especificar el día '0' en el método constructor del objeto 'Date'
   // se obtiene el último día del mes. Así está definido en la API de 
   // JavaScript).
-  const último_día_mes_actual = new Date(año,mes,0).getDate();
+  const último_día_mes_actual = new Date(año, mes, 0).getDate();
 
   selector_fecha_inicio.value = `${año}-${mes}-01`;
   selector_fecha_fin.value = `${año}-${mes}-${último_día_mes_actual}`;
@@ -238,7 +248,7 @@ function generarRegistrosEntabla(baseDeDatos) {
         reject("No se pudo.");
 
 
-        setTimeout(function () {
+        setTimeout(function() {
 
           let promedio_glucosa = parseInt(datos_promedios.rows[2].cells[1].innerText.split(" ")[0]);
           let promedio_o2 = parseInt(datos_promedios.rows[2].cells[2].innerText.split(" ")[0]);
@@ -296,10 +306,8 @@ function generarEjeXGráfico(tabla_html) {
 
 }
 
-function incrustarDatosGráfico(tabla_html, id_col) {
+function crearConjuntoDatos(tabla_html, id_col) {
 
-  let promedio = 0;
-  let contador = 0;
 
   Array.from(tabla_html.rows).forEach(fila => {
 
@@ -307,22 +315,27 @@ function incrustarDatosGráfico(tabla_html, id_col) {
 
       var contenido_celda = fila.cells[id_col].innerText;
 
+      if (contenido_celda === "") {
 
-      if (id_col === 2 && contenido_celda != "") {
+        contenido_celda = null;
+      }
+
+      if (id_col === 2) {
+
 
         conjunto_datos_peso.push(contenido_celda);
 
-      } else if (id_col === 3 && contenido_celda != "") {
+      } else if (id_col === 3) {
 
         conjunto_datos_glucosa.push(contenido_celda);
-      } else if (id_col === 4 && contenido_celda != "") {
+      } else if (id_col === 4) {
 
         conjunto_datos_o2.push(contenido_celda);
-      } else if (id_col === 5 && contenido_celda != "") {
+      } else if (id_col === 5) {
         conjunto_datos_sist.push(contenido_celda);
-      } else if (id_col === 6 && contenido_celda != "") {
+      } else if (id_col === 6) {
         conjunto_datos_diast.push(contenido_celda);
-      } else if (id_col === 7 && contenido_celda != "") {
+      } else if (id_col === 7) {
         conjunto_datos_ppm.push(contenido_celda);
       }
 
@@ -399,7 +412,7 @@ function iterarCeldas(mapa_datos, registro, fila) {
     celda_eliminar.innerHTML = "<i class=\"fas fa-trash\"></i>";
     celda_eliminar.setAttribute('id', `elimi_${registro}`);
     celda_eliminar.classList.add("no_imprimible");
-    
+
 
     celda_editar.addEventListener(('click'), () => {
 
@@ -526,20 +539,36 @@ function evaluar_dato(celda, dato, límite1, límite2, límite3, límite4) {
 
 }
 
-function crearGráfico() {
+function llenarDatos() {
+
 
   generarEjeXGráfico(tabla_datos);
 
-  incrustarDatosGráfico(tabla_datos, 2);
-  incrustarDatosGráfico(tabla_datos, 3);
-  incrustarDatosGráfico(tabla_datos, 4);
-  incrustarDatosGráfico(tabla_datos, 5);
-  incrustarDatosGráfico(tabla_datos, 6);
-  incrustarDatosGráfico(tabla_datos, 7);
+  crearConjuntoDatos(tabla_datos, 2);
+  crearConjuntoDatos(tabla_datos, 3);
+  crearConjuntoDatos(tabla_datos, 4);
+  crearConjuntoDatos(tabla_datos, 5);
+  crearConjuntoDatos(tabla_datos, 6);
+  crearConjuntoDatos(tabla_datos, 7);
+
+
+
+}
+
+function restablecerConjuntosDatos() {
+
+  conjunto_datos_peso = [];
+  conjunto_datos_glucosa = [];
+  conjunto_datos_o2 = [];
+  conjunto_datos_sist = [];
+  conjunto_datos_diast = [];
+  conjunto_datos_ppm = [];
+
+}
+
+function crearGráfico() {
 
   const etiquetas_X = Array.from(categorías_eje_x_gráfico);
-
-  console.log(etiquetas_X);
 
   let graf = new Chart(`Evolución`, {
     type: "line",
@@ -593,8 +622,8 @@ function crearGráfico() {
         xAxes: [{
           gridLines: {
             display: true, // Display vertical grid lines
-            color:"teal",
-            borderDash:[4,4,4]
+            color: "teal",
+            borderDash: [4, 4, 4]
           },
 
 
@@ -606,10 +635,10 @@ function crearGráfico() {
         }],
         yAxes: [{
 
-          gridLines:{
-          display:true,
-          color:"teal",
-            borderDash:[4,4,4]
+          gridLines: {
+            display: true,
+            color: "teal",
+            borderDash: [4, 4, 4]
           },
           ticks: {
             fontSize: 18 // Set font size for y axis ticks
@@ -666,11 +695,11 @@ function comprobarSiDatoAlterado() {
     if (datos_promedios.rows[2].cells[i].classList.contains("celda_roja")) {
 
       return "recursos/img/Enfermera_Datos_Peligro.webp";
-    
+
     } else if (datos_promedios.rows[2].cells[i].classList.contains("celda_ambar")) {
 
       return "recursos/img/Enfermera_Datos_Precau.webp";
-    
+
     }
 
   }

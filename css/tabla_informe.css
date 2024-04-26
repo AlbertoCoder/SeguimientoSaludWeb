@@ -42,12 +42,38 @@ body {
 }
 
 .titul {
+    padding-top:0.8vh;
     padding-left: 1vw;
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
     font-family: 'Arial';
-    height: 3vh;
+    height: 1vh;
 }
+
+#div_fecha_inicio,#div_fecha_fin{
+
+    text-align:center;
+    padding:0.9vw;
+    width:60%;
+    margin-left:20%;
+    margin-right:20%;
+
+}
+
+#fecha_inicio,#fecha_fin{
+
+    width:100%;
+    text-align:center;
+}
+
+#eti_fecha_inicio,#eti_fecha_fin{
+
+    color:white;
+    background:teal;
+    width:100%;
+
+}
+
 
 .inicio_ses {
 
@@ -61,11 +87,11 @@ body {
 #nomusuario_barra_nav {
 
     padding-left: 1vw;
-    padding-top: 0.3vw;
+    padding-top: 0.9vw;
     color: white;
-    font-size: 1.5em;
+    font-size: 1em;
     font-family: 'Arial';
-    height: 3vh;
+    height: 4vh;
 
 
 }
@@ -84,7 +110,10 @@ body {
     height: 80%;
 
 }
-
+#div_selectores_fecha{
+    width:19.9vw;
+background:rgba(0, 128, 128, 0.409);border-radius:12px;
+}
 .div_informe {
 
     display: flex;
@@ -332,6 +361,10 @@ td {
     
 }
 
+#div_selectores_fecha{
+
+    display:none;
+}
 .celda_ambar{
 
     animation-name: "precaución";
@@ -464,7 +497,7 @@ td {
         top: 17%;
         left: 2.5%;
         width: 94.5%;
-        height: 50%;
+        height: 53.3%;
         z-index: 1;
         background-color: rgba(255, 255, 255, 1);
 
