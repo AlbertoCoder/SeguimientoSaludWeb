@@ -1,5 +1,5 @@
 {
-    "name": "Seguimiento Salud Web",
+    "name": "Seguimiento Salud PWA",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",

@@ -1,0 +1,251 @@
+
+
+@media screen and (orientation: portrait){
+
+
+html,body{
+    
+
+    width:100vw;
+    height:100vh;
+    background: radial-gradient(ellipse, #ffffff, #ffffff, #72e7c2, #a9ecdd, #ffffff) !important;
+    overflow:hidden;
+}
+.barra_nav {
+
+    background: linear-gradient(110deg,rgb(11, 94, 94) 15%,rgb(24, 144, 144),rgb(53, 176, 176),teal) !important;
+    color: white;
+    border-style: inset;
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    height: 15vh;
+}
+
+#cruzverde{
+    width: 10vw;
+    height: 10vw;
+    align-self: center;
+    margin-left:1vw;
+}
+
+#divtabla_interno{
+
+    margin-top:1vh;
+    height:48%;
+
+}
+
+#div_tablas_promedios_totales {
+
+    width: 100%;
+    overflow: scroll;
+    height:14vh; 
+}
+
+
+#div_tablas_promedios_totales::-webkit-scrollbar{
+
+    width:0;
+    height:0;
+
+}
+
+#div_tablas_promedios_totales td{
+
+    font-size:1em;
+}
+
+.titul{
+    color: white !important;
+    font-size:1.28em;
+    font-family: 'Arial';
+    height:1vh;
+}
+
+#btnGrafico,#btnImprimir{
+
+    width:50% !important;
+}
+
+.div_botones_graf_imprimir{
+
+    display:flex;
+    flex-direction:row;
+    width:100% !important;
+}
+
+#nomusuario_barra_nav{
+
+    padding-left: 1vw;
+    padding-top: 2vh;
+    color: white;
+    font-size: 1em;
+    font-family: 'Arial';
+    height: 4vh;
+
+
+}
+
+#btnInicio,#btnTabla{
+
+    width:95px;
+    margin-top:1vh;
+    margin-left:12px !important;
+    margin-right:12px !important;
+    font-size:1.2em !important;
+    border-radius:5px !important;
+}
+
+#div_información{
+
+    display:none;
+}
+
+.tit_pag{
+  width:100%;
+  margin-left:0;
+  
+}
+#tit_sección{
+
+    font-size:1.2em;
+}
+.div_informe{
+
+    display:flex !important;
+    flex-direction:column !important;
+}
+
+#div_fecha_inicio,#div_fecha_fin{
+
+    width:50%;
+    margin-left:2%;
+    margin-right:2%;
+}
+
+#fecha_inicio,#fecha_fin{
+
+    text-align:center;
+    width:100%;
+}
+
+#eti_fecha_inicio,#eti_fecha_fin{
+
+    color:white;
+    background:teal;
+    width:100%;
+
+}
+#div_selectores_fecha{
+
+    background:transparent;
+    display:flex !important;
+    flex-direction:row !important;
+    width:100%;
+}
+
+
+.div_entrada_valores{
+
+  margin-left:0; 
+  width:100%;
+  height:100%;
+}
+#img_enfermera{
+
+  display:none;
+    width:25%;
+}
+
+
+#form_entrada_valores{
+
+  width:100%;
+
+}
+
+#btnInsertarRegistro,#btnEliminarRegistro,#btnLimpiarFormulario{
+
+  height:8vh;
+  font-size:1.4em;
+}
+
+label{
+font-size:1.3em !important;
+}
+input{
+
+  font-size:1.1em;
+  text-align:center !important;
+}
+
+
+td{
+
+  width:50% !important;
+}
+
+#select_usuarios{
+
+    margin-top:8vh;
+    margin-left:15vw !important;
+    margin-right:15vw !important;
+    font-size:1.5em !important;
+    width:64vw !important;
+    text-align:center;
+}
+
+.inicio_ses{
+
+    position:relative;
+    display:inline-block;
+    margin-left:0%;
+    margin-right:20%;
+    margin-top:1vh !important;
+}
+
+#img_enfermera{
+
+    width:100vw;
+    height:40vh;
+
+}
+.texto_con_contorno{
+
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+
+}
+
+#div_grafico{
+
+    display: flex;
+    flex-direction:row;
+    overflow:auto;
+    border-style:groove;
+    border-width:12px;
+    position: fixed;
+    border-radius: 12px;
+    border-style:line;
+    top: 20%;
+    left: 0%;
+    width: 100% !important;
+    height: 45%;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 1;
+
+}
+
+#Evolución {
+
+        width: 300% !important;
+        max-width: 300% !important;
+        height: 100% !important;
+        max-height: 100% !important;
+}
+
+

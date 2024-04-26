@@ -103,6 +103,7 @@ self.addEventListener('install', (event) => {
             './css/tabla_informe.css',
             './css/tabla_datos_movil_vertical.css',
             './css/formulario_datos.css',
+            './css/formulario_datos_movil_vertical.css',
 
             './js/inicio.js',
             './js/manejo_idb.mjs',

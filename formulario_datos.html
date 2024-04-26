@@ -5,13 +5,14 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Seguimiento Básico De Salud - Formulario Datos</title>
-    <link rel="manifest" href="manifest.json"/>
-    <meta name="description" content="PWA para el seguimiento de parámetros básicos de salud"> 
+    <link rel="manifest" href="manifest.json" />
+    <meta name="description" content="PWA para el seguimiento de parámetros básicos de salud">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel='stylesheet' type='text/css' media='screen' href='/css/formulario_datos.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/formulario_datos_movil_vertical.css'>
     <link rel="icon" type="image/x-icon" href="./recursos/img/cruz_sanitaria.webp">
     <script src='js/formulario_datos.js' type="module"></script>
 </head>
@@ -25,15 +26,11 @@
 
         <div>
 
-            <h3 class="titul">Seguimiento Básico De Salud</h3>
-
-        </div>
-
-        <div>
+            <h3 class="titul">Seguimiento Básico De Salud v2.0</h3>
 
             <h4 id="nomusuario_barra_nav"></h4>
-
         </div>
+
 
         <div style="flex-grow:7;"></div>
 
@@ -44,7 +41,7 @@
 
     </nav>
 
-    <div class="tit_pag" style="margin-top:4vw;">
+    <div class="tit_pag">
 
         <h2 id="tit_sección">INTRODUCCIÓN Y EDICIÓN DE DATOS</h2>
 
@@ -52,7 +49,7 @@
 
     <div class="div_entrada_valores">
 
-        <img src="recursos/img/Enfermera_formulario.webp">
+        <img id="img_enfermera" src="recursos/img/Enfermera_formulario.webp">
 
         <form id="form_entrada_valores">
 

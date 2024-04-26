@@ -26,14 +26,6 @@ body {
     margin-left: 1vw;
 }
 
-.titul {
-    padding-left: 1vw;
-    color: white;
-    font-size: 2em;
-    font-family: 'Arial';
-    height: 3vh;
-}
-
 .inicio_ses {
 
     position: relative;
@@ -43,14 +35,23 @@ body {
 
 }
 
-#nomusuario_barra_nav {
-
+.titul {
+    padding-top:0.8vh;
     padding-left: 1vw;
-    padding-top: 0.3vw;
     color: white;
     font-size: 1.5em;
     font-family: 'Arial';
-    height: 3vh;
+    height: 1vh;
+}
+
+#nomusuario_barra_nav {
+
+    padding-left: 1vw;
+    padding-top: 0.9vw;
+    color: white;
+    font-size: 1em;
+    font-family: 'Arial';
+    height: 4vh;
 
 
 }
