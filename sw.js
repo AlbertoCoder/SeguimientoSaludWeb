@@ -12,12 +12,12 @@ const ponerEnCache = async (solicitud, respuesta) => {
 
 }
 
-const cachePrimero = async ({solicitud, promesaRespuestaPrecargada, urlAlternativa}) => {
+const cachePrimero = async ({ solicitud, promesaRespuestaPrecargada, urlAlternativa }) => {
 
     // Primero intentar obtener el recurso desde la cache:
     const respuestaDesdeCache = await caches.match(solicitud);
 
-    if(respuestaDesdeCache){
+    if (respuestaDesdeCache) {
 
         return respuestaDesdeCache;
     }
@@ -31,8 +31,8 @@ const cachePrimero = async ({solicitud, promesaRespuestaPrecargada, urlAlternati
     // 'respuestaPrecargada' junto con la función 'habilitarNavegaciónPrecargada'
     // y el oyente "activate".
     const respuestaPrecargada = await promesaRespuestaPrecargada;
-    
-    if(respuestaPrecargada){
+
+    if (respuestaPrecargada) {
 
         console.log('Usando respuesta precargada', respuestaPrecargada);
         ponerEnCache(solicitud, respuestaPrecargada.clone());
@@ -40,7 +40,7 @@ const cachePrimero = async ({solicitud, promesaRespuestaPrecargada, urlAlternati
     }
 
     // Después intentar obtener el recurso desde la red:
-    try{
+    try {
 
         const respuestaDesdeLaRed = await fetch(solicitud.clone());
         // La respuesta podría usarse solo una vez.
@@ -48,11 +48,11 @@ const cachePrimero = async ({solicitud, promesaRespuestaPrecargada, urlAlternati
         // y servir la segunda.
         ponerEnCache(solicitud, respuestaDesdeLaRed.clone());
         return respuestaDesdeLaRed;
-    }catch (error){
+    } catch (error) {
 
         const respuestaAlternativa = await caches.match(urlAlternativa);
 
-        if(respuestaAlternativa){
+        if (respuestaAlternativa) {
 
             return respuestaAlternativa;
         }
@@ -60,10 +60,10 @@ const cachePrimero = async ({solicitud, promesaRespuestaPrecargada, urlAlternati
         // Cuando incluso la respuesta alternativa no esté disponible,
         // no hay nada que podamos hacer, pero siempre debemos
         // devolver un objeto 'Response'.
-        return new Response('Ha tenido lugar un error de red.',{
-            
+        return new Response('Ha tenido lugar un error de red.', {
+
             status: 408,
-            headers: {'Content-Type':'text/plain'},
+            headers: { 'Content-Type': 'text/plain' },
 
         });
 
@@ -71,9 +71,9 @@ const cachePrimero = async ({solicitud, promesaRespuestaPrecargada, urlAlternati
 
 };
 
-const habilitarNavegaciónPrecargada = async() => {
+const habilitarNavegaciónPrecargada = async () => {
 
-    if(self.registration.navigationPreload){
+    if (self.registration.navigationPreload) {
         // Habilitar precargas de navegación:
         await self.registration.navigationPreload.enable();
     }
@@ -87,7 +87,7 @@ self.addEventListener('activate', (event) => {
 
 });
 
-self.addEventListener('install', (event) =>{
+self.addEventListener('install', (event) => {
 
     event.waitUntil(
 
@@ -99,7 +99,9 @@ self.addEventListener('install', (event) =>{
             './tabla_datos.html',
 
             './css/index.css',
+            './css/index_movil_vertical.css',
             './css/tabla_informe.css',
+            './css/tabla_datos_movil_vertical.css',
             './css/formulario_datos.css',
 
             './js/inicio.js',
@@ -120,7 +122,7 @@ self.addEventListener('install', (event) =>{
 });
 
 
-self.addEventListener('fetch', (event) =>{
+self.addEventListener('fetch', (event) => {
 
     event.respondWith(
 
