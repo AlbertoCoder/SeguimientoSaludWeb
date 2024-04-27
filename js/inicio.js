@@ -15,11 +15,11 @@ var btnEntrar, btnEliminarUsuario;
 var baseDeDatos, almacénUsuarios, almacénMediciones;
 var sonido_correcto = new Audio("recursos/snd/ok.wav");
 
-if('serviceWorker' in navigator){
+if ('serviceWorker' in navigator) {
 
   navigator.serviceWorker.register('../sw.js')
-      .then((reg) => console.log('Trabajador de servicio registrado.', reg))
-      .catch((err) => console.log('Trabajador de servicio NO registrado.', err));
+    .then((reg) => console.log('Trabajador de servicio registrado.', reg))
+    .catch((err) => console.log('Trabajador de servicio NO registrado.', err));
 
 
 }
@@ -91,8 +91,10 @@ window.onload = () => {
         console.log(`Objeto agregado ${resultado}`);
       });
       sonido_correcto.play();
-      alert(`${itNombre.value} ${itApellidos.value} -- CORRECTO.`);
-      location.reload();
+      let mensaje_usuario_correcto = new MensEmergente("¡Bienvenido/a, " +itNombre.value + "!");
+
+      document.body.appendChild(mensaje_usuario_correcto);
+      //alert(`${itNombre.value} ${itApellidos.value} -- CORRECTO.`);
 
     } else {
 

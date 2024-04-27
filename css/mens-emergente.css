@@ -1,0 +1,63 @@
+@media screen and (orientation: portrait) {
+
+    .mens-emergente {
+
+
+        display: flex;
+        background: black;
+        position:fixed;
+        top: 20vh !important;
+        left: 10vw;
+        border-style:ridge;
+        border-radius:12px;
+        background:rgba(0, 128, 128, 0.89);
+        width:80vw;
+        z-index:1;
+        height:40vh;
+        box-shadow:5px 5px 12px black;
+        flex-direction:column;
+    }
+
+    #titulo_mens_emergente {
+
+        color: white;
+        text-align:center;
+    }
+
+    #encabezado_mens_emergente{
+
+        background:rgb(7, 99, 99);
+        border:"thin solid";
+        border-radius:12px 12px 0px 0px;
+        border-color:white;
+        height:8%;
+        width:100% !important;
+    }
+   
+    #div_mensaje{
+
+        margin-left:25%;
+        margin-right:25%;
+        margin-top:20%;
+        color:white;
+        text-align:center;
+    }
+
+    #mensaje{
+
+        width:100%;
+
+    }
+
+    .btnVale{
+
+        width:100%;
+        margin-top:15%;
+        height:10vh;
+        border-radius:12px;
+        box-shadow:3px 3px 10px black;
+        background:linear-gradient(180deg,#888888,#999999,#aaaaaa,#bbbbbb,#cccccc,#dddddd,#eeeeee,#ffffff);
+
+    }
+
+}

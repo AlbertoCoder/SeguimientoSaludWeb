@@ -104,11 +104,13 @@ self.addEventListener('install', (event) => {
             './css/tabla_datos_movil_vertical.css',
             './css/formulario_datos.css',
             './css/formulario_datos_movil_vertical.css',
+            './css/mens-emergente.css',
 
             './js/inicio.js',
             './js/manejo_idb.mjs',
             './js/formulario_datos.js',
             './js/tabla_datos.js',
+            './js/mi_mensaje_emergente.js',
 
             './recursos/img/cruz_sanitaria.webp',
             './recursos/img/icono.png',
