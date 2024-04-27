@@ -13,6 +13,7 @@ var itNombre, itApellidos;
 var formulario_nuevo_usuario;
 var btnEntrar, btnEliminarUsuario;
 var baseDeDatos, almacénUsuarios, almacénMediciones;
+var sonido_correcto = new Audio("recursos/snd/ok.wav");
 
 if('serviceWorker' in navigator){
 
@@ -89,7 +90,7 @@ window.onload = () => {
 
         console.log(`Objeto agregado ${resultado}`);
       });
-
+      sonido_correcto.play();
       alert(`${itNombre.value} ${itApellidos.value} -- CORRECTO.`);
       location.reload();
 

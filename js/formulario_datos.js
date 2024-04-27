@@ -5,6 +5,8 @@ var n = parseInt(sessionStorage.getItem("registro_edición"));
 var idusuario_seleccionado = sessionStorage.getItem("id_usuario");
 var nomusuario_barra_nav;
 var it_fecha, it_peso, it_glucosa, it_o2, it_sist, it_diast, it_ppm, it_pasos, it_kms, it_cals;
+var eti_glucosa, eti_sist, eti_diast, eti_ppm;
+
 var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
 var baseDeDatos;
 var btnInicio, btnTabla;
@@ -13,7 +15,7 @@ var opcInserción;
 window.onload = function() {
 
 
-  document.documentElement.requestFullscreen();
+  //document.documentElement.requestFullscreen();
 
   nomusuario_barra_nav = document.getElementById("nomusuario_barra_nav");
 
@@ -66,7 +68,14 @@ window.onload = function() {
   btnInsertarRegistro = document.getElementById("btnInsertarRegistro");
   btnEliminarRegistro = document.getElementById("btnEliminarRegistro");
   btnLimpiarFormulario = document.getElementById("btnLimpiarFormulario");
+  eti_glucosa = document.getElementById("eti_glucosa");
 
+    eti_glucosa.addEventListener("click",()=>{
+
+      it_glucosa.innerText=calcular_promedio_campo(it_glucosa); 
+
+
+    });
   btnInsertarRegistro.addEventListener("click", () => {
 
     idusuario_seleccionado = sessionStorage.getItem("id_usuario").split(" ")[0];
@@ -74,6 +83,7 @@ window.onload = function() {
     var nombre_usu = nomusuario_barra_nav.innerHTML.split(" ")[2];
     var apellido1_usu = nomusuario_barra_nav.innerHTML.split(" ")[3];
     var apellido2_usu = nomusuario_barra_nav.innerHTML.split(" ")[4];
+
 
     var mediciones_prueba = {
 

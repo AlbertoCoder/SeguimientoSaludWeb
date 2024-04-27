@@ -22,8 +22,10 @@ var tamanyo_leyenda_graf = 16;
 var tamanyo_marcas_graf = 18;
 var visibilidad_leyenda = true;
 var ancho_graf, alto_graf;
-
-window.onload = function() {
+var sonido_correcto = new Audio("recursos/snd/ok.wav");
+var sonido_impresora = new Audio("recursos/snd/impresora.wav");
+var sonido_eliminar = new Audio("recursos/snd/eliminar.wav");
+window.onload = function () {
 
 
   setTimeout(() => {
@@ -46,18 +48,19 @@ window.onload = function() {
 
   btnImprimir.addEventListener("click", () => {
 
+    sonido_impresora.play();
     window.print();
 
   });
 
-  btnInicio.addEventListener("click", function() {
+  btnInicio.addEventListener("click", function () {
 
     window.location.href = "index.html";
 
 
   });
 
-  btnFormulario.addEventListener("click", function() {
+  btnFormulario.addEventListener("click", function () {
 
     let último_registro = tabla_datos.rows.length - 1;
 
@@ -70,7 +73,7 @@ window.onload = function() {
 
   });
 
-  btnGráfico.addEventListener("click", function() {
+  btnGráfico.addEventListener("click", function () {
 
     definirTamanyosFuentesGráfico();
 
@@ -84,7 +87,7 @@ window.onload = function() {
 
     if (div_grafico.style.display === 'none') {
 
-
+      sonido_correcto.play();
       mostrarOcultarGráfico(1);
 
 
@@ -142,7 +145,7 @@ window.onload = function() {
     titsección.innerHTML = `INFORME: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
     let filas = tabla_datos.querySelectorAll('tr');
 
-    filas.forEach(function(fila, i) {
+    filas.forEach(function (fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -165,7 +168,7 @@ window.onload = function() {
     let titsección = document.getElementById("tit_sección");
 
     titsección.innerHTML = `INFORME: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
-    filas.forEach(function(fila, i) {
+    filas.forEach(function (fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -255,7 +258,7 @@ function generarRegistrosEntabla(baseDeDatos) {
         reject("No se pudo.");
 
 
-        setTimeout(function() {
+        setTimeout(function () {
 
           let promedio_glucosa = parseInt(datos_promedios.rows[2].cells[1].innerText.split(" ")[0]);
           let promedio_o2 = parseInt(datos_promedios.rows[2].cells[2].innerText.split(" ")[0]);
@@ -434,14 +437,22 @@ function iterarCeldas(mapa_datos, registro, fila) {
 
       var registro_seleccionado = celda_eliminar.id.split("_")[1];
       sessionStorage.setItem("opcInserción", null);
-      eliminarRegistro(baseDeDatos, "Mediciones", registro_seleccionado).then(resultado => {
 
+      let respuesta = confirm("¿Quieres eliminar el registro?");
+      if (respuesta === true) {
+        eliminarRegistro(baseDeDatos, "Mediciones", registro_seleccionado).then(resultado => {
+          sonido_eliminar.play();
+          alert("Eliminado correctamente.");
+        });
 
-        alert("Eliminado correctamente.");
+      } else {
 
-        location.reload();
+        alert("Aquí no ha pasado nada. ;-)");
 
-      });
+      }
+
+      location.reload();
+
 
 
 
