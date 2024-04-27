@@ -116,6 +116,10 @@ self.addEventListener('install', (event) => {
             './recursos/img/Enfermera_Datos_Precau.webp',
             './recursos/img/Enfermera_Datos_Peligro.webp',
             './recursos/img/Enfermera_formulario.webp',
+
+            './recursos/snd/ok.wav',
+            './recursos/snd/eliminar.wav',
+            './recursos/snd/impresora.wav',
         ])
 
     );
