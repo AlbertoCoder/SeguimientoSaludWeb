@@ -16,7 +16,7 @@
         box-shadow:5px 5px 12px black;
         flex-direction:column;
     }
-
+    
     #titulo_mens_emergente {
 
         color: white;
@@ -56,8 +56,33 @@
         border-radius:12px;
         box-shadow:3px 3px 10px black;
         background:linear-gradient(180deg,#888888,#999999,#aaaaaa,#bbbbbb,#cccccc,#dddddd,#eeeeee,#ffffff);
+        font-size:1.2em; 
     }
 
+    .texto_perimetrado{
+
+        text-shadow:-1px -1px 2px black,
+                    -1px 1px 2px black,
+                    1px -1px 2px black,
+                    1px 1px 2px black;
+        color:white;
+
+
+    }
+    .btn3dFino{
+
+        height:6vh;
+        margin-top:0%;
+        text-stroke:white;
+        font-size:1.2em;
+    }
+
+    .btn3dFino:active{
+
+        font-size:1em;
+        box-shadow:1px 1px 5px black;
+
+    }
     #btnSi, #btnNo{
 
         margin:4vw;

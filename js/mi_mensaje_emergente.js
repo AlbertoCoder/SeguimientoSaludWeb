@@ -14,7 +14,7 @@ class MensEmergente extends HTMLElement {
             <div id="div_mensaje">
                 
                 <h5 id="mensaje">${mensaje}</h5>
-                <button type="button" class="btn3d">${textoBtn}</button>
+                <button type="button" class="btn3d texto_perimetrado">${textoBtn}</button>
             </div>
           </div>
       `;
