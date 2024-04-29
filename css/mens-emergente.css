@@ -1,17 +1,16 @@
 @media screen and (orientation: portrait) {
 
-    .mens-emergente {
-
+    .mens-emergente,.pregunta-emergente {
 
         display: flex;
         background: black;
         position:fixed;
-        top: 20vh !important;
-        left: 10vw;
+        top: 24vh !important;
+        left: 5vw;
         border-style:ridge;
         border-radius:12px;
         background:rgba(0, 128, 128, 0.89);
-        width:80vw;
+        width:90vw;
         z-index:1;
         height:40vh;
         box-shadow:5px 5px 12px black;
@@ -36,20 +35,20 @@
    
     #div_mensaje{
 
-        margin-left:25%;
-        margin-right:25%;
+        margin-left:20%;
+        margin-right:20%;
         margin-top:20%;
         color:white;
         text-align:center;
     }
 
-    #mensaje{
+    #mensaje_pregunta{
 
         width:100%;
 
     }
 
-    .btnVale{
+    .btn3d{
 
         width:100%;
         margin-top:15%;
@@ -57,7 +56,12 @@
         border-radius:12px;
         box-shadow:3px 3px 10px black;
         background:linear-gradient(180deg,#888888,#999999,#aaaaaa,#bbbbbb,#cccccc,#dddddd,#eeeeee,#ffffff);
-
     }
 
+    #btnSi, #btnNo{
+
+        margin:4vw;
+
+
+    }
 }

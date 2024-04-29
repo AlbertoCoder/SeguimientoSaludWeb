@@ -11,9 +11,8 @@ var btnInsertarRegistro, btnEliminarRegistro, btnLimpiarFormulario;
 var baseDeDatos;
 var btnInicio, btnTabla;
 var opcInserción;
-
+var sonido_correcto = new Audio("./recursos/snd/ok.wav");
 window.onload = function() {
-
 
   //document.documentElement.requestFullscreen();
 
@@ -70,20 +69,28 @@ window.onload = function() {
   btnLimpiarFormulario = document.getElementById("btnLimpiarFormulario");
   eti_glucosa = document.getElementById("eti_glucosa");
 
-    eti_glucosa.addEventListener("click",()=>{
+  eti_glucosa.addEventListener("click", () => {
 
-      it_glucosa.innerText=calcular_promedio_campo(it_glucosa); 
+    it_glucosa.innerText = calcular_promedio_campo(it_glucosa);
 
+  });
 
-    });
   btnInsertarRegistro.addEventListener("click", () => {
+
+    let panel_pregunta = new PreguntaEmergente("Pregunta", "¿Quieres agregar el registro?", "Sí", "No");
+
+    document.body.appendChild(panel_pregunta);
+
+    panel_pregunta.style.display = "flex";
+
+    let btnSi = document.getElementById("btnSi");
+    let btnNo = document.getElementById("btnNo");
 
     idusuario_seleccionado = sessionStorage.getItem("id_usuario").split(" ")[0];
 
     var nombre_usu = nomusuario_barra_nav.innerHTML.split(" ")[2];
     var apellido1_usu = nomusuario_barra_nav.innerHTML.split(" ")[3];
     var apellido2_usu = nomusuario_barra_nav.innerHTML.split(" ")[4];
-
 
     var mediciones_prueba = {
 
@@ -102,66 +109,79 @@ window.onload = function() {
       Cals: it_cals.value
     }
 
-    insertarRegistro(baseDeDatos, "Mediciones", n, opcInserción, mediciones_prueba).then(resultado => {
+
+    btnSi.addEventListener("click", () => {
+
+      panel_pregunta.style.display = "none";
+      sonido_correcto.play();
+      insertarRegistro(baseDeDatos, "Mediciones", n, opcInserción, mediciones_prueba).then(resultado => {
+        //alert(`Registro guardado con fecha ${resultado.Fecha}`);
+
+        let mens_info = new MensEmergente("Añadir Registro", "¡Registro Agregado!", "¡Perfecto!");
+        document.body.appendChild(mens_info);
+
+      });
 
 
-      alert(`Registro guardado con fecha ${resultado.Fecha}`);
-      window.location.href = "tabla_datos.html";
 
     });
 
+    btnNo.addEventListener("click", () => {
+      panel_pregunta.style.display = "none";
+
+      let mens_info = new MensEmergente("Añadir Registro", "¡No ha pasado nada!", "¡Genial!");
+      document.body.appendChild(mens_info);
+      mens_info.style.display = "flex";
+
+    });
     n = null;
 
     mostrarRegistroEnFormulario(baseDeDatos);
 
-  });
-
-  btnLimpiarFormulario.addEventListener("click", limpiarFormulario);
-
-}
-
-function mostrarRegistroEnFormulario(nmbBD) {
-
-
-
-
-  leerTodosLosRegistros(nmbBD, "Mediciones").then(resultado => {
-
-    try {
-
-      it_fecha.value = resultado.get(n).Fecha;
-      it_peso.value = resultado.get(n).Peso;
-      it_glucosa.value = resultado.get(n).Glucosa;
-      it_o2.value = resultado.get(n).O2;
-      it_sist.value = resultado.get(n).Sist;
-      it_diast.value = resultado.get(n).Diast;
-      it_ppm.value = resultado.get(n).PPM;
-      it_pasos.value = resultado.get(n).Pasos;
-      it_kms.value = resultado.get(n).Kms;
-      it_cals.value = resultado.get(n).Cals;
-
-
-
-    } catch (error) {
-
-      console.log("Inserción de nuevo registro.");
-
-    }
+    btnLimpiarFormulario.addEventListener("click", limpiarFormulario);
 
   });
-}
 
-function limpiarFormulario() {
+  function mostrarRegistroEnFormulario(nmbBD) {
 
-  it_fecha.value = null;
-  it_peso.value = null;
-  it_glucosa.value = null;
-  it_o2.value = null;
-  it_sist.value = null;
-  it_diast.value = null;
-  it_ppm.value = null;
-  it_pasos.value = null;
-  it_kms.value = null;
-  it_cals.value = null;
+    leerTodosLosRegistros(nmbBD, "Mediciones").then(resultado => {
 
+      try {
+
+        it_fecha.value = resultado.get(n).Fecha;
+        it_peso.value = resultado.get(n).Peso;
+        it_glucosa.value = resultado.get(n).Glucosa;
+        it_o2.value = resultado.get(n).O2;
+        it_sist.value = resultado.get(n).Sist;
+        it_diast.value = resultado.get(n).Diast;
+        it_ppm.value = resultado.get(n).PPM;
+        it_pasos.value = resultado.get(n).Pasos;
+        it_kms.value = resultado.get(n).Kms;
+        it_cals.value = resultado.get(n).Cals;
+
+
+
+      } catch (error) {
+
+        console.log("Inserción de nuevo registro.");
+
+      }
+
+    });
+  }
+
+  function limpiarFormulario() {
+
+    it_fecha.value = null;
+    it_peso.value = null;
+    it_glucosa.value = null;
+    it_o2.value = null;
+    it_sist.value = null;
+    it_diast.value = null;
+    it_ppm.value = null;
+    it_pasos.value = null;
+    it_kms.value = null;
+    it_cals.value = null;
+
+  }
 }

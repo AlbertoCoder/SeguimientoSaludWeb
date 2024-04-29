@@ -8,6 +8,7 @@ import {
   leerTodosLosRegistros,
   eliminarRegistro
 } from "./manejo_idb.mjs";
+
 var selector_usuario;
 var itNombre, itApellidos;
 var formulario_nuevo_usuario;
@@ -20,7 +21,6 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../sw.js')
     .then((reg) => console.log('Trabajador de servicio registrado.', reg))
     .catch((err) => console.log('Trabajador de servicio NO registrado.', err));
-
 
 }
 
@@ -91,7 +91,7 @@ window.onload = () => {
         console.log(`Objeto agregado ${resultado}`);
       });
       sonido_correcto.play();
-      let mensaje_usuario_correcto = new MensEmergente("¡Bienvenido/a, " +itNombre.value + "!");
+      let mensaje_usuario_correcto = new MensEmergente("Bienvenida", "¡Bienvenido / a, " + itNombre.value + "!", "¡Gracias!");
 
       document.body.appendChild(mensaje_usuario_correcto);
       //alert(`${itNombre.value} ${itApellidos.value} -- CORRECTO.`);

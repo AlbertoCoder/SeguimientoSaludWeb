@@ -25,7 +25,7 @@ var ancho_graf, alto_graf;
 var sonido_correcto = new Audio("recursos/snd/ok.wav");
 var sonido_impresora = new Audio("recursos/snd/impresora.wav");
 var sonido_eliminar = new Audio("recursos/snd/eliminar.wav");
-window.onload = function () {
+window.onload = function() {
 
 
   setTimeout(() => {
@@ -53,14 +53,14 @@ window.onload = function () {
 
   });
 
-  btnInicio.addEventListener("click", function () {
+  btnInicio.addEventListener("click", function() {
 
     window.location.href = "index.html";
 
 
   });
 
-  btnFormulario.addEventListener("click", function () {
+  btnFormulario.addEventListener("click", function() {
 
     let último_registro = tabla_datos.rows.length - 1;
 
@@ -73,7 +73,7 @@ window.onload = function () {
 
   });
 
-  btnGráfico.addEventListener("click", function () {
+  btnGráfico.addEventListener("click", function() {
 
     definirTamanyosFuentesGráfico();
 
@@ -145,7 +145,7 @@ window.onload = function () {
     titsección.innerHTML = `INFORME: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
     let filas = tabla_datos.querySelectorAll('tr');
 
-    filas.forEach(function (fila, i) {
+    filas.forEach(function(fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -168,7 +168,7 @@ window.onload = function () {
     let titsección = document.getElementById("tit_sección");
 
     titsección.innerHTML = `INFORME: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
-    filas.forEach(function (fila, i) {
+    filas.forEach(function(fila, i) {
       if (i != 0) {
 
         fila.parentNode.removeChild(fila);
@@ -258,7 +258,7 @@ function generarRegistrosEntabla(baseDeDatos) {
         reject("No se pudo.");
 
 
-        setTimeout(function () {
+        setTimeout(function() {
 
           let promedio_glucosa = parseInt(datos_promedios.rows[2].cells[1].innerText.split(" ")[0]);
           let promedio_o2 = parseInt(datos_promedios.rows[2].cells[2].innerText.split(" ")[0]);
