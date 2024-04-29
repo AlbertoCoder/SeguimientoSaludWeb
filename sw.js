@@ -111,6 +111,7 @@ self.addEventListener('install', (event) => {
             './js/formulario_datos.js',
             './js/tabla_datos.js',
             './js/mi_mensaje_emergente.js',
+            './js/mi_pregunta_emergente.js',
 
             './recursos/img/cruz_sanitaria.webp',
             './recursos/img/icono.png',
