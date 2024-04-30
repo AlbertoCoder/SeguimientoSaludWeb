@@ -167,6 +167,8 @@ window.onload = () => {
 
           //location.reload();
 
+          selector_usuario.innerHTML = '';
+          agregarOpcionesListaDesplegable();
 
         } else {
 

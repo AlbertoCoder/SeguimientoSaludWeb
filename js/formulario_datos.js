@@ -122,6 +122,11 @@ window.onload = function() {
 
       });
 
+      n = null;
+
+      mostrarRegistroEnFormulario(baseDeDatos);
+
+      btnLimpiarFormulario.addEventListener("click", limpiarFormulario);
 
 
     });
@@ -134,11 +139,6 @@ window.onload = function() {
       mens_info.style.display = "flex";
 
     });
-    n = null;
-
-    mostrarRegistroEnFormulario(baseDeDatos);
-
-    btnLimpiarFormulario.addEventListener("click", limpiarFormulario);
 
   });
 
