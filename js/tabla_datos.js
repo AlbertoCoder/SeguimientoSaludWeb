@@ -62,11 +62,11 @@ window.onload = function() {
 
   btnFormulario.addEventListener("click", function() {
 
+    sessionStorage.setItem("registro_edición", null);
     let último_registro = tabla_datos.rows.length - 1;
 
     let valor_celda = tabla_datos.rows[último_registro].cells[0].innerText.split(" ")[0];
 
-    sessionStorage.setItem("registro_edición", null);
     //sessionStorage.setItem("registro_edición", parseInt(valor_celda) + 1);
 
     window.location.href = "formulario_datos.html";

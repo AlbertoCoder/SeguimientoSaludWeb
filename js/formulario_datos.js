@@ -110,6 +110,7 @@ window.onload = function() {
     }
 
 
+    alert(n);
     btnSi.addEventListener("click", () => {
 
       panel_pregunta.style.display = "none";
@@ -122,11 +123,6 @@ window.onload = function() {
 
       });
 
-      n = null;
-
-      mostrarRegistroEnFormulario(baseDeDatos);
-
-      btnLimpiarFormulario.addEventListener("click", limpiarFormulario);
 
 
     });
@@ -140,6 +136,10 @@ window.onload = function() {
 
     });
 
+
+    mostrarRegistroEnFormulario(baseDeDatos);
+
+    btnLimpiarFormulario.addEventListener("click", limpiarFormulario);
   });
 
   function mostrarRegistroEnFormulario(nmbBD) {

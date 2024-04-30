@@ -86,7 +86,7 @@ window.onload = () => {
     console.log(baseDeDatos);
 
     if (selector_usuario.value === "Crear Nuevo") {
-      insertarRegistro(baseDeDatos, "Usuarios", null, null, { Nombre: itNombre.value, Apellidos: itApellidos.value }).then(resultado => {
+      insertarRegistro(baseDeDatos, "Usuarios", "nuevo", null, { Nombre: itNombre.value, Apellidos: itApellidos.value }).then(resultado => {
 
         console.log(`Objeto agregado ${resultado}`);
       });
@@ -166,8 +166,7 @@ window.onload = () => {
           alert(`${selector_usuario.value} eliminado.`);
 
           //location.reload();
-
-          selector_usuario.innerHTML = '';
+          selector_usuario.innerHTML = '<option value="Crear Nuevo">Crear Nuevo</option>';
           agregarOpcionesListaDesplegable();
 
         } else {

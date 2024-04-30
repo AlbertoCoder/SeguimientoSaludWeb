@@ -39,18 +39,18 @@ export function insertarRegistro(nmbBD, nmbObjSt, num_reg, opcInserción, datos)
 
     let transac = nmbBD.transaction(nmbObjSt, "readwrite");
     let objst = transac.objectStore(nmbObjSt);
-   
-    if(num_reg!=null){
 
-      objst.put(datos, num_reg).onsuccess = (event) =>{
+    if (!isNaN(num_reg)) {
+
+      objst.put(datos, num_reg).onsuccess = (event) => {
 
         resolve(datos);
 
       }
 
-    }else{
+    } else {
 
-      objst.put(datos).onsuccess = (event) =>{
+      objst.put(datos).onsuccess = (event) => {
 
         resolve(datos);
 
