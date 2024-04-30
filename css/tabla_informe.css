@@ -288,6 +288,8 @@ td {
 
         
         box-shadow:3px 3px 10px black;
+
+
 }
 
 #divtabla{
@@ -404,6 +406,13 @@ td {
 }
 
  
+#tabla_datos td{
+
+       padding:0px; 
+       font-size:0.7em !important;
+       border-width:1px;
+}
+
 
     #div_información{
 

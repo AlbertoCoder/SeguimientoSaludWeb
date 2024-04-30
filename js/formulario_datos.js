@@ -110,7 +110,6 @@ window.onload = function() {
     }
 
 
-    alert(n);
     btnSi.addEventListener("click", () => {
 
       panel_pregunta.style.display = "none";
@@ -118,7 +117,7 @@ window.onload = function() {
       insertarRegistro(baseDeDatos, "Mediciones", n, opcInserción, mediciones_prueba).then(resultado => {
         //alert(`Registro guardado con fecha ${resultado.Fecha}`);
 
-        let mens_info = new MensEmergente("Añadir Registro", "¡Registro Agregado!", "¡Perfecto!");
+        let mens_info = new MensEmergente("Guardar Registro", "¡Registro Guardado!", "¡Perfecto!");
         document.body.appendChild(mens_info);
 
       });
@@ -130,7 +129,7 @@ window.onload = function() {
     btnNo.addEventListener("click", () => {
       panel_pregunta.style.display = "none";
 
-      let mens_info = new MensEmergente("Añadir Registro", "¡No ha pasado nada!", "¡Genial!");
+      let mens_info = new MensEmergente("Guardar Registro", "¡No ha pasado nada!", "¡Genial!");
       document.body.appendChild(mens_info);
       mens_info.style.display = "flex";
 

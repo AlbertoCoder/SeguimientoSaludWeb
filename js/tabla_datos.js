@@ -142,7 +142,7 @@ window.onload = function() {
     let titsección = document.getElementById("tit_sección");
 
 
-    titsección.innerHTML = `INFORME: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
+    titsección.innerHTML = `${idusuario_seleccionado}: &emsp;(${invertirFecha(selector_fecha_inicio.value)} al ${invertirFecha(selector_fecha_fin.value)})`;
     let filas = tabla_datos.querySelectorAll('tr');
 
     filas.forEach(function(fila, i) {
@@ -438,20 +438,43 @@ function iterarCeldas(mapa_datos, registro, fila) {
       var registro_seleccionado = celda_eliminar.id.split("_")[1];
       sessionStorage.setItem("opcInserción", null);
 
-      let respuesta = confirm("¿Quieres eliminar el registro?");
-      if (respuesta === true) {
+      let panel_pregunta = new PreguntaEmergente("Eliminación", "¿Quieres ELIMINAR el registro?", "Sí", "No");
+
+      document.body.appendChild(panel_pregunta);
+
+      panel_pregunta.style.display = "flex";
+
+      let btnSi = document.getElementById("btnSi");
+      let btnNo = document.getElementById("btnNo");
+
+      btnSi.addEventListener("click", () => {
+
+        panel_pregunta.style.display = "none";
+        sonido_correcto.play();
+
         eliminarRegistro(baseDeDatos, "Mediciones", registro_seleccionado).then(resultado => {
-          sonido_eliminar.play();
-          alert("Eliminado correctamente.");
+
+
+          new Promise((resolve, reject) => {
+
+            resolve(sonido_eliminar.play());
+          });
+          location.reload();
         });
 
-      } else {
 
-        alert("Aquí no ha pasado nada. ;-)");
+      });
 
-      }
+      btnNo.addEventListener("click", () => {
+        panel_pregunta.style.display = "none";
 
-      location.reload();
+        let mens_info = new MensEmergente("Eliminar Registro", "¡Aquí no ha pasado nada!", "¡Vale!");
+        document.body.appendChild(mens_info);
+        mens_info.style.display = "flex";
+
+      });
+
+
 
 
 
