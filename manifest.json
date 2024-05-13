@@ -1,6 +1,7 @@
 {
     "name": "Seguimiento Salud PWA",
     "start_url": "/",
+    "orientation":"portrait",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
