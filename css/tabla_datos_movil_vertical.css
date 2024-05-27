@@ -168,10 +168,10 @@ html,body{
 .texto_con_contorno{
 
     text-shadow:
-    -0.5px -0.5px 0 #000,
-    0.5px -0.5px 0 #000,
-    -0.5px 0.5px 0 #000,
-    0.5px 0.5px 0 #000;  
+    -0.2px -0.2px 0 #000,
+    0.2px -0.2px 0 #000,
+    -0.2px 0.2px 0 #000,
+    0.2px 0.2px 0 #000;  
 
 }
 
