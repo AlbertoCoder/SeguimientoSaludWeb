@@ -46,14 +46,14 @@ window.onload = function() {
   btnImprimir = document.getElementById("btnImprimir");
   img_enfermera = document.getElementById("img_enfermera");
 
-  btnImprimir.addEventListener("click", () => {
+  btnImprimir.addEventListener("mouseup", () => {
 
     sonido_impresora.play();
     window.print();
 
   });
 
-  btnInicio.addEventListener("click", function() {
+  btnInicio.addEventListener("mouseup", function() {
 
     window.location.href = "index.html";
 
