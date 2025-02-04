@@ -510,7 +510,7 @@ function iterarCeldas(mapa_datos, registro, fila) {
       let dato = mapa_datos.get(registro)[índices[celda]];
 
 
-      nueva_celda.innerHTML = dato;
+      nueva_celda.innerHTML = formatearValorDecimal(dato);
 
 
       fila.appendChild(nueva_celda);
@@ -521,22 +521,36 @@ function iterarCeldas(mapa_datos, registro, fila) {
   }
 
 
-  datos_promedios.rows[2].cells[0].innerText = obtenerPromedio(tabla_datos, 2) + " Kg.";
-  datos_promedios.rows[2].cells[1].innerText = obtenerPromedio(tabla_datos, 3) + " mg/dl";
-  datos_promedios.rows[2].cells[2].innerText = obtenerPromedio(tabla_datos, 4) + " %";
-  datos_promedios.rows[2].cells[3].innerText = obtenerPromedio(tabla_datos, 5) + " mmHg";
-  datos_promedios.rows[2].cells[4].innerText = obtenerPromedio(tabla_datos, 6) + " mmHg";
-  datos_promedios.rows[2].cells[5].innerText = obtenerPromedio(tabla_datos, 7);
-  datos_promedios.rows[2].cells[6].innerText = obtenerPromedio(tabla_datos, 8);
-  datos_promedios.rows[2].cells[7].innerText = obtenerPromedio(tabla_datos, 9);
-  datos_promedios.rows[2].cells[8].innerText = obtenerPromedio(tabla_datos, 10);
 
-  datos_totales.rows[2].cells[0].innerText = obtenerTotales(tabla_datos, 8);
-  datos_totales.rows[2].cells[1].innerText = obtenerTotales(tabla_datos, 9);
-  datos_totales.rows[2].cells[2].innerText = obtenerTotales(tabla_datos, 10);
+  datos_promedios.rows[2].cells[0].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 2)) + " Kg.";
+  datos_promedios.rows[2].cells[1].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 3)) + " mg/dl";
+  datos_promedios.rows[2].cells[2].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 4)) + " %";
+  datos_promedios.rows[2].cells[3].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 5)) + " mmHg";
+  datos_promedios.rows[2].cells[4].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 6)) + " mmHg";
+  datos_promedios.rows[2].cells[5].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 7));
+  datos_promedios.rows[2].cells[6].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 8));
+  datos_promedios.rows[2].cells[7].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 9));
+  datos_promedios.rows[2].cells[8].innerText = formatearValorDecimal(obtenerPromedio(tabla_datos, 10));
+
+  datos_totales.rows[2].cells[0].innerText = formatearValorDecimal(obtenerTotales(tabla_datos, 8));
+  datos_totales.rows[2].cells[1].innerText = formatearValorDecimal(obtenerTotales(tabla_datos, 9));
+  datos_totales.rows[2].cells[2].innerText = formatearValorDecimal(obtenerTotales(tabla_datos, 10));
 
 
 }
+
+function formatearValorDecimal(valor){
+
+  const valor_num = valor;
+
+  const valor_formateado = new Intl.NumberFormat('es-ES',{minimumFractionDigits:2}).format(valor_num);
+
+  return valor_formateado;
+
+
+}
+
+
 
 function resaltarCelda(celda, tipo) {
 
